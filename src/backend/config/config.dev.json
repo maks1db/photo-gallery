@@ -2,7 +2,7 @@
     "mysql":{
       "user": "root",
       "password": "kolbaska",
-      "database": "races",
+      "database": "gallery",
       "host": "localhost"
     }
 }
