@@ -22,7 +22,9 @@ class App extends React.Component{
         return (               
             <Provider store={store}>
                 <div> 
-                    <Router children={Routes} history={ history } />    
+                    <div>
+                        <Router children={Routes} history={ history } />  
+                    </div>  
                     <ReduxToastr
                         timeOut={4000}
                         newestOnTop={false}

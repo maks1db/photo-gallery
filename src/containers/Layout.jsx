@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import Header from 'Layout/Header.jsx';
 
 function mapStateToProps(state) {
     return {};
@@ -10,16 +10,15 @@ function mapDispatchToProps(dispatch, ownProps) {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class Main extends Component {
+export default class Layout extends Component {
     constructor() {
         super();
     }
 
     render() {
-
         return (
             <div>
-                <h1>Hello, app</h1>
+                <Header />
             </div>
         );
     }
