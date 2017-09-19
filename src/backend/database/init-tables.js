@@ -3,6 +3,5 @@ const models = require('require-all')({
     dirname: '../../models/'
 });
 
-console.log(models);
 
 

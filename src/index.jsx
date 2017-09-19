@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import ReduxToastr from 'react-redux-toastr';
 import configureStore from './store';
-import {Router, browserHistory } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
+import {createBrowserHistory} from 'history';
 import Routes from './routes.jsx';
 import { syncHistoryWithStore } from 'react-router-redux';
 import './scss/index.scss';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
 
 const initialState = window.__INITIAL_STATE__ || {};
 const store = configureStore(initialState);
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(createBrowserHistory(), store);
 
 class App extends React.Component{
     constructor(){
@@ -22,9 +24,9 @@ class App extends React.Component{
         return (               
             <Provider store={store}>
                 <div> 
-                    <div>
-                        <Router children={Routes} history={ history } />  
-                    </div>  
+                    <BrowserRouter >
+                        <Routes />
+                    </BrowserRouter>  
                     <ReduxToastr
                         timeOut={4000}
                         newestOnTop={false}

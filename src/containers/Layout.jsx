@@ -19,6 +19,7 @@ export default class Layout extends Component {
         return (
             <div>
                 <Header />
+                {this.props.children}
             </div>
         );
     }

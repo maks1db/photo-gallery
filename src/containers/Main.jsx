@@ -19,7 +19,7 @@ export default class Main extends Component {
     render() {
         return (
             <div>
-                <h3>тест</h3>
+                <IndexScreen />
             </div>
         );
     }
