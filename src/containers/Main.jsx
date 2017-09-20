@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import IndexScreen from 'Screens/IndexScreen.jsx';
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        dateEnd: new Date(2017,11,1)
+    };
 }
 function mapDispatchToProps(dispatch, ownProps) {
     return {};
@@ -17,9 +19,12 @@ export default class Main extends Component {
     }
 
     render() {
+        const { dateEnd } = this.props;
         return (
             <div>
-                <IndexScreen />
+                <IndexScreen
+                    dateEnd={dateEnd}
+                />
             </div>
         );
     }
