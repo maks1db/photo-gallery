@@ -14,7 +14,6 @@ function mapDispatchToProps(dispatch, ownProps) {
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Main extends Component {
     constructor() {
-        console.log('main')
         super();
     }
 
