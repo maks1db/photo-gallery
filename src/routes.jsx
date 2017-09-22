@@ -8,7 +8,7 @@ export default () => (
     <Switch>
         <Layout>
             <Route exact path="/" component={Main} />
-            <Route path="/register" component={Register} />
         </Layout>
+        <Route path="/register" component={Register} />
     </Switch>
 );

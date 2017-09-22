@@ -4,7 +4,9 @@ import Header from 'Layout/Header.jsx';
 import MainScreen from 'Layout/MainScreen.jsx';
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        visible: state.layout.visible
+    };
 }
 function mapDispatchToProps(dispatch, ownProps) {
     return {};
@@ -17,12 +19,12 @@ export default class Layout extends Component {
     }
 
     render() {
+
+        const { visible } = this.props;
         return (
             <div>
-                <Header />
-                <MainScreen>
-                    {this.props.children}
-                </MainScreen>
+                { visible && <Header />}
+                {this.props.children}
             </div>
         );
     }

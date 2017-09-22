@@ -2,13 +2,14 @@ import React from 'react';
 import Calendar from 'Calendar/Calendar.jsx';
 import styles from './Main.scss';
 import { Link } from 'react-router-dom';
+import MainScreen from 'Layout/MainScreen.jsx';
 
 const style = {
     background: 'url("/assets/images/example.jpg")'
 };
 
 export default ({ dateEnd }) => (
-    <div>
+    <MainScreen>
         <article className={styles.article}>
             <div>
                 <h4>1 декабря 2017 г., Липецк</h4>
@@ -22,5 +23,5 @@ export default ({ dateEnd }) => (
             <h5>До завершения подачи заявок:</h5>
             <Calendar dateEnd={dateEnd} />
         </div>        
-    </div>
+    </MainScreen>
 );
