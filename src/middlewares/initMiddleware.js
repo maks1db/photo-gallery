@@ -1,18 +1,26 @@
 import layout from 'constants/layout';
 
-const init = store => next => action => {
-    console.log('init');
-    if (action.type === '@@router/LOCATION_CHANGE') {
+const titles = {
+    '/': 'Фотовыставка',
+    '/register': 'Подача заявки'
+};
 
-        let visibleLayout = false;
-        if (action.payload.pathname === '/'){
-            visibleLayout = true;
-        }
+const init = store => next => action => {
+
+    if (action.type === '@@router/LOCATION_CHANGE') {
         
+        const title = titles[action.payload.pathname];
         store.dispatch({
-            type: layout.VISIBLE_LAYOUT,
-            state: visibleLayout
+            type: layout.SET_TITLE,
+            title
         });
+        document.title = title;
+
+        store.dispatch({
+            type: layout.SHOW_MAIN_LINK,
+            show: action.payload.pathname !== '/'
+        });
+        
     }
 
     next(action);

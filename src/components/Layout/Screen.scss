@@ -13,25 +13,44 @@
         content: "";
         background-color: rgba(0, 0, 0, 0.6);
     }
-    &:after {
+    .screens {
         position: absolute;
-        z-index: 0;
-        background: url('/assets/images/example.jpg');
         width: 100%;
         height: 100%;
-        content: "";
-        z-index: -1;
+        z-index: -3;
         top:0;
-        left:0;
-        animation: scale linear 300s infinite;
+        left:0;  
+        animation: opacity ease-in-out .5s;
+        div {
+            position: absolute;
+            z-index: -3;
+            width: 100%;
+            height: 100%;
+            top:0;
+            left:0;
+            transition: transform ease-in-out 1s, scale linear 200s;
+        }
+    }
+    .active {
+        animation: scale linear 200s infinite;
+    }
+    .content {
+        z-index: 1;
+    }
+    @keyframes opacity {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
     }
     @keyframes scale {
         0% {
-            transform: scale(1)
+            transform: scale(1);
         }
         100% {
             transform: scale(1.5) translate(50px, -50px);
-            
         }
     }
 }

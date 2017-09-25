@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import UserInfo from 'Register/UserInfo.jsx';
+import RegisterComponent from 'Register/Register.jsx';
 
 function mapStateToProps(state) {
     return {
@@ -19,7 +19,7 @@ export default class Register extends Component {
 
     render() {
         return (
-            <UserInfo />
+            <RegisterComponent />
         );
     }
 }

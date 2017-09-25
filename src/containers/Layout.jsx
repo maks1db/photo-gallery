@@ -5,10 +5,12 @@ import MainScreen from 'Layout/MainScreen.jsx';
 
 function mapStateToProps(state) {
     return {
-        visible: state.layout.visible
+        visible: state.layout.visible,
+        title: state.layout.title,
+        showMainLink: state.layout.showMainLink
     };
 }
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
     return {};
 }
 
@@ -20,12 +22,19 @@ export default class Layout extends Component {
 
     render() {
 
-        const { visible } = this.props;
+        const { 
+            visible,
+            title,
+            showMainLink
+        } = this.props;
         return (
-            <div>
-                { visible && <Header />}
+            <MainScreen>
+                { visible && <Header 
+                    title={title} 
+                    showMainLink={showMainLink} 
+                />}
                 {this.props.children}
-            </div>
+            </MainScreen>
         );
     }
 }

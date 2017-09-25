@@ -9,7 +9,7 @@ const style = {
 };
 
 export default ({ dateEnd }) => (
-    <MainScreen>
+    <div>
         <article className={styles.article}>
             <div>
                 <h4>1 декабря 2017 г., Липецк</h4>
@@ -23,5 +23,5 @@ export default ({ dateEnd }) => (
             <h5>До завершения подачи заявок:</h5>
             <Calendar dateEnd={dateEnd} />
         </div>        
-    </MainScreen>
+    </div>
 );
