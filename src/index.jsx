@@ -5,15 +5,16 @@ import ReduxToastr from 'react-redux-toastr';
 import configureStore from './store';
 import { BrowserRouter } from 'react-router-dom';
 import {createBrowserHistory} from 'history';
+import createHistory from 'history/createBrowserHistory';
 import Routes from './routes.jsx';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { ConnectedRouter } from 'react-router-redux';
 import './scss/index.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 
 const initialState = window.__INITIAL_STATE__ || {};
-const store = configureStore(initialState);
-const history = syncHistoryWithStore(createBrowserHistory(), store);
+const history = createHistory();
+const store = configureStore(history);
 
 class App extends React.Component{
     constructor(){
@@ -24,9 +25,9 @@ class App extends React.Component{
         return (               
             <Provider store={store}>
                 <div> 
-                    <BrowserRouter >
+                    <ConnectedRouter history={history}>
                         <Routes />
-                    </BrowserRouter>  
+                    </ConnectedRouter>  
                     <ReduxToastr
                         timeOut={4000}
                         newestOnTop={false}

@@ -5,10 +5,10 @@ import Main from 'containers/Main.jsx';
 import Register from 'containers/Register.jsx';
 
 export default () => (
-    <Switch>
-        <Layout>
+    <Layout>
+        <Switch>
             <Route exact path="/" component={Main} />
-        </Layout>
-        <Route path="/register" component={Register} />
-    </Switch>
+            <Route path="/register" component={Register} />
+        </Switch>
+    </Layout>
 );

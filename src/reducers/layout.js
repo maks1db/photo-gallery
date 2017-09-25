@@ -7,7 +7,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
     case constants.VISIBLE_LAYOUT:
-        return {...state, visible: state};
+        return {...state, visible: action.state};
     }
 
     return state;
