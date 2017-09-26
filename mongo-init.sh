@@ -1,0 +1,1 @@
+sudo chmod -R go+w /data/db
