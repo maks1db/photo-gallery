@@ -1,0 +1,4 @@
+export default {
+    REQUEST_DATE_END: 'REQUEST_DATE_END',
+    RECEIVE_DATE_END: 'RECEIVE_DATE_END'
+};

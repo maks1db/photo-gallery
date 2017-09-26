@@ -1,4 +1,6 @@
 import layout from 'constants/layout';
+import app from 'constants/app';
+import { dateEnd } from 'api/app';
 
 const titles = {
     '/': 'Фотовыставка',
@@ -21,6 +23,22 @@ const init = store => next => action => {
             show: action.payload.pathname !== '/'
         });
         
+        if (action.payload.pathname === '/') {
+            const state = store.getState();
+
+            if (!state.app.dateEnd.value) {
+                store.dispatch({
+                    type: app.REQUEST_DATE_END
+                });
+                dateEnd()
+                    .then(x => {
+                        store.dispatch({
+                            type: app.RECEIVE_DATE_END,
+                            value: x.data.date
+                        });   
+                    });
+            }
+        }
     }
 
     next(action);

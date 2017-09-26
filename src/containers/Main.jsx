@@ -4,7 +4,7 @@ import IndexScreen from 'Screens/IndexScreen.jsx';
 
 function mapStateToProps(state) {
     return {
-        dateEnd: new Date(2017,11,1)
+        dateEnd: state.app.dateEnd
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {

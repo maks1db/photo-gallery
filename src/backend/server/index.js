@@ -1,6 +1,7 @@
-import express                      from 'express';                      
-import bodyParser                   from 'body-parser';
-import path                         from 'path';
+import express from 'express';                      
+import bodyParser from 'body-parser';
+import path from 'path';
+import routes from '../routes';
 
 const app = express();  
 
@@ -23,6 +24,7 @@ app.use(function(req, res, next) {
 
 const port = 4000;
 
+app.use('', routes);
 app.get('*',function(req,res){
     res.sendFile(path.resolve(__dirname, '../../../public/', 'index.html'));
 });

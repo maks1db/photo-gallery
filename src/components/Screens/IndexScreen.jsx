@@ -21,7 +21,7 @@ export default ({ dateEnd }) => (
         </article>  
         <div className={styles.counter}>
             <h5>До завершения подачи заявок:</h5>
-            <Calendar dateEnd={dateEnd} />
+            {!dateEnd.isFetching && <Calendar dateEnd={dateEnd.value} />}
         </div>        
     </div>
 );
