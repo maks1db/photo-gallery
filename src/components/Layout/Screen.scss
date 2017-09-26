@@ -4,7 +4,7 @@
     display: block;
     position: relative;
     &:before {
-        position: absolute;
+        position: fixed;
         left: 0;
         top: 0;
         width: 100%;
@@ -13,15 +13,17 @@
         background-color: rgba(0, 0, 0, 0.6);
     }
     .screens {
-        position: absolute;
+        position: fixed;
         width: 100%;
         height: 100%;
         z-index: -3;
         top:0;
         left:0;  
         animation: opacity ease-in-out .5s;
+        overflow: hidden;
         div {
             position: absolute;
+            background-repeat: no-repeat;
             z-index: -3;
             width: 100%;
             height: 100%;
