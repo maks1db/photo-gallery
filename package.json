@@ -1,6 +1,6 @@
 {
   "name": "photo-gallery",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Фотовыставка туристов",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,8 @@
   "dependencies": {
     "array-sort": "^0.1.2",
     "express": "4.15.3",
-    "mysql": "2.13.0",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.13",
     "body-parser": "^1.17.2",
     "camelcase": "4.1.0",
     "axios": "^0.15.0",

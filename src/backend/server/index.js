@@ -27,6 +27,6 @@ app.get('*',function(req,res){
     res.sendFile(path.resolve(__dirname, '../../../public/', 'index.html'));
 });
 
-app.listen(port, ()=> console.log('Server LESOBEG RUNNING on ' + port));
+app.listen(port, ()=> console.log('Server PHOTO-GALLERY RUNNING on ' + port));
 
 module.exports = app;
