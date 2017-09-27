@@ -7,7 +7,10 @@ export default (props) => {
 
     return (
         <form className={styles.form}>
-            <UserInfo />
+            <UserInfo 
+                onChangeRegKey={props.onChangeRegKey}
+                registerInfo={props.registerInfo}
+            />
             <div className={styles.center}>
                 <Button title={<i className={`fa fa-arrow-right ${styles.arrow}`}></i>} type="primary"/>
             </div>   

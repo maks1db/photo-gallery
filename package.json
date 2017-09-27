@@ -1,6 +1,6 @@
 {
   "name": "photo-gallery",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Фотовыставка туристов",
   "main": "index.js",
   "scripts": {
@@ -36,7 +36,8 @@
     "babel-register": "^6.24.1",
     "module-alias": "^2.0.1",
     "bootstrap": "3.3.7",
-    "font-awesome": "4.7.0"
+    "font-awesome": "4.7.0",
+    "react-input-mask": "1.0.7"
   },
   "devDependencies": {
     "eslint": "^4.7.0",
