@@ -7,9 +7,9 @@ export const changeRegisterKey = (key, value) => {
     };
 };
 
-export const checkRegisterKey = (key, value) => {
+export const checkRegisterKey = (key, value, initValidation = false) => {
     return {
-        type: constants.VALIDATION_REGISTER_KEY,
+        type: initValidation ? constants.VALIDATION_INIT_REGISTER_KEY : constants.VALIDATION_REGISTER_KEY,
         key, value
     };
 };

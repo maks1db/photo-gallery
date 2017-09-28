@@ -1,4 +1,8 @@
 module.exports = (obj, props=[]) => {
+
+    if (typeof props === 'string') {
+        props = [props];
+    }
     
     let result = {};
     Object.assign(result, obj);

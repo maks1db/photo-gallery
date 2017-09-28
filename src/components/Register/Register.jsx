@@ -9,6 +9,7 @@ export default (props) => {
         <form className={styles.form}>
             <UserInfo 
                 onChangeRegKey={props.onChangeRegKey}
+                onValidation={props.onValidation}
                 registerInfo={props.registerInfo}
             />
             <div className={styles.center}>

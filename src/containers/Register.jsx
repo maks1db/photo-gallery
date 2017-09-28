@@ -10,11 +10,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        onChangeRegKey: (key, value) => {
-            dispatch(changeRegisterKey(key, value));
-            dispatch(checkRegisterKey(key,value))
-
-        },
+        onChangeRegKey: (key, value) => dispatch(changeRegisterKey(key, value)),
+        onValidation: (key, value, init) => dispatch(checkRegisterKey(key, value, init)),
         validationUserInfo: () => {}
     };
 }
@@ -29,10 +26,12 @@ export default class Register extends Component {
         const { 
             onChangeRegKey, 
             validationUserInfo,
+            onValidation,
             registerInfo} = this.props;
         return (
             <RegisterComponent 
                 validationUserInfo={validationUserInfo}
+                onValidation={onValidation}
                 onChangeRegKey={onChangeRegKey}
                 registerInfo={registerInfo}
             />
