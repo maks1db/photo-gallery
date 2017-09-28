@@ -12,7 +12,10 @@ export default (props) => {
                 registerInfo={props.registerInfo}
             />
             <div className={styles.center}>
-                <Button title={<i className={`fa fa-arrow-right ${styles.arrow}`}></i>} type="primary"/>
+                <Button 
+                    onClick={props.validationUserInfo}
+                    title={<i className={`fa fa-arrow-right ${styles.arrow}`}></i>} 
+                    type="primary"/>
             </div>   
         </form>
     );

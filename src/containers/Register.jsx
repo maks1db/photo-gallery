@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RegisterComponent from 'Register/Register.jsx';
-import { changeRegisterKey } from 'actions/app';
+import { changeRegisterKey, checkRegisterKey } from 'actions/app';
 
 function mapStateToProps(state) {
     return {
@@ -10,7 +10,12 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        onChangeRegKey: (key, value) => dispatch(changeRegisterKey(key, value))
+        onChangeRegKey: (key, value) => {
+            dispatch(changeRegisterKey(key, value));
+            dispatch(checkRegisterKey(key,value))
+
+        },
+        validationUserInfo: () => {}
     };
 }
 
@@ -21,9 +26,13 @@ export default class Register extends Component {
     }
 
     render() {
-        const { onChangeRegKey, registerInfo} = this.props;
+        const { 
+            onChangeRegKey, 
+            validationUserInfo,
+            registerInfo} = this.props;
         return (
             <RegisterComponent 
+                validationUserInfo={validationUserInfo}
                 onChangeRegKey={onChangeRegKey}
                 registerInfo={registerInfo}
             />

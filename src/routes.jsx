@@ -7,8 +7,8 @@ import Register from 'containers/Register.jsx';
 export default () => (
     <Layout>
         <Switch>
-            <Route exact path="/" component={Main} title="Фотовыставка"/>
-            <Route path="/register" component={Register} title="Подача заявки"/>
+            <Route exact path="/" component={Main}/>
+            <Route path="/register" component={Register}/>
         </Switch>
     </Layout>
 );

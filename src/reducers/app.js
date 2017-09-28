@@ -63,6 +63,13 @@ export default (state = initialState, action) => {
                 value: action.value,
             }}
         };
+    case app.VALIDATION_REGISTER_KEY: 
+        return {...state, 
+            register: {...state.register, [action.key]: {
+                ...state.register[action.key],
+                errorMessage: action.value,
+            }}
+        };
     }
 
     return state;
