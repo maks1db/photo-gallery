@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RegisterComponent from 'Register/Register.jsx';
-import { changeRegisterKey, checkRegisterKey } from 'actions/app';
+import { changeRegisterKey, validation } from 'actions/app';
 
 function mapStateToProps(state) {
     return {
-        registerInfo: state.app.register
+        registerInfo: state.register.init
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         onChangeRegKey: (key, value) => dispatch(changeRegisterKey(key, value)),
-        onValidation: (key, value, init) => dispatch(checkRegisterKey(key, value, init)),
-        validationUserInfo: () => {}
+        onValidation: () => {
+            dispatch(validation())
+        }
     };
 }
 
@@ -30,7 +31,6 @@ export default class Register extends Component {
             registerInfo} = this.props;
         return (
             <RegisterComponent 
-                validationUserInfo={validationUserInfo}
                 onValidation={onValidation}
                 onChangeRegKey={onChangeRegKey}
                 registerInfo={registerInfo}
