@@ -5,7 +5,9 @@ const initialState = {
         isFetching: false,
         value: undefined
     },
-    role: 'users'
+    role: 'user',
+    validationErrorsShow: false,
+    registerStep: 2
 };
 
 export default (state = initialState, action) => {
@@ -17,6 +19,14 @@ export default (state = initialState, action) => {
     case app.RECEIVE_DATE_END:
         return {...state, 
             dateEnd: {...state.dateEnd, isFetching: false, value: new Date(action.value)}
+        };
+    case app.VALIDATION_ERRORS_SHOW:
+        return {...state,
+            validationErrorsShow: action.validation    
+        };
+    case app.CHANGE_REGISTER_STEP:
+        return {...state,
+            registerStep: action.step    
         };
     }
 

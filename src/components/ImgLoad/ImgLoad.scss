@@ -1,0 +1,35 @@
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    input {
+        display: none !important;
+    }
+    button {
+        i {
+            font-style: normal !important;
+            i {
+                margin-left: 8px;
+            }
+        }
+    }
+    img {
+        //width: 100%;
+        height: 100%;
+        padding: 5px;
+        background: #fff;
+
+    }
+}
+.button {
+    i{
+        font-size: 16px !important;
+    }
+}
+.img {
+    height: 100%;
+}
+.hide {
+    display: none;
+}

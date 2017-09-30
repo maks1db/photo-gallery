@@ -7,7 +7,12 @@ import Row from 'Controls/Row.jsx';
 export default (props) => {
     const init = (key) => {
         return {
-            onChange: (e) => props.onChangeRegKey(key, e.target.value),
+            onChange: (e) => {
+                props.onChangeRegKey(key, e.target.value);
+                if (props.validationShow) {
+                    props.onValidation(false);
+                }
+            },
             defaultValue: props.registerInfo[key].value,
             errorMessage: props.registerInfo[key].errorMessage
         };
@@ -17,14 +22,14 @@ export default (props) => {
         <Row>
             <Col number={6}>
                 <Row>
-                    <Col number={9}>
+                    <Col number={8}>
                         <Input 
                             label={'ФИО'}
                             placeholder="Введите ваше ФИО"  
                             {...init('name')}
                         />
                     </Col>
-                    <Col number={3}>
+                    <Col number={4}>
                         <Input 
                             label={'Возрат'}
                             placeholder="Ваш возраст"  

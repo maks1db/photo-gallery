@@ -1,6 +1,7 @@
 import React from 'react';
 import deleteProps from 'deleteProps.js';
 import ClassName from 'className.js';
+import styles from './MainInput.scss';  
 
 const Control = (props) => {
     if (props.control === 'input') return <input {...deleteProps(props, 'control')} />;
@@ -23,6 +24,7 @@ export default class Input extends React.Component {
                     {...deleteProps(this.props, ['onValidation','reqired', 'errorMessage'])}
                 />
                 {errorMessage !== false && (<span className="glyphicon glyphicon-remove form-control-feedback"></span>)}
+                {errorMessage !== false && (<label className={styles.error}>{errorMessage}</label>)}
             </div>
         );
     }

@@ -1,6 +1,7 @@
 import app from 'constants/app';
 
 const initialState = {
+    photo: [],
     init: {
         name: {
             value: '',
@@ -73,6 +74,27 @@ export default (state = initialState, action) => {
                 ...state.init[action.key],
                 errorMessage: action.value,
             }}
+        };
+    case app.ADD_PHOTO: 
+        return {...state, 
+            photo: [...state.photo, {
+                active: false,
+                id: new Date().valueOf(),
+                picture: {value: null, errorMessage: false},
+                title: {value: '', errorMessage: false},
+                description: {value: '', errorMessage: false},
+                year: {value: 0, errorMessage: false},
+                info: {value: '', errorMessage: false}
+            }]
+        };
+    case app.CHANGE_PHOTO_KEY: 
+        return {...state, 
+            photo: state.photo.map( x=> {
+                if (x.id === action.id) {
+                    x[action.key].value = action.value;
+                }
+                return x;
+            })
         };
     }
 

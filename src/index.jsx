@@ -11,6 +11,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import './scss/index.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 
 const initialState = window.__INITIAL_STATE__ || {};
 const history = createHistory();
