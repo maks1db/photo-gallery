@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import RegisterComponent from 'Register/Register.jsx';
 import { changeRegisterKey, 
     validation, 
     setRegisterStep,
     addPhoto,
     deletePhoto,
-    changePhotoKey
+    deletePhotoItem,
+    changePhotoKey,
+    setPhotoActive
 } from 'actions/app';
+
+import styles from 'Register/Register.scss';
+import UserInfo from 'Register/UserInfo.jsx';
+import UserPhoto from 'Register/UserPhoto.jsx';
+import RegisterControls from 'Register/RegisterControls.jsx';
+
 
 function mapStateToProps(state) {
     return {
@@ -23,7 +30,10 @@ function mapDispatchToProps(dispatch, ownProps) {
         onValidation: (toastr) => dispatch(validation(toastr)),
         onSetRegisterStep: (step) => dispatch(setRegisterStep(step)),
         addPhoto: () => dispatch(addPhoto()),
-        changePhotoKey: (id, key, value)=> dispatch(changePhotoKey(id, key, value))
+        changePhotoKey: (id, key, value)=> dispatch(changePhotoKey(id, key, value)),
+        setPhotoActive: (id) => dispatch(setPhotoActive(id)),
+        deletePhoto: () => dispatch(deletePhoto()),
+        deletePhotoItem: (id) => dispatch(deletePhotoItem(id))
     };
 }
 
@@ -44,21 +54,38 @@ export default class Register extends Component {
             onSetRegisterStep,
             photo,
             addPhoto,
-            changePhotoKey
+            changePhotoKey,
+            setPhotoActive,
+            deletePhoto,
+            deletePhotoItem
         } = this.props;
 
         return (
-            <RegisterComponent 
-                photo={photo}
-                addPhoto={addPhoto}
-                registerStep={registerStep}
-                validationShow={validationShow}
-                onValidation={onValidation}
-                onChangeRegKey={onChangeRegKey}
-                registerInfo={registerInfo}
+            <div className={styles.form}>
+            {
+                registerStep === 1 ?
+                    <UserInfo 
+                        onChangeRegKey={onChangeRegKey}
+                        registerInfo={registerInfo}
+                        validationShow={validationShow}
+                        onValidation={onValidation}
+                    /> :
+                    <UserPhoto
+                        addPhoto={addPhoto}
+                        photo={photo}
+                        changePhotoKey={changePhotoKey}
+                        setPhotoActive={setPhotoActive}
+                        deletePhoto={deletePhoto}
+                        deletePhotoItem={deletePhotoItem}
+                    />
+            }
+            <RegisterControls 
                 onSetRegisterStep={onSetRegisterStep}
-                changePhotoKey={changePhotoKey}
+                registerStep={registerStep} 
+                onValidation={onValidation}
             />
+              
+        </div>
         );
     }
 }

@@ -6,6 +6,8 @@ import styles from './MainInput.scss';
 const Control = (props) => {
     if (props.control === 'input') return <input {...deleteProps(props, 'control')} />;
     else if (props.control === 'textarea') return <textarea {...deleteProps(props, 'control')} />;
+    else if (props.control === 'select') return <select {...deleteProps(props, 'control')}
+    />;
 };
 
 export default class Input extends React.Component {

@@ -80,11 +80,12 @@ export default (state = initialState, action) => {
             photo: [...state.photo, {
                 active: false,
                 id: new Date().valueOf(),
-                picture: {value: null, errorMessage: false},
-                title: {value: '', errorMessage: false},
-                description: {value: '', errorMessage: false},
-                year: {value: 0, errorMessage: false},
-                info: {value: '', errorMessage: false}
+                picture: {value: null, errorMessage: false, required:true},
+                title: {value: '', errorMessage: false, required:true},
+                description: {value: '', errorMessage: false, required:true},
+                year: {value: 0, errorMessage: false, required:true},
+                info: {value: '', errorMessage: false, required:true},
+                category: {value: 'Категория 2', errorMessage: false, required:true}
             }]
         };
     case app.CHANGE_PHOTO_KEY: 
@@ -92,6 +93,36 @@ export default (state = initialState, action) => {
             photo: state.photo.map( x=> {
                 if (x.id === action.id) {
                     x[action.key].value = action.value;
+                }
+                return x;
+            })
+        };
+    case app.VALIDATION_PHOTO_KEY: 
+        return {...state, 
+            photo: state.photo.map( x=> {
+                if (x.id === action.id) {
+                    x[action.key].errorMessage = action.value;
+                }
+                return x;
+            })
+        };
+    case app.SET_PHOTO_ACTIVE: 
+        return {...state, 
+            photo: state.photo.map( x=> {
+                x.active = x.id === action.id;
+                return x;
+            })
+        };
+    case app.DELETE_PHOTO: 
+        return {...state, 
+            photo: state.photo.filter( x=> !x.active)
+        };
+    case app.DELETE_PHOTO_ITEM: 
+        return {...state, 
+            photo: state.photo.map( x=> {
+                if (x.id === action.id) {
+                    x.picture.value = null;
+                    x.picture.errorMessage = null;
                 }
                 return x;
             })

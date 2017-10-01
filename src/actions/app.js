@@ -34,9 +34,21 @@ export const changePhotoKey = (id, key, value) => {
     };
 };
 
-
-export const deletePhoto = (id) => {
+export const setPhotoActive = (id) => {
     return {
-        type: constants.DELETE_PHOTO, id
+        type: constants.SET_PHOTO_ACTIVE,
+        id
+    };
+};
+
+export const deletePhoto = () => {
+    return {
+        type: constants.DELETE_PHOTO
+    };
+};
+
+export const deletePhotoItem = (id) => {
+    return {
+        type: constants.DELETE_PHOTO_ITEM, id
     };
 };
