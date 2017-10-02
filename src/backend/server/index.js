@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import routes from '../routes';
+import db from '../db';
 
 const app = express();  
 
@@ -29,6 +30,7 @@ app.get('*',function(req,res){
     res.sendFile(path.resolve(__dirname, '../../../public/', 'index.html'));
 });
 
+db.connect();
 app.listen(port, ()=> console.log('Server PHOTO-GALLERY RUNNING on ' + port));
 
 module.exports = app;

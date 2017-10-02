@@ -7,7 +7,8 @@ import { changeRegisterKey,
     deletePhoto,
     deletePhotoItem,
     changePhotoKey,
-    setPhotoActive
+    setPhotoActive,
+    saveUser
 } from 'actions/app';
 
 import styles from 'Register/Register.scss';
@@ -21,7 +22,8 @@ function mapStateToProps(state) {
         registerInfo: state.register.init,
         validationShow: state.app.validationErrorsShow,
         registerStep: state.app.registerStep,
-        photo: state.register.photo
+        photo: state.register.photo,
+        onSave: state.register.onSave
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {
@@ -33,7 +35,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         changePhotoKey: (id, key, value)=> dispatch(changePhotoKey(id, key, value)),
         setPhotoActive: (id) => dispatch(setPhotoActive(id)),
         deletePhoto: () => dispatch(deletePhoto()),
-        deletePhotoItem: (id) => dispatch(deletePhotoItem(id))
+        deletePhotoItem: (id) => dispatch(deletePhotoItem(id)),
+        onSaveUser: (user) => dispatch(saveUser(user))
     };
 }
 
@@ -57,7 +60,9 @@ export default class Register extends Component {
             changePhotoKey,
             setPhotoActive,
             deletePhoto,
-            deletePhotoItem
+            deletePhotoItem,
+            onSaveUser,
+            onSave
         } = this.props;
 
         return (
@@ -81,8 +86,14 @@ export default class Register extends Component {
             }
             <RegisterControls 
                 onSetRegisterStep={onSetRegisterStep}
+                onSave={onSave}
                 registerStep={registerStep} 
                 onValidation={onValidation}
+                onSaveUser={() => {//validationShow && 
+                    var obj = {};
+                    Object.keys(registerInfo).forEach(x=> obj[x] = registerInfo[x].value)
+                    onSaveUser(obj);
+                }}
             />
               
         </div>

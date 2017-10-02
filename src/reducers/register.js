@@ -55,7 +55,8 @@ const initialState = {
             value: '',
             errorMessage: false
         }
-    }
+    },
+    onSave: false
 };
 
 export default (state = initialState, action) => {
@@ -116,6 +117,14 @@ export default (state = initialState, action) => {
     case app.DELETE_PHOTO: 
         return {...state, 
             photo: state.photo.filter( x=> !x.active)
+        };
+    case app.SAVE_USER_REQUEST: 
+        return {...state, 
+            onSave: true
+        };
+    case app.SAVE_USER_COMPLETE: 
+        return {...state, 
+            onSave: false
         };
     case app.DELETE_PHOTO_ITEM: 
         return {...state, 

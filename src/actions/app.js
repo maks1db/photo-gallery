@@ -1,4 +1,11 @@
 import constants from 'constants/app';
+import { saveUser as saveUserApi} from 'api/app';
+
+export const saveUser = () => dispatch => {
+    dispatch({
+        type: constants.SAVE_USER_REQUEST
+    });
+};
 
 export const changeRegisterKey = (key, value) => {
     return {

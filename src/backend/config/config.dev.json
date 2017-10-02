@@ -1,8 +1,7 @@
 {
-    "mysql":{
-      "user": "root",
-      "password": "kolbaska",
-      "database": "gallery",
+    "mongodb":{
+      "port": "27017",
+      "database": "photoGallery",
       "host": "localhost"
     }
 }

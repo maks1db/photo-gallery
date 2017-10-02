@@ -65,6 +65,7 @@ const validation = store => next => action => {
                 }  
             });
     
+            hasError = false;
             if (!hasError) {
                 store.dispatch({
                     type: app.CHANGE_REGISTER_STEP,
@@ -85,7 +86,7 @@ const validation = store => next => action => {
         }
 
         //DEMO
-        //hasError = false;
+        hasError = false;
         store.dispatch({
             type: app.VALIDATION_ERRORS_SHOW,
             validation: hasError 

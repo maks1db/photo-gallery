@@ -15,7 +15,12 @@ export default (props) => (
                 children={<i className={'fa fa-arrow-right'}></i>} 
                 option="primary"/>)}
             {props.registerStep === 2 && (<Button 
-                onClick={props.onValidation}
+                onClick={() => {
+                    props.onValidation();
+                    props.onSaveUser();
+                }
+                }
+                {...(props.onSave === 1 ? {disabled:true} : {})}
                 children={<i className={'fa fa-floppy-o'}></i>} 
                 option="success"/>)}
         </div> 
