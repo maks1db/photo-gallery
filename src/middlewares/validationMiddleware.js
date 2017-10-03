@@ -1,4 +1,5 @@
 import app from 'constants/app';
+import layout from 'constants/layout';
 import {toastr} from 'react-redux-toastr';
 
 const validation = store => next => action => {
@@ -72,6 +73,11 @@ const validation = store => next => action => {
                     step: 2
                 });
             }
+            store.dispatch({
+                type: layout.SET_TITLE,
+                title: 'Подача заявки (2 из 2)'
+            });
+            document.title = 'Подача заявки (2 из 2)';
         }
         else if (state.app.registerStep === 2) {
             const type = app.VALIDATION_PHOTO_KEY; 
@@ -94,6 +100,8 @@ const validation = store => next => action => {
         if (hasError && action.toastrError) {
             toastr.error('Ошибка', 'Заполните правильно необходимые реквизиты');
         }
+
+        
         
     }
 

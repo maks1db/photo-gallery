@@ -4,6 +4,7 @@ import rootReducer from 'reducers';
 import initMiddleware from 'middlewares/initMiddleware';
 import validationMiddleware from 'middlewares/validationMiddleware';
 import { routerMiddleware } from 'react-router-redux';
+import saveUserMiddleware from 'middlewares/saveUserMiddleware';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -14,7 +15,8 @@ export default function configureStore(history) {
             thunkMiddleware,
             routerMiddleware(history),
             initMiddleware,
-            validationMiddleware
+            validationMiddleware,
+            saveUserMiddleware
         ))
     );
 

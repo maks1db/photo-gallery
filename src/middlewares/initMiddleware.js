@@ -4,7 +4,7 @@ import { dateEnd } from 'api/app';
 
 const titles = {
     '/': 'Фотовыставка',
-    '/register': 'Подача заявки'
+    '/register': 'Подача заявки (1 из 2)'
 };
 
 const init = store => next => action => {

@@ -90,9 +90,7 @@ export default class Register extends Component {
                 registerStep={registerStep} 
                 onValidation={onValidation}
                 onSaveUser={() => {//validationShow && 
-                    var obj = {};
-                    Object.keys(registerInfo).forEach(x=> obj[x] = registerInfo[x].value)
-                    onSaveUser(obj);
+                    onSaveUser();
                 }}
             />
               
