@@ -11,4 +11,4 @@ const userPhoto = new Schema({
     userId: String
 },{versionKey: false});
 
-module.exports = mongoose.model('userPhoto', userPhoto);
+module.exports = mongoose.model('user-photo', userPhoto);

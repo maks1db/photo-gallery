@@ -12,10 +12,9 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         let l = file.originalname.split('.');
 
-        cb(null, `${Date.now().valueOf()}${l.length > 1 ? '.' + l[1] : '' }`);
+        cb(null, `${Date.now().valueOf() + Math.round(1,500)}${l.length > 1 ? '.' + l[1] : '' }`);
     }
 });
-//var upload = multer({ dest: 'public/uploads/' })
   
 const upload = multer({ storage });
 

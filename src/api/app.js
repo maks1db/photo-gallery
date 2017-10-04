@@ -1,5 +1,4 @@
 import axios from 'axios';
-import $ from 'jquery-ajax';
 
 let API_PREFIX = '';
 if (process.env.BROWSER){

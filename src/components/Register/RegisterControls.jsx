@@ -14,7 +14,7 @@ export default (props) => (
                 onClick={props.onValidation}
                 children={<i className={'fa fa-arrow-right'}></i>} 
                 option="primary"/>)}
-            {props.registerStep === 2 && (
+            {(props.registerStep === 2 && !props.userRegister) && (
                 <Button 
                     onClick={() => {
                         props.onValidation();

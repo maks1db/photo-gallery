@@ -85,7 +85,7 @@ export default (props) => {
 
     let number = 0;
     return (<div>
-        <div className={styles.controls}>
+        {!props.userRegister && <div className={styles.controls}>
             { props.photo.length > 0 && <RaisedButton 
                 mini={true}
                 {...props.photo.filter(x => x.active).length === 0 && {disabled: true}}
@@ -107,10 +107,11 @@ export default (props) => {
                 className={styles.add}    
             />
             <h3>{props.photo.length} фото из 5</h3>
-        </div>
-        {props.photo.length === 0 && <h2 className={styles.info}>Добавьте ваши фото</h2>}
+        </div>}
+        {(props.photo.length === 0 && !props.userRegister) && <h2 className={styles.info}>Добавьте ваши фото</h2>}
+        {(props.userRegister) && <h2 className={styles.info}>Ваша заявка на участие принята</h2>}
         {
-            props.photo.map(x=> {
+            !props.userRegister && props.photo.map(x=> {
                 number++;
                 return (
                     <ImgRow 

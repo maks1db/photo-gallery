@@ -14,6 +14,7 @@ const initialState = {
             value: '',
             errorMessage: false,
             required: true,
+            min:0,
             max: 80
         },
         phone: {
@@ -53,6 +54,10 @@ const initialState = {
         },
         info: {
             value: '',
+            errorMessage: false
+        },
+        confirm: {
+            value: false,
             errorMessage: false
         }
     },

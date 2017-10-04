@@ -2,9 +2,10 @@ import React from 'react';
 import deleteProps from 'deleteProps.js';
 import ClassName from 'className.js';
 import styles from './MainInput.scss';  
+import Inputmask from 'react-input-mask';
 
 const Control = (props) => {
-    if (props.control === 'input') return <input {...deleteProps(props, 'control')} />;
+    if (props.control === 'input') return <Inputmask {...deleteProps(props, 'control')} />;
     else if (props.control === 'textarea') return <textarea {...deleteProps(props, 'control')} />;
     else if (props.control === 'select') return <select {...deleteProps(props, 'control')}
     />;

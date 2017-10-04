@@ -16,7 +16,6 @@ const init = store => next => action => {
             type: layout.SET_TITLE,
             title
         });
-        document.title = title;
 
         store.dispatch({
             type: layout.SHOW_MAIN_LINK,

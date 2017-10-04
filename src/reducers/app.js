@@ -7,7 +7,8 @@ const initialState = {
     },
     role: 'user',
     validationErrorsShow: false,
-    registerStep: 1
+    registerStep: 1,
+    userRegister: false
 };
 
 export default (state = initialState, action) => {
@@ -27,6 +28,10 @@ export default (state = initialState, action) => {
     case app.CHANGE_REGISTER_STEP:
         return {...state,
             registerStep: action.step    
+        };
+    case app.USER_REGISTER:
+        return {...state,
+            userRegister:true    
         };
     }
 

@@ -73,11 +73,10 @@ const validation = store => next => action => {
                     step: 2
                 });
             }
-            store.dispatch({
-                type: layout.SET_TITLE,
-                title: 'Подача заявки (2 из 2)'
-            });
-            document.title = 'Подача заявки (2 из 2)';
+
+            if (!state.register.init.confirm.value) {
+                toastr.error('Ошибка', 'Необходимо разрешить использование указанных данных.'); 
+            }
         }
         else if (state.app.registerStep === 2) {
             const type = app.VALIDATION_PHOTO_KEY; 

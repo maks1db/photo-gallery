@@ -24,7 +24,8 @@ function mapStateToProps(state) {
         registerStep: state.app.registerStep,
         photo: state.register.photo,
         onSave: state.register.onSave,
-        photoNumber: state.register.photoNumber
+        photoNumber: state.register.photoNumber,
+        userRegister: state.app.userRegister
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {
@@ -64,7 +65,8 @@ export default class Register extends Component {
             deletePhotoItem,
             onSaveUser,
             onSave, //save on/off
-            photoNumber
+            photoNumber,
+            userRegister
         } = this.props;
 
         return (
@@ -84,6 +86,7 @@ export default class Register extends Component {
                         setPhotoActive={setPhotoActive}
                         deletePhoto={deletePhoto}
                         deletePhotoItem={deletePhotoItem}
+                        userRegister={userRegister}
                     />
             }
             <RegisterControls 
@@ -94,6 +97,7 @@ export default class Register extends Component {
                 onSave={onSave}
                 count={photo.length}
                 photoNumber={photoNumber}
+                userRegister={userRegister}
                 onSaveUser={() => {//validationShow && 
                     onSaveUser();
                 }}
