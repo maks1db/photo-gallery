@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 const userPhoto = new Schema({
-    pic: String,
+    picture: String,
     title: String,
     description: String,
     year: Number,

@@ -56,7 +56,8 @@ const initialState = {
             errorMessage: false
         }
     },
-    onSave: false
+    onSave: false,
+    photoNumber: 0
 };
 
 export default (state = initialState, action) => {
@@ -113,6 +114,10 @@ export default (state = initialState, action) => {
                 x.active = x.id === action.id;
                 return x;
             })
+        };
+    case app.SAVE_PHOTO_NUMBER: 
+        return {...state, 
+            photoNumber: action.value      
         };
     case app.DELETE_PHOTO: 
         return {...state, 

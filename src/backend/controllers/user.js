@@ -1,14 +1,11 @@
-import model from '../models/users';
-import multer from 'multer';
+import modelUser from '../models/users';
+import modelPhoto from '../models/userPhoto';
 
-const storage = multer.diskStorage({
-    destination: './files'
-});
-  
-const upload = multer({ dest: 'uploads/' });
-
+/**
+ * Save user
+ */
 module.exports.save = (req, res) => {
-    const user = new model(req.body.user);
+    const user = new modelUser(req.body.user);
     user.save().then((doc) => {
         res.json({
             result: true,
@@ -17,14 +14,19 @@ module.exports.save = (req, res) => {
     });
 };
 
+/**
+ * Save photo
+ */
 module.exports.savePhoto = (req, res) => {
-    upload(req, res, function (err) {
-        if (err) {
-            console.log(req.file);
-            console.log(err);
-            return;
-        }
-    
-        res.send('Profile ok');
+
+    let obj = req.body;
+    obj.picture = req.file.path;
+
+    const photo = new modelPhoto(obj);
+    photo.save().then((doc) => {
+        res.json({
+            result: true,
+            id: doc._id.toString()
+        });
     });
 };

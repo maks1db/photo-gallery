@@ -19,9 +19,17 @@ const init = store => next => action => {
             const save = (index) => {
                 if (index === state.register.photo.length) {
                     resolve('ok');
+
+                    store.dispatch({
+                        type: app.SAVE_USER_COMPLETE
+                    });
                     return;
                 }
 
+                store.dispatch({
+                    type: app.SAVE_PHOTO_NUMBER,
+                    value: state.register.photo.length - index - 1
+                });
                 const item = state.register.photo[index];
                 obj = {};
                 obj.picture = item.picture.value[0];
@@ -29,8 +37,9 @@ const init = store => next => action => {
                     .filter(x => ['id', 'active', 'picture'].indexOf(x) < 0)
                     .forEach(x=> obj[x] = item[x].value);
 
-                savePhoto(obj);
-                index++;
+                savePhoto(obj)
+                    .then(() => save(++index));
+                
             };
             
             save(0);
