@@ -68,6 +68,7 @@ const ImgRow = (props) => {
                     <Input 
                         label="Год" 
                         type="number"
+                        maxLength={4}
                         {...init('year')}    
                     />   
                 </Col>
@@ -111,16 +112,14 @@ export default (props) => {
         {(props.photo.length === 0 && !props.userRegister) && <h2 className={styles.info}>Добавьте ваши фото</h2>}
         {(props.userRegister) && <h2 className={styles.info}>Ваша заявка на участие принята</h2>}
         {
-            !props.userRegister && props.photo.map(x=> {
+            props.photo.map(x=> {
                 number++;
                 return (
                     <ImgRow 
                         number={number}
                         key={x.id} 
                         values={x}
-                        changePhotoKey={props.changePhotoKey}
-                        setPhotoActive={props.setPhotoActive}
-                        deletePhotoItem={props.deletePhotoItem}
+                        {...props}
                     />
                 );
             })

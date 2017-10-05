@@ -54,7 +54,7 @@ export default class Register extends Component {
             validationUserInfo,
             onValidation,
             registerInfo,
-            validationShow,
+            validationShow, //not valid step
             registerStep,
             onSetRegisterStep,
             photo,
@@ -87,6 +87,8 @@ export default class Register extends Component {
                         deletePhoto={deletePhoto}
                         deletePhotoItem={deletePhotoItem}
                         userRegister={userRegister}
+                        validationShow={validationShow}
+                        onValidation={onValidation}
                     />
             }
             <RegisterControls 
@@ -98,9 +100,7 @@ export default class Register extends Component {
                 count={photo.length}
                 photoNumber={photoNumber}
                 userRegister={userRegister}
-                onSaveUser={() => {//validationShow && 
-                    onSaveUser();
-                }}
+                onSaveUser={() => !validationShow && onSaveUser()}
             />
               
         </div>

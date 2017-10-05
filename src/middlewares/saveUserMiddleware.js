@@ -1,5 +1,6 @@
 import app from 'constants/app';
 import { saveUser, savePhoto } from 'api/app';
+import {toastr} from 'react-redux-toastr';
 
 const init = store => next => action => {
 
@@ -28,7 +29,7 @@ const init = store => next => action => {
                             store.dispatch({
                                 type: app.USER_REGISTER
                             });
-                            
+                            toastr.success('Спасибо', 'Ваша заявка принята');
                             return;
                         }
         

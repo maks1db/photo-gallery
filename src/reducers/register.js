@@ -21,7 +21,8 @@ const initialState = {
             value: '',
             errorMessage: false,
             minLength:11,
-            maxLength:20
+            maxLength:20,
+            forbidden: ['_']
         },
         email: {
             value: '',

@@ -38,6 +38,7 @@ export default (props) => {
                                 placeholder="Ваш возраст" 
                                 type="number"
                                 {...init('age')}
+                                maxLength={2}
                             />
                         </Col>
                     </Row>

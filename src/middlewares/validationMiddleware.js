@@ -20,19 +20,26 @@ const validation = store => next => action => {
                 value: `Длина реквизита максимум ${item.max} символов` 
             });    
         }
-        else if (item.min && parseInt(item.value) <= item.min) {
+        else if (item.min !== undefined && parseInt(item.value) <= item.min) {
             hasError = true;
             store.dispatch({
                 type, key,id,
-                value: `Мин. ${item.min}` 
+                value: `Мин. значение ${item.min}` 
             });
         }
-        else if (item.max && parseInt(item.value) > item.max) {
+        else if (item.max !== undefined && parseInt(item.value) > item.max) {
             hasError = true;
             store.dispatch({
                 type, key,id,
-                value: `Макс. ${item.max}`
+                value: `Макс. значение ${item.max}`
             }); 
+        }
+        else if (item.forbidden && item.forbidden.filter(x => item.value.indexOf(x) >= 0).length) {
+            hasError = true;
+            store.dispatch({
+                type, key,id,
+                value: `Недопустимые символы ${item.forbidden.join(', ')}`
+            });
         }
         else if (item.required && !item.value) {
             hasError = true;
@@ -51,9 +58,9 @@ const validation = store => next => action => {
         return hasError;
     }
 
-    let hasError = false;
+    //toastrError означает, что проверка валидации вызвана из изменения реквизита
+    let hasError = false, hasErrorConfirm = false;
     if (action.type === app.VALIDATION_USER_INFO) {
-
         const state = store.getState();      
 
         if (state.app.registerStep === 1) {
@@ -66,17 +73,19 @@ const validation = store => next => action => {
                 }  
             });
     
-            hasError = false;
-            if (!hasError) {
+            if (!state.register.init.confirm.value && action.toastrError) {
+                toastr.error('Ошибка', 'Необходимо разрешить использование указанных данных.'); 
+                hasErrorConfirm = true;
+            }
+
+            if (!hasError && !hasErrorConfirm && action.toastrError) {
                 store.dispatch({
                     type: app.CHANGE_REGISTER_STEP,
                     step: 2
                 });
             }
 
-            if (!state.register.init.confirm.value) {
-                toastr.error('Ошибка', 'Необходимо разрешить использование указанных данных.'); 
-            }
+            
         }
         else if (state.app.registerStep === 2) {
             const type = app.VALIDATION_PHOTO_KEY; 
@@ -91,16 +100,16 @@ const validation = store => next => action => {
         }
 
         //DEMO
-        hasError = false;
         store.dispatch({
             type: app.VALIDATION_ERRORS_SHOW,
             validation: hasError 
         });
-        if (hasError && action.toastrError) {
-            toastr.error('Ошибка', 'Заполните правильно необходимые реквизиты');
-        }
 
-        
+        if (action.toastrError) {
+            if (hasError) {
+                toastr.error('Ошибка', 'Заполните правильно необходимые реквизиты');
+            } 
+        }
         
     }
 
