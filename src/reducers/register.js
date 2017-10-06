@@ -15,7 +15,8 @@ const initialState = {
             errorMessage: false,
             required: true,
             min:0,
-            max: 80
+            max: 80,
+            maxLength:2,
         },
         phone: {
             value: '',
@@ -28,7 +29,11 @@ const initialState = {
             value: '',
             errorMessage: false,
             minLength:10,
-            maxLength:64
+            maxLength:64,
+            regexp: {
+                reg: /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/gi,
+                message: 'Введите корректный e-mail'
+            }
         },
         town: {
             value: '',
@@ -59,7 +64,8 @@ const initialState = {
         },
         confirm: {
             value: false,
-            errorMessage: false
+            errorMessage: false,
+            required: true
         }
     },
     onSave: false,
@@ -91,7 +97,13 @@ export default (state = initialState, action) => {
                 picture: {value: null, errorMessage: false, required:true},
                 title: {value: '', errorMessage: false, required:true},
                 description: {value: '', errorMessage: false, required:true},
-                year: {value: 0, errorMessage: false, required:true},
+                year: {value: 0, 
+                    errorMessage: false, 
+                    max:new Date().getFullYear(), 
+                    min:2000,
+                    required:true,
+                    maxLength: 4
+                },
                 info: {value: '', errorMessage: false, required:true},
                 category: {value: 'Категория 2', errorMessage: false, required:true}
             }]

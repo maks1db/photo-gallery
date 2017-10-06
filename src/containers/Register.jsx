@@ -31,7 +31,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         onChangeRegKey: (key, value) => dispatch(changeRegisterKey(key, value)),
-        onValidation: (toastr) => dispatch(validation(toastr)),
+        onValidation: (key) => dispatch(validation(key)),
         onSetRegisterStep: (step) => dispatch(setRegisterStep(step)),
         addPhoto: () => dispatch(addPhoto()),
         changePhotoKey: (id, key, value)=> dispatch(changePhotoKey(id, key, value)),

@@ -86,7 +86,7 @@ export default (props) => {
 
     let number = 0;
     return (<div>
-        {!props.userRegister && <div className={styles.controls}>
+        {!props.userRegister && <div {...ClassName({[styles.down]: props.photo.length > 0}, `${styles.controls}`)}>
             { props.photo.length > 0 && <RaisedButton 
                 mini={true}
                 {...props.photo.filter(x => x.active).length === 0 && {disabled: true}}

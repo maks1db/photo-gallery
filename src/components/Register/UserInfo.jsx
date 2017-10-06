@@ -12,7 +12,7 @@ export default (props) => {
             onChange: (e) => {
                 props.onChangeRegKey(key, key=== 'confirm' ? e.target.checked : e.target.value);
                 if (props.validationShow) {
-                    props.onValidation(false);
+                    props.onValidation(key);
                 }
             },
             defaultValue: props.registerInfo[key].value,

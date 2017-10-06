@@ -44,12 +44,17 @@
 }
 .controls {
     margin-top: 20px;
-    //background: rgba(255,255,255,.1);
     border-radius: 1px;
-    bottom:30px;
+    left: 40%;
     position: fixed;
     padding: 6px;
     z-index: 100;
+    bottom: 60%;
+    transition: all ease-in-out .5s;
+    &.down {
+        left: 40px;
+        bottom:20px;    
+    }
     button {
         display: block;
         &.remove {

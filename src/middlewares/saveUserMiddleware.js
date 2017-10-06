@@ -7,6 +7,13 @@ const init = store => next => action => {
     if (action.type === app.SAVE_USER_REQUEST) {
 
         let state = store.getState();
+        if (state.app.validationErrorsShow) {
+            next(action);
+            store.dispatch({
+                type: app.SAVE_USER_COMPLETE
+            });
+            return;
+        }
 
         // prepare object
         var obj = {};

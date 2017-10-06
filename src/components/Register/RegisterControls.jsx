@@ -12,7 +12,7 @@ export default (props) => (
                 option="primary"/>
 
             {props.registerStep === 1 && (<Button 
-                onClick={props.onValidation}
+                onClick={() => props.onValidation()}
                 children={<i className={'fa fa-arrow-right'}></i>} 
                 option="primary"/>)}
                 

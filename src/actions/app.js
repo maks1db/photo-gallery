@@ -1,5 +1,4 @@
 import constants from 'constants/app';
-import { saveUser as saveUserApi} from 'api/app';
 
 export const saveUser = () => dispatch => {
     dispatch({
@@ -14,10 +13,10 @@ export const changeRegisterKey = (key, value) => {
     };
 };
 
-export const validation = (toastrError = true) => {
+export const validation = (key = '') => {
     return {
         type: constants.VALIDATION_USER_INFO,
-        toastrError
+        key
     };
 };
 
