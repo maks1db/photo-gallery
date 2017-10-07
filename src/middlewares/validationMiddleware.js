@@ -1,5 +1,4 @@
-import app from 'constants/app';
-import layout from 'constants/layout';
+import app from 'constants/appConstants';
 import {toastr} from 'react-redux-toastr';
 
 function validationItem(store, item, type, key, id) {

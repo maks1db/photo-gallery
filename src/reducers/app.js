@@ -1,4 +1,4 @@
-import app from 'constants/app';
+import app from 'constants/appConstants';
 
 const initialState = {
     dateEnd: {

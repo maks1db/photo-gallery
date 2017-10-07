@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import styles from './Header.scss';
 
 export default ({title,href=''}) => (
-    <li><Link to={href}>{title}</Link></li>
+    <li><NavLink to={href} activeClassName={styles.active}>{title}</NavLink></li>
 );

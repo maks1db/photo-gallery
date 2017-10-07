@@ -1,5 +1,5 @@
 import express from 'express';
-import userController from '../controllers/user';
+import userController from '../controllers/userController';
 
 const router = express.Router();
 
@@ -20,5 +20,6 @@ const upload = multer({ storage });
 
 router.post('/item', userController.save);
 router.post('/photo', upload.single('picture'), userController.savePhoto);
+router.get('/checkInputs', userController.checkInputs);
 
 module.exports = router;

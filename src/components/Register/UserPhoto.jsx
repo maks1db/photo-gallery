@@ -37,6 +37,9 @@ const ImgRow = (props) => {
                 title={`Загрузить фото ${props.number}`}
                 {...init('picture')}
                 deletePhotoItem={props.deletePhotoItem}
+                imgType={['jpeg','jpg']}
+                minSize={50}
+                maxSize={800}
             />   
         </Col>
         <Col number={8}>

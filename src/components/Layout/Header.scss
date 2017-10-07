@@ -52,6 +52,9 @@
                 text-decoration: none;
                 color: rgb(212, 211, 211);
             }
+            &.active {
+                color: rgb(139, 139, 139);   
+            }
         }
     }
 }

@@ -1,0 +1,13 @@
+.content {
+    margin: 0px 30px 30px 30px;
+    top:80px;
+    position: relative;
+    .items, .result {
+        background-color: #fff;
+        padding: 5px 10px 5px 10px;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        min-height: 500px;
+    }
+}

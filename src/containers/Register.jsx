@@ -9,7 +9,7 @@ import { changeRegisterKey,
     changePhotoKey,
     setPhotoActive,
     saveUser
-} from 'actions/app';
+} from 'actions/appActions';
 
 import styles from 'Register/Register.scss';
 import UserInfo from 'Register/UserInfo.jsx';

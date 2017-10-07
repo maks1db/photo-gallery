@@ -7,7 +7,8 @@ function mapStateToProps(state) {
     return {
         visible: state.layout.visible,
         title: state.layout.title,
-        showMainLink: state.layout.showMainLink
+        showMainLink: state.layout.showMainLink,
+        adminDashboard: state.layout.adminDashboard
     };
 }
 function mapDispatchToProps(dispatch) {
@@ -25,13 +26,15 @@ export default class Layout extends Component {
         const { 
             visible,
             title,
-            showMainLink
+            showMainLink,
+            adminDashboard
         } = this.props;
         return (
             <MainScreen>
                 { visible && <Header 
                     title={title} 
                     showMainLink={showMainLink} 
+                    adminDashboard={adminDashboard}
                 />}
                 {this.props.children}
             </MainScreen>

@@ -1,4 +1,4 @@
-import app from 'constants/app';
+import app from 'constants/appConstants';
 
 const initialState = {
     photo: [],
@@ -97,7 +97,7 @@ export default (state = initialState, action) => {
                 picture: {value: null, errorMessage: false, required:true},
                 title: {value: '', errorMessage: false, required:true},
                 description: {value: '', errorMessage: false, required:true},
-                year: {value: 0, 
+                year: {value: new Date().getFullYear(), 
                     errorMessage: false, 
                     max:new Date().getFullYear(), 
                     min:2000,

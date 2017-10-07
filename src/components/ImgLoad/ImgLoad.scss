@@ -24,9 +24,13 @@
     }
 }
 .button {
-    i{
-        font-size: 16px !important;
+    display: block;
+    button {
+        i{
+            font-size: 16px !important;
+        }
     }
+    
 }
 .img {
     height: 100%;
@@ -45,4 +49,26 @@
 }
 .hide {
     display: none;
+}
+@keyframes show {
+    0% {
+        transform: scale(0.5)
+    }
+    80% {
+        transform: scale(1.2)
+    }
+    100% {
+        transform: scale(1)
+    }
+}
+.errors {
+    list-style: none;
+    display: block;
+    animation: show ease-in-out .5s;
+    li {
+        color: #dfc6c6;
+        font-weight: bold;
+        text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+        margin-bottom: 8px;
+    }
 }

@@ -30,3 +30,18 @@ module.exports.savePhoto = (req, res) => {
         });
     });
 };
+
+module.exports.checkInputs = (req,res) => {
+    const inputs = req.query;
+
+    Promise.all([
+        modelUser.findOne({email: 'fdgdfhry4yhdfhdrhfghdgfghf'}),
+        modelUser.findOne({phone: inputs.phone})  
+    ])
+        .then( x => {
+            res.json({
+                email: x[0] !== null,
+                phone: x[1] !== null
+            });
+        });
+};

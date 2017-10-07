@@ -1,10 +1,11 @@
-import layout from 'constants/layout';
-import app from 'constants/app';
-import { dateEnd } from 'api/app';
+import layout from 'constants/layoutConstants';
+import app from 'constants/appConstants';
+import { dateEnd } from 'api/appApi';
 
 const titles = {
-    '/': 'Фотовыставка',
-    '/register': 'Подача заявки (1 из 2)'
+    '/': '',
+    '/register': 'Подача заявки (1 из 2)',
+    '/admin/users': 'Заявки пользователей'
 };
 
 const init = store => next => action => {
@@ -16,6 +17,13 @@ const init = store => next => action => {
             type: layout.SET_TITLE,
             title
         });
+
+        //enable admn dashboard
+        store.dispatch({
+            type: layout.ADMIN_DASHBOARD,
+            value: action.payload.pathname.indexOf('/admin') >= 0
+        });
+        
 
         store.dispatch({
             type: layout.SHOW_MAIN_LINK,

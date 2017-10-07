@@ -1,5 +1,5 @@
-import layout from 'constants/layout';
-import app from 'constants/app';
+import layout from 'constants/layoutConstants';
+import app from 'constants/appConstants';
 
 const init = store => next => action => {
 

@@ -17,3 +17,5 @@ export const savePhoto = (photo) => {
     
     return axios.post(`${API_PREFIX}/user/photo`, f);
 };
+
+export const checkInputs = (phone, email) => axios.get(`${API_PREFIX}/user/checkInputs/`, { params: {email, phone }}) ;

@@ -1,4 +1,4 @@
-import constants from 'constants/app';
+import constants from 'constants/appConstants';
 
 export const saveUser = () => dispatch => {
     dispatch({

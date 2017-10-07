@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production webpack -p",
     "test": "mocha --compilers js:babel-core/register ./src/tests/**/*.test.js",
     "testJSX": "mocha --require ./src/tests/setup.js --compilers js:babel-core/register ./src/tests/**/*.test.js",
-    "dev": "NODE_ENV=dev nodemon index.js"
+    "dev": "NODE_ENV=dev node index.js"
   },
   "_moduleAliases": {
     "models": "./src/models"
