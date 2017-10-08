@@ -8,6 +8,7 @@ const NavItems = (showMainLink, isAdmin) => {
         return (<ul>
             {<NavLi href='/' title="Главная" />}
             <NavLi href='/admin/users' title="Пользователи" />
+            <NavLi href='/admin/photo' title="Фото" />
             <NavLi href='/admin/jury' title="Жюри" />
         </ul>);   
     }

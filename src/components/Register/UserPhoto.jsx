@@ -8,6 +8,7 @@ import RaisedButton from 'Controls/RaisedButton.jsx';
 import styles from './Register.scss';
 import ImgLoad from 'ImgLoad/ImgLoad.jsx';
 import ClassName from 'className.js';
+import PhotoInputs from './PhotoInputs.jsx';
 
 const ImgRow = (props) => {
 
@@ -43,75 +44,44 @@ const ImgRow = (props) => {
             />   
         </Col>
         <Col number={8}>
-            <Row>
-                <Col number={8}>
-                    <Input 
-                        label="Название снимка" 
-                        {...init('title')}
-                    />
-                </Col>
-                <Col number={4}>
-                    <Select 
-                        label="Категория" 
-                        {...init('category')}
-                    >
-                        <option>Категория 1</option>
-                        <option>Категория 2</option>
-                    </Select>  
-                </Col>
-            </Row>
-            <Row>
-                <Col number={8}>
-                    <Input 
-                        label="Название похода" 
-                        {...init('description')}
-                    />
-                </Col>
-                <Col number={4}>
-                    <Input 
-                        label="Год" 
-                        type="number"
-                        maxLength={4}
-                        {...init('year')}    
-                    />   
-                </Col>
-            </Row>
-            
-            <Input 
-                label="Где сделано фото" 
-                {...init('info')}
-            />
+            <PhotoInputs 
+                {...props}
+                init={init}
+            />       
         </Col>
     </Row>); 
 };
+const Controls = (props) => (
+    !props.userRegister && <div {...ClassName({[styles.down]: props.photo.length > 0}, `${styles.controls}`)}>
+        { props.photo.length > 0 && <RaisedButton 
+            mini={true}
+            {...props.photo.filter(x => x.active).length === 0 && {disabled: true}}
+            onClick={props.deletePhoto}
+            children={<i className={'fa fa-times'}></i>} 
+            option="danger"
+            className={styles.remove}    
+        />}
+        <RaisedButton 
+            mini={true}
+            {...props.photo.length === 5 && {disabled: true}}
+            onClick={() => {
+                if (props.photo.length < 5) {
+                    props.addPhoto();
+                } 
+            }}
+            children={<i className={'fa fa-plus'}></i>} 
+            option="primary"
+            className={styles.add}    
+        />
+        <h3>{props.photo.length} фото из 5</h3>
+    </div>
+);
 
 export default (props) => {
 
     let number = 0;
     return (<div>
-        {!props.userRegister && <div {...ClassName({[styles.down]: props.photo.length > 0}, `${styles.controls}`)}>
-            { props.photo.length > 0 && <RaisedButton 
-                mini={true}
-                {...props.photo.filter(x => x.active).length === 0 && {disabled: true}}
-                onClick={props.deletePhoto}
-                children={<i className={'fa fa-times'}></i>} 
-                option="danger"
-                className={styles.remove}    
-            />}
-            <RaisedButton 
-                mini={true}
-                {...props.photo.length === 5 && {disabled: true}}
-                onClick={() => {
-                    if (props.photo.length < 5) {
-                        props.addPhoto();
-                    } 
-                }}
-                children={<i className={'fa fa-plus'}></i>} 
-                option="primary"
-                className={styles.add}    
-            />
-            <h3>{props.photo.length} фото из 5</h3>
-        </div>}
+        <Controls {...props} />
         {(props.photo.length === 0 && !props.userRegister) && <h2 className={styles.info}>Добавьте ваши фото</h2>}
         {(props.userRegister) && <h2 className={styles.info}>Ваша заявка на участие принята</h2>}
         {

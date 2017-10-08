@@ -4,10 +4,12 @@ import Layout from 'containers/Layout.jsx';
 import Main from 'containers/Main.jsx';
 import Register from 'containers/Register.jsx';
 import AdminUsers from 'containers/AdminUsers.jsx';
+import AdminPhoto from 'containers/AdminPhoto.jsx';
 
 const AdminRoutes = () => (
     <Switch>
         <Route path="/admin/users" component={AdminUsers}/>
+        <Route path="/admin/photo" component={AdminPhoto}/>
         <Redirect to="/admin/users" />
     </Switch>
 );

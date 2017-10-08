@@ -7,7 +7,7 @@ const initialState = {
     },
     role: 'user',
     validationErrorsShow: false,
-    registerStep: 1,
+    registerStep: 2,
     userRegister: false
 };
 

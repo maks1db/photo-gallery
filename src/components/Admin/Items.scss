@@ -1,0 +1,13 @@
+.active {
+    font-weight: bold;
+}
+.table {
+    tbody {
+        tr {
+            cursor: pointer;
+            &:hover {
+                font-weight: bold;
+            }
+        }
+    }
+}

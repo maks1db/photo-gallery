@@ -7,7 +7,7 @@ class CRUD {
         this.options = options;
     }
 
-    init(){
+    init(disabled = []){
         var express = require('express'),
             router = express.Router();
 
@@ -21,7 +21,9 @@ class CRUD {
         router.patch('/:id', (req, res) => this.patch(req, res));
 
         //удаление объекта
-        router.delete('/:id', (req, res) => this.delete(req, res));
+        if (disabled.indexOf('delete') < 0) {
+            router.delete('/:id', (req, res) => this.delete(req, res));
+        }
         
         return router;
     }
@@ -52,13 +54,13 @@ class CRUD {
         }
         else{
 
-            const get =  req.query.query;
-            const sort = req.query.sort;
+            const get =  req.query.query || '{}';
+            const sort = req.query.sort || '{}';
             const limit = req.query.limit || 0;
 
             this.model.find(JSON.parse(get)).sort(JSON.parse(sort)).limit(parseInt(limit)).then((data) => {
 
-                res.json(data.toJSON());
+                res.json(data.map(x => x.toJSON()));
                 
             });
         }
@@ -79,9 +81,9 @@ class CRUD {
     patch(req, res){
         const id = ObjectID(req.params.id);
 
-        this.model.update({_id: id}, req.body).then((data) => {
-            res.json({result: data.nModified === 1});
-        });
+        this.model.update({_id: id}, req.body)
+            .then(() => this.model.findById(id))
+            .then((obj) => res.json(obj.toJSON()));
     }
 }
 

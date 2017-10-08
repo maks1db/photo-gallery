@@ -8,6 +8,13 @@ import styles from './Register.scss';
 
 export default (props) => {
     const init = (key) => {
+        if (props.admin) {
+            return {
+                errorMessage: false,
+                defaultValue: props.result.isFetching ? '' : props.result.data[key],
+                onChange: (e) => props.setModify(key, e.target.value),
+            };
+        }
         return {
             onChange: (e) => {
                 props.onChangeRegKey(key, key=== 'confirm' ? e.target.checked : e.target.value);
@@ -23,7 +30,7 @@ export default (props) => {
     return (
         <div>
             <Row>
-                <Col number={6}>
+                <Col number={props.admin ? 12 : 6}>
                     <Row>
                         <Col number={8}>
                             <Input 
@@ -77,7 +84,7 @@ export default (props) => {
                         {...init('post')}
                     />
                 </Col>
-                <Col number={6}>
+                <Col number={props.admin ? 12 : 6}>
                     <Textarea 
                         label={'Туристический опыт'} 
                         rows={8}
@@ -92,11 +99,11 @@ export default (props) => {
                     />
                 </Col>
             </Row>
-            <div className={styles.center}>
+            {!props.admin && <div className={styles.center}>
                 <Checkbox 
                     {...init('confirm')}
                     label={'Разрешаю использовать указанне данные в фотовыставке и мероприятиях, связанных с ней'} />
-            </div>
+            </div>}
         </div>
     );
 };

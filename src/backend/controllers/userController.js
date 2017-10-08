@@ -35,7 +35,7 @@ module.exports.checkInputs = (req,res) => {
     const inputs = req.query;
 
     Promise.all([
-        modelUser.findOne({email: 'fdgdfhry4yhdfhdrhfghdgfghf'}),
+        modelUser.findOne({email: inputs.email}),
         modelUser.findOne({phone: inputs.phone})  
     ])
         .then( x => {
