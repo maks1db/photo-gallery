@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Form from 'Admin/Form.jsx';
 import Items from 'Admin/Items.jsx';
-import Inputs from 'Register/UserInfo.jsx';
+import Inputs from 'Admin/Inputs.jsx';
 import AdminControls from 'Admin/AdminControls.jsx';
 import { items, subItems, itemResult, setItemActive, saveItem, setModify, removeItem } from 'actions/adminObjects';
 import { toastr } from 'react-redux-toastr';
+
 
 function mapStateToProps(state) {
     return {
@@ -23,11 +24,11 @@ function mapDispatchToProps(dispatch) {
         getSubItems: (id) => dispatch(subItems('photo',{name: 1})),
         setItemActive: (id) => {
             dispatch(setItemActive(id)); 
-            dispatch(itemResult('users', id))
+            dispatch(itemResult('photo', id))
         },
-        onSave: (obj) => dispatch(saveItem('users', obj, 'name')),
+        onSave: (obj) => dispatch(saveItem('photo', obj, 'title')),
         setModify: (key, value) => dispatch(setModify(key, value)),
-        onRemove: (id) => dispatch(removeItem('users', id, {name: 1}))
+        onRemove: (id) => dispatch(removeItem('photo', id, {name: 1}))
     };
 }
 
@@ -37,14 +38,37 @@ export default class AdminPhoto extends Component {
         super();
     }
 
+    prepareItems = () => {
+        var arr = [];
+        let items;
+        if (this.props.items.isFetching || this.props.subItems.isFetching) {
+            items = {isFetching: true, data: []}
+        } 
+        else {
+            this.props.items.data.map(x=> {
+                x.subItem = false;
+                arr.push(x);
+    
+                this.props.subItems.data.filter(f => f.userId === x._id)
+                    .forEach(f => {
+                        f.subItem = true;
+                        arr.push(f);
+                    });
+            });
+
+            items = {isFetching: false, data: arr};
+        }
+        return items;
+    }
+
     onDelete= () => {
         const {
-            items, onRemove
+            subItems, onRemove, 
         } = this.props;
 
         const toastrConfirmOptions = {
             onOk: () => {
-                const id = items.data.find(x=>x.active)._id;
+                const id = subItems.data.find(x=>x.active)._id;
                 onRemove(id);
             },
             okText: 'Удалить',
@@ -62,26 +86,31 @@ export default class AdminPhoto extends Component {
     render() {
 
         const {
-            items,
+            subItems,
             itemResult,
             setItemActive,
             setModify,
             modify,
-            onSave,
-            itActive
+            onSave
         } = this.props;
 
+        const items = this.prepareItems();
+        const itActive = items.data.filter(x=>x.active).length > 0
+        
         return (
             <div>
                 <Form>
                     <Items 
                         title="Фото пользователей"
                         itemKey="name"
+                        subItemKey="title"
                         items={items}
-                        subItems={subItems}
                         setItemActive={setItemActive}
                     />
-                    <div></div>
+                    <Inputs 
+                        itemResult={itemResult}
+                        setModify={setModify}
+                    />
                     
                 </Form>
                 <AdminControls 

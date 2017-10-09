@@ -16,6 +16,9 @@ router.delete('/users/:id', adminController.deleteUser);
  * users photo
  */
 router.use('/photo', new crud(photoModel).init());
-
+router.use('/photo/(:id)?', function (req, res, next) {
+    console.log('Request Type:', req.method);
+    next();
+});
 
 module.exports = router;

@@ -53,15 +53,9 @@ class Crud {
         return axios.patch(`${API_PREFIX}/${this.entity}/${id}`, obj);
     }  
     
-    delete(data) {
-
-        if (typeof data === 'string') {
-            return axios.delete(`${API_PREFIX}/${this.entity}/${data}`); 
-        }
-        else {
-            return axios.delete(`${API_PREFIX}/${this.entity}`, data);     
-        }
-        
+    delete(id) {
+        console.log(this.entity);
+        return axios.delete(`${API_PREFIX}/${this.entity}/${id}`); 
     }
 }
 

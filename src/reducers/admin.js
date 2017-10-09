@@ -43,6 +43,10 @@ export default (state = initialState, action) => {
             items: {...state.items, data: state.items.data.map(x => {
                 x.active = x._id === action.id;
                 return x;
+            })},
+            subItems: {...state.subItems, data: state.subItems.data.map(x => {
+                x.active = x._id === action.id;
+                return x;
             })}
         };
     case constants.SET_MODIFY:
@@ -56,6 +60,15 @@ export default (state = initialState, action) => {
         return {...state,
             items: {
                 ...state.items, data: state.items.data.map(x => {
+                    if (x._id === action.id) {
+                        x[action.key] = action.value;
+                    }
+
+                    return x;
+                })
+            },
+            subItems: {
+                ...state.subItems, data: state.subItems.data.map(x => {
                     if (x._id === action.id) {
                         x[action.key] = action.value;
                     }

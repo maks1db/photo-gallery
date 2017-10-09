@@ -3,8 +3,8 @@ import app from 'constants/appConstants';
 import { dateEnd } from 'api/appApi';
 
 const titles = {
-    '/': 'Фотовыставка',
-    '/register': 'Подача заявки (1 из 2)',
+    '/': '',
+    '/register': 'Шаг 1 из 2',
     '/admin/users': 'Заявки пользователей',
     '/admin/photo': 'Фото пользователей'
 };

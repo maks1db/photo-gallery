@@ -1,11 +1,17 @@
 import crud from '../api/crud';
 import adminConst from 'constants/adminDashboard';
 import deleteProps from 'deleteProps.js';
-import { deleteUser } from 'api/adminApi';
 import { toastr } from 'react-redux-toastr';
 
-const deleteApi = {
-    users: deleteUser
+const deleteApi = {};
+
+const afterDeleteActions = {
+    photo: {
+        items: 'users', 
+        itemsSort: {name:1}, 
+        subItems: 'photo', 
+        subItemsSort: {title: 1}
+    }
 };
 
 export const items = (model, sort) => dispatch => {
@@ -73,14 +79,20 @@ export const saveItem = (model, obj, key) => dispatch => {
 
 export const removeItem = (model, id, sort) => dispatch => {
 
-    let api = deleteApi[model];
-    if (!api) {
-        api = new crud(`admin/${model}`).delete;
-    }
-    api(id)
+    new crud(`admin/${model}`).delete(id)
         .then( () => {
-            dispatch(items(model, sort));
-            toastr.warning('Удалено', 'Объект удален из базы данных');           
+            const actions = afterDeleteActions[model];
+
+            if (actions) {
+                dispatch(items(actions.items, actions.itemsSsort));
+                dispatch(subItems(actions.subItems, actions.subItemsSsort));
+                toastr.warning('Удалено', 'Объект удален из базы данных');
+            }
+            else {
+                dispatch(items(model, sort));
+                toastr.warning('Удалено', 'Объект удален из базы данных');
+            }
+                       
         }); 
 };
 
