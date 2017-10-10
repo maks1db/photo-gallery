@@ -27,7 +27,7 @@ if (!isDevelopment){
 }
 module.exports = {
     entry: 
-    ['./src/index.jsx'],
+    ['./src/frontend/index.jsx'],
     output: {
         path:     path.resolve(__dirname, 'public', 'assets/js'),
         publicPath: '/assets/js/',
@@ -41,8 +41,8 @@ module.exports = {
     resolve: {
         modules: [
             'node_modules',
-            path.resolve(__dirname, 'src/'),
-            path.resolve(__dirname, 'src/components/'),
+            path.resolve(__dirname, 'src/frontend/'),
+            path.resolve(__dirname, 'src/frontend/components/'),
             path.resolve(__dirname, 'src/common/'),
             path.resolve(__dirname, 'node_modules/inputmaks/dist/inputmask/dependencyLibs/')
         ]
