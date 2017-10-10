@@ -4,3 +4,4 @@ public/assets/js/
 .directory
 public/uploads/*.jpg
 public/uploads/*.jpeg
+src/backend/config/config.prod.json

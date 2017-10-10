@@ -3,6 +3,16 @@
       "port": "27017",
       "database": "photoGallery",
       "host": "localhost"
+    },
+    "users": {
+      "admin": {
+        "login": "admin",
+        "password": "admin"
+      },
+      "superadmin": {
+        "login": "superadmin",
+        "password": "superadmin"
+      }
     }
 }
   

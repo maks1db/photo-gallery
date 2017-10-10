@@ -3,7 +3,6 @@ import app from 'constants/appConstants';
 import { dateEnd } from 'api/appApi';
 
 const titles = {
-    '/': '',
     '/register': 'Шаг 1 из 2',
     '/admin/users': 'Заявки пользователей',
     '/admin/photo': 'Фото пользователей'
@@ -33,6 +32,7 @@ const init = store => next => action => {
         
         if (action.payload.pathname === '/') {
             const state = store.getState();
+            document.title = 'Туристическая фотовыставка';
 
             if (!state.app.dateEnd.value) {
                 store.dispatch({
