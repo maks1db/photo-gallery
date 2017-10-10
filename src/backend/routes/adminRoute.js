@@ -1,5 +1,5 @@
 import express from 'express';
-import usersModel from '../models/users';
+import usersModel from '../models/user';
 import photoModel from '../models/userPhoto';
 import crud from '../crud';
 import adminController from '../controllers/adminController';

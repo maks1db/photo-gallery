@@ -1,7 +1,5 @@
 import photoModel from '../models/userPhoto';
-import userModel from '../models/users';
-import fs from 'fs';
-import path from 'path';
+import userModel from '../models/user';
 const ObjectID = require('mongodb').ObjectID;
 
 /**

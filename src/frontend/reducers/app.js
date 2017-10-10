@@ -8,7 +8,8 @@ const initialState = {
     role: 'user',
     validationErrorsShow: false,
     registerStep: 1,
-    userRegister: false
+    userRegister: false,
+    token: ''
 };
 
 export default (state = initialState, action) => {

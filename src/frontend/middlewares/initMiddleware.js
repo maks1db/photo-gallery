@@ -5,7 +5,8 @@ import { dateEnd } from 'api/appApi';
 const titles = {
     '/register': 'Шаг 1 из 2',
     '/admin/users': 'Заявки пользователей',
-    '/admin/photo': 'Фото пользователей'
+    '/admin/photo': 'Фото пользователей',
+    '/login': 'Авторизация'
 };
 
 const init = store => next => action => {

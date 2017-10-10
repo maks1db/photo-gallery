@@ -1,4 +1,4 @@
-import modelUser from '../models/users';
+import modelUser from '../models/user';
 import modelPhoto from '../models/userPhoto';
 
 /**

@@ -7,7 +7,7 @@ const init = store => next => action => {
         document.title = action.title;
     }
     if (action.type === app.CHANGE_REGISTER_STEP) {
-        const title = `Подача заявки (${action.step} из 2)`;
+        const title = `Шаг (${action.step} из 2)`;
         store.dispatch({
             type: layout.SET_TITLE,
             title

@@ -16,8 +16,6 @@ const NavItems = (showMainLink, isAdmin) => {
         {showMainLink && <NavLi href='/' title="Главная" />}
         <NavLi title="О нас" />
         <NavLi title="Жюри" />
-        <NavLi title="Галерея" />
-        <NavLi title="Местоположение" />
     </ul>)
 }
 export default class Header extends React.Component {
