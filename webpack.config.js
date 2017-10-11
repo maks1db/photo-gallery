@@ -36,7 +36,8 @@ module.exports = {
     },
     devtool: isDevelopment && 'inline-source-map',
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        hot: true
     },
     resolve: {
         modules: [
@@ -51,7 +52,7 @@ module.exports = {
         loaders: [{
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
-            loader: ['react-hot-loader', 'babel-loader']
+            loader: ['react-hot-loader/webpack', 'babel-loader']
         },
         { 
             test: /\.scss$/, 

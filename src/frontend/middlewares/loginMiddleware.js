@@ -10,7 +10,6 @@ export default store => next => action => {
             const state = store.getState();
 
             if (state.app.token === '') {
-                
                 store.dispatch(push('/login'));
             }
         }

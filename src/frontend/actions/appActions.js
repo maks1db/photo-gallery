@@ -1,9 +1,23 @@
 import constants from 'constants/appConstants';
+import { loginUser as loginUserApi } from 'api/appApi';
 
 export const saveUser = () => dispatch => {
     dispatch({
         type: constants.SAVE_USER_REQUEST
     });
+};
+
+export const loginUser = (login, password) => dispatch => {
+    dispatch({
+        type: constants.LOGIN_REQUEST
+    });
+
+    loginUserApi(login, password)
+        .then(x => {
+            dispatch({
+                type: constants.LOGIN_RECEIVE
+            });   
+        });
 };
 
 export const changeRegisterKey = (key, value) => {

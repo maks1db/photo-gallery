@@ -34,6 +34,16 @@ export default (state = initialState, action) => {
         return {...state,
             userRegister:true    
         };
+    case app.LOGIN_REQUEST: 
+        return {...state,
+            role: '',
+            token: ''
+        };
+    case app.LOGIN_RECEIVE: 
+        return {...state,
+            role: action.role,
+            token: action.token
+        };
     }
 
     return state;
