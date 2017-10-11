@@ -8,8 +8,16 @@ module.exports = (req, res, next) => {
     }
 
     tokenModel.findById(req.headers.authorization)
-        .then(x => {
-            var a = 1;
-        })
-    next();
+        .then(obj => {
+            if (obj.expired.valueOf() < new Date().valueOf()) {
+                res.status(401).json({ error: 'Not authorized' });
+            }
+            else {
+                next();
+            }
+        }, () => {
+            //not found
+            res.status(401).json({ error: 'Not authorized' });
+        });
+    
 };

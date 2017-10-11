@@ -15,8 +15,14 @@ export const loginUser = (login, password) => dispatch => {
     loginUserApi(login, password)
         .then(x => {
             dispatch({
-                type: constants.LOGIN_RECEIVE
-            });   
+                type: constants.LOGIN_RECEIVE,
+                token: x.data.token,
+                role: x.data.role
+            });  
+            
+            dispatch({
+                type: constants.USER_REDIRECT
+            });
         });
 };
 

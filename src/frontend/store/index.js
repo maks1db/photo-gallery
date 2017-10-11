@@ -14,13 +14,14 @@ export default function configureStore(history) {
     const store = createStore(
         rootReducer,
         composeEnhancers(applyMiddleware(
-            loginMiddleware,
             thunkMiddleware,
             routerMiddleware(history),
             initMiddleware,
+            titleMiddleware,
+            loginMiddleware,
             validationMiddleware,
-            saveUserMiddleware,
-            titleMiddleware
+            saveUserMiddleware
+            
         ))
     );
 

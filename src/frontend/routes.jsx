@@ -7,13 +7,13 @@ import AdminUsers from 'containers/AdminUsers.jsx';
 import AdminPhoto from 'containers/AdminPhoto.jsx';
 import Login from 'containers/Login.jsx';
 
-const AdminRoutes = () => (
-    <Switch>
-        <Route path="/admin/users" component={AdminUsers}/>
-        <Route path="/admin/photo" component={AdminPhoto}/>
-        <Redirect to="/admin/users" />
-    </Switch>
-);
+// const AdminRoutes = () => (
+//     <Switch>
+//         <Route path="/admin/users" component={AdminUsers}/>
+//         <Route path="/admin/photo" component={AdminPhoto}/>
+//         <Redirect to="/admin/users" />
+//     </Switch>
+// );
 
 export default () => (
     <Layout>
@@ -21,7 +21,8 @@ export default () => (
             <Route exact path="/" component={Main}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
-            <Route path="/admin" component={AdminRoutes}/>
+            <Route path="/admin/users" component={AdminUsers}/>
+            <Route path="/admin/photo" component={AdminPhoto}/>
         </Switch>
     </Layout>
 );

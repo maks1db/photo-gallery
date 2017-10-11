@@ -30,7 +30,7 @@ const init = store => next => action => {
             type: layout.SHOW_MAIN_LINK,
             show: action.payload.pathname !== '/'
         });
-        
+
         if (action.payload.pathname === '/') {
             const state = store.getState();
             document.title = 'Туристическая фотовыставка';
