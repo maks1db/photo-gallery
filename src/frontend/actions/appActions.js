@@ -1,5 +1,5 @@
 import constants from 'constants/appConstants';
-import { loginUser as loginUserApi } from 'api/appApi';
+import { loginUser as loginUserApi, logoutUser as logoutUserApi } from 'api/appApi';
 
 export const saveUser = () => dispatch => {
     dispatch({
@@ -24,6 +24,26 @@ export const loginUser = (login, password) => dispatch => {
                 type: constants.USER_REDIRECT
             });
         });
+};
+
+export const logoutUser = (login, password) => dispatch => {
+    dispatch({
+        type: constants.LOGIN_REQUEST
+    });
+    const result = () => {
+        dispatch({
+            type: constants.LOGIN_RECEIVE,
+            token: '',
+            role: ''
+        });  
+        
+        dispatch({
+            type: constants.USER_REDIRECT
+        });
+    };
+
+    logoutUserApi(login, password)
+        .then(result, result);
 };
 
 export const changeRegisterKey = (key, value) => {

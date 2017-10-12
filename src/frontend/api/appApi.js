@@ -13,6 +13,9 @@ export const saveUser = (user) => axios.post(`${API_PREFIX}/user/item`, {user});
 
 export const loginUser = (login, password) => axios.post(`${API_PREFIX}/auth/login`, { login, password }); 
 
+export const logoutUser = () => axios.post(`${API_PREFIX}/auth/logout`)
+    .then(() => axios.defaults.headers.common = {'Authorization': ''}); 
+
 export const checkToken = (id) => axios.get(`${API_PREFIX}/login/token/${id}`); 
 
 export const savePhoto = (photo) => {

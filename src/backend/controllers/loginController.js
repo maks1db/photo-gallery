@@ -1,6 +1,7 @@
 import tokenModel from '../models/token';
 import userJuryModel from '../models/userJury';
 import config from '../config';
+const ObjectID = require('mongodb').ObjectID;
 
 module.exports.login = (req, res) => {
     const { login, password } = req.body;
@@ -19,6 +20,7 @@ module.exports.login = (req, res) => {
     }
 
     if (!role) {
+        //try check JURY
         userJuryModel.findOne({ login, password})
             .then(x => {
                 var a = 1;
@@ -35,4 +37,12 @@ module.exports.login = (req, res) => {
                 });
             });
     }
+};
+
+module.exports.logout = (req, res) => {
+    const id = req.headers.authorization;   
+    
+    const result = () => res.json({result: 'ok'});
+    tokenModel.remove({_id: ObjectID(id)}).then(result, result);       
+
 };

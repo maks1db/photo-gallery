@@ -24,30 +24,26 @@ const init = store => next => action => {
             type: layout.ADMIN_DASHBOARD,
             value: action.payload.pathname.indexOf('/admin') >= 0
         });
-        
-
-        store.dispatch({
-            type: layout.SHOW_MAIN_LINK,
-            show: action.payload.pathname !== '/'
-        });
 
         if (action.payload.pathname === '/') {
-            const state = store.getState();
+            
             document.title = 'Туристическая фотовыставка';
-
-            if (!state.app.dateEnd.value) {
-                store.dispatch({
-                    type: app.REQUEST_DATE_END
-                });
-                dateEnd()
-                    .then(x => {
-                        store.dispatch({
-                            type: app.RECEIVE_DATE_END,
-                            value: x.data.date
-                        });   
-                    });
-            }
         }
+
+        const state = store.getState();
+        if (!state.app.dateEnd.value) {
+            store.dispatch({
+                type: app.REQUEST_DATE_END
+            });
+            dateEnd()
+                .then(x => {
+                    store.dispatch({
+                        type: app.RECEIVE_DATE_END,
+                        value: x.data.date
+                    });   
+                });
+        }
+        
     }
 
     next(action);

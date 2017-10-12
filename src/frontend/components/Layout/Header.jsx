@@ -3,20 +3,28 @@ import styles from './Header.scss';
 import NavLi from './NavLi.jsx';
 import ClassName from 'className.js';
 
-const NavItems = (showMainLink, isAdmin) => {
-    if (isAdmin) {
-        return (<ul>
-            {<NavLi href='/' title="Главная" />}
-            <NavLi href='/admin/users' title="Пользователи" />
-            <NavLi href='/admin/photo' title="Фото" />
-            <NavLi href='/admin/jury' title="Жюри" />
-        </ul>);   
+const roleUrl = (role) => {
+    switch (role) {
+        case 'admin':
+            return '/admin/users';
+        case 'superadmin':
+            return '/admin/users';
+        case 'jury':
+            return '/jury'
     }
-    return (<ul>
-        {showMainLink && <NavLi href='/' title="Главная" />}
-        <NavLi title="О нас" />
-        <NavLi title="Жюри" />
-    </ul>)
+}
+const NavItems = ({ isAdmin, role, onLogout }) => {
+    return(
+        <ul>
+            {(role && !isAdmin) && <NavLi href={roleUrl(role)} title="Кабинет" />}
+            {<NavLi href='/' title="Главная" />}
+            {isAdmin && <NavLi href='/admin/users' title="Пользователи" />}
+            {isAdmin && <NavLi href='/admin/photo' title="Фото" />}
+            {isAdmin && <NavLi href='/admin/jury' title="Жюри" /> }  
+            {!isAdmin && <NavLi title="О нас" />}
+            {!isAdmin && <NavLi title="Жюри" />}
+            {role && <NavLi onClick={onLogout} title="Выйти" />}
+        </ul>)
 }
 export default class Header extends React.Component {
 
@@ -50,11 +58,15 @@ export default class Header extends React.Component {
 
     render() {
 
-        const { title, showMainLink, adminDashboard } = this.props;
+        const { title, showMainLink, adminDashboard, role, onLogout } = this.props;
         return (<div {...ClassName({[styles.background]: this.state.background}, styles.header)}>
             <div className={styles.title}>{title}</div> 
             <nav className={styles.navigation}>
-                {NavItems(showMainLink, adminDashboard)}     
+                <NavItems 
+                    isAdmin={adminDashboard}
+                    role={role}
+                    onLogout={onLogout}
+                />   
             </nav>
         </div>);
     }

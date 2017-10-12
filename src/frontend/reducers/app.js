@@ -5,7 +5,7 @@ const initialState = {
         isFetching: false,
         value: undefined
     },
-    role: 'user',
+    role: '',
     validationErrorsShow: false,
     registerStep: 1,
     userRegister: false,

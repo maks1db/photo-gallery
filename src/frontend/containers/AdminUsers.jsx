@@ -12,7 +12,8 @@ function mapStateToProps(state) {
         items: state.admin.items,
         itemResult: state.admin.itemResult,
         modify: state.admin.modify,
-        itActive: state.admin.items.data.filter(x=>x.active).length > 0
+        itActive: state.admin.items.data.filter(x=>x.active).length > 0,
+        role: state.app.role
     };
 }
 function mapDispatchToProps(dispatch) {
@@ -65,7 +66,8 @@ export default class Admin extends Component {
             setModify,
             modify,
             onSave,
-            itActive
+            itActive,
+            role
         } = this.props;
 
         return (
@@ -84,11 +86,11 @@ export default class Admin extends Component {
                     />}
                     
                 </Form>
-                <AdminControls 
+                {role === 'superadmin' &&<AdminControls 
                     active={itActive}
                     onSave={() => onSave({...modify, '_id': items.data.find(x=>x.active)._id})}
                     onDelete={this.onDelete}
-                />
+                />}
             </div>
             
         );
