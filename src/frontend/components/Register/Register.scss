@@ -1,0 +1,82 @@
+.form {
+    margin: 0px 30px 30px 30px;
+    top:80px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.4);
+    border-radius: 2px;
+    padding: 15px;
+    h1, label {
+        color: #fff;
+    }
+}
+.center {
+    text-align: center;
+}
+
+.fixed{
+    position: fixed;
+    z-index: 90;
+    bottom: 15px;
+    left: 45%;
+    .buttons {
+        button:first-child {
+            margin-right: 15px;
+        }
+    }
+}
+.info {
+    color: #fff;
+    text-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    font-weight: bold;
+    text-align: center;
+}
+.row {
+    margin: 0 16px 16px 16px !important;
+    cursor: pointer;
+    box-shadow: 0px 2px 7px rgba(0,0,0,.6);
+    padding: 6px;
+    transition: all linear .2s;
+    border-radius: 3px;
+    &:hover {
+        box-shadow: none;
+    }
+}
+.controls {
+    margin-top: 20px;
+    border-radius: 1px;
+    left: 40%;
+    position: fixed;
+    padding: 6px;
+    z-index: 100;
+    bottom: 60%;
+    transition: all ease-in-out .5s;
+    &.down {
+        left: 40px;
+        bottom:20px;    
+    }
+    button {
+        display: block;
+        &.remove {
+            margin-bottom: 6px;
+        }
+    }
+    h3 {
+        position: absolute;
+        bottom: 0px;
+        left: 70px;
+        width: 150px;
+        color: #fff;
+        text-shadow: 2px 3px 5px rgba(0,0,0,.8);
+        font-weight: bold;
+    }
+}
+.active {
+    border: 2px solid #fff;
+    box-shadow: none;
+}
+.number {
+    font-size: 36px;
+    position: relative;
+    top: 3px;
+}

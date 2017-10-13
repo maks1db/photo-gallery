@@ -1,0 +1,15 @@
+{
+  "mongodb":{
+    "port": "27017",
+    "database": "photo-gallery",
+    "host": "localhost"
+  },
+  "users": {
+    "admin": {
+
+    },
+    "superadmin": {
+      
+    }
+  }
+}

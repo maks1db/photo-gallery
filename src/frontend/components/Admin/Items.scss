@@ -1,0 +1,28 @@
+.active {
+    font-weight: bold;
+}
+
+.table {
+    tbody {
+        tr {
+            cursor: pointer;
+            &:hover {
+                font-weight: bold;
+            }
+        }
+        .subItem {
+            td{
+                padding-left: 20px !important;
+            } 
+        }
+    }
+    &.tableSubItems{
+        tr:not(.subItem) {
+            cursor: default;
+            td {
+                font-weight: normal !important;
+            }
+            
+        }
+    }
+}

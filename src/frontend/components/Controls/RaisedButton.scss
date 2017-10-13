@@ -1,0 +1,23 @@
+.raised {
+    border-radius: 50% !important;
+    width: 80px;
+    height: 80px;
+    padding: 0 !important;
+    box-shadow: 1px 2px 6px rgba(0,0,0,.6);
+}
+.mini {
+    width: 50px;
+    height: 50px;  
+}
+.ico {
+    i {
+        font-size: 36px;
+    }
+}
+.mini {
+    i {
+        position: relative;
+        top:2px;
+        font-size: 20px !important;
+    }
+}

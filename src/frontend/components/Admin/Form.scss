@@ -1,0 +1,19 @@
+.items, .result {
+    background-color: rgba(255, 255, 255, 1);
+    padding: 16px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,.7);
+    border-radius: 4px;
+    position: fixed;
+    overflow: auto;
+    bottom: 20px;
+    top:80px;
+}
+.items {
+    left: 20px;
+    width: 320px;
+}
+.result {
+    left: 360px;
+    bottom:20px;
+    right: 20px;
+}
