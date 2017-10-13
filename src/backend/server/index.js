@@ -8,7 +8,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use('/',express.static(path.join(__dirname, '../../../public/favicon.ico')));
+//app.use('/',express.static(path.join(__dirname, '../../../public/favicon.ico')));
 app.use('/assets',express.static(path.join(__dirname, '../../../public/assets')));
 
 if (process.env.NODE_ENV === 'dev') {
