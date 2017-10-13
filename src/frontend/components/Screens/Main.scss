@@ -15,6 +15,10 @@
         margin-bottom: 25px;
     }    
 }
+.main {
+    height: 100vh;
+    display: block;
+}
 .article {
     position: absolute;
     left: 50%;
@@ -83,5 +87,38 @@
 
         }
         
+    }
+}
+
+.section {
+    padding: 120px 0;
+    position: relative;
+    z-index: 1;
+    h5 {
+        font-weight: 300;
+        margin-bottom: 55px;
+        font-size: 16px;
+        text-transform: uppercase;
+    }
+    h2 {
+        color: #222222;
+        margin-bottom: 80px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    p {
+        font-size: 19px;
+        color: #555555;
+        line-height: 34px;
+        padding: 0 40px;
+    }
+    .content {
+        text-align: center;
+    }
+    &.about {
+        background-color: #fff;
+    }
+    &.jury {
+        background-color: #f2f2f2;
     }
 }

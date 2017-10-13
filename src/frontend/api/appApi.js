@@ -11,7 +11,11 @@ export const dateEnd = () => axios.get(`${API_PREFIX}/dateEnd`);
 
 export const saveUser = (user) => axios.post(`${API_PREFIX}/user/item`, {user});
 
-export const loginUser = (login, password) => axios.post(`${API_PREFIX}/auth/login`, { login, password }); 
+export const loginUser = (login, password) => axios.post(`${API_PREFIX}/auth/login`, { login, password })
+    .then((x) => {
+        axios.defaults.headers.common = { 'Authorization': x.data.token };
+        return x;
+    });
 
 export const logoutUser = () => axios.post(`${API_PREFIX}/auth/logout`)
     .then(() => axios.defaults.headers.common = {'Authorization': ''}); 

@@ -43,6 +43,11 @@ export default class Calendar extends React.Component{
         if (result > 0) {
             seconds = result;
         }
+
+        if (seconds === 60) {
+            seconds = 0;
+            minutes += 1;
+        }
         
         return (
             <ul className={styles.countdown}>
@@ -64,6 +69,5 @@ export default class Calendar extends React.Component{
                     names={['секунду', 'секунды', 'секунд']}
                 />
             </ul>);
-    }
-    
-};
+    } 
+}

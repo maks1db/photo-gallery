@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import IndexScreen from 'Screens/IndexScreen.jsx';
+import AboutScreen from 'Screens/AboutScreen.jsx';
+import JuryScreen from 'Screens/JuryScreen.jsx';
 
 function mapStateToProps(state) {
     return {
@@ -24,6 +26,8 @@ export default class Main extends Component {
                 <IndexScreen
                     dateEnd={dateEnd}
                 />
+                <AboutScreen />
+                <JuryScreen />
             </div>
         );
     }
