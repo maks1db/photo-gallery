@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let API_PREFIX = '';
-if (process.env.BROWSER){
+if (process.env.DEV){
     API_PREFIX = 'http://localhost:4000';
 }
 
