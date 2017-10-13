@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Screen.scss';
 import ClassName from 'className.js';
 
+
 const imgCount = 3;
 
 export default class MainScreen extends React.Component {
@@ -74,7 +75,7 @@ export default class MainScreen extends React.Component {
         }
         return (
             (
-                <div className={`${styles.subheader}`}>
+                <div className={`${styles.subheader}`} id="main">
                     <div className={styles.screens}>
                         {
                             items.map(x=>(<div

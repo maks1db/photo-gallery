@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './Header.scss';
 import NavLi from './NavLi.jsx';
 import ClassName from 'className.js';
+import ToTop from 'react-scroll-top';
+import smoothScroll from 'smoothscroll';
 
 const roleUrl = (role) => {
     switch (role) {
@@ -13,16 +15,20 @@ const roleUrl = (role) => {
             return '/jury'
     }
 }
+const scrollTo = (selector) => setTimeout(function() {
+    smoothScroll(document.querySelector(selector))
+}, 50)
+
 const NavItems = ({ isAdmin, role, onLogout }) => {
     return(
         <ul>
             {(role && !isAdmin) && <NavLi href={roleUrl(role)} title="Кабинет" />}
-            {<NavLi href='/' title="Главная" />}
+            {<NavLi href='/' title="Главная" onClick={() => scrollTo('#main')}/>}
             {isAdmin && <NavLi href='/admin/users' title="Пользователи" />}
             {isAdmin && <NavLi href='/admin/photo' title="Фото" />}
             {isAdmin && <NavLi href='/admin/jury' title="Жюри" /> }  
-            {!isAdmin && <NavLi title="О нас" />}
-            {!isAdmin && <NavLi title="Жюри" />}
+            {!isAdmin && <NavLi title="О нас" onClick={() => scrollTo('#about')}/>}
+            {!isAdmin && <NavLi title="Жюри" onClick={() => scrollTo('#jury')} />}
             {role && <NavLi onClick={onLogout} title="Выйти" />}
         </ul>)
 }
@@ -68,6 +74,12 @@ export default class Header extends React.Component {
                     onLogout={onLogout}
                 />   
             </nav>
+            <div className={styles['to-top']} >
+                <ToTop 
+                    hideAt={100} 
+                    position="bottom" 
+                />
+            </div>
         </div>);
     }
 }

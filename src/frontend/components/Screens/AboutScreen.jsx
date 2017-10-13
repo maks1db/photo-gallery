@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Main.scss';
 
 export default () => (
-    <section className={`${styles.section} ${styles.about}`}>
+    <section className={`${styles.section} ${styles.about}`} id="about">
         <div className={styles.content}>
             <h5>О НАС</h5>
             <h2>Ежегодная туристическая фотовыставка</h2>    
