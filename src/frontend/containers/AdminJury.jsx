@@ -1,12 +1,13 @@
 import React from 'react';
 import EntityEditor from 'Admin/EntityEditor.jsx';
-import Inputs from 'Register/UserInfo.jsx';
+import Inputs from 'Jury/Inputs.jsx';
 
 export default () => (
     <EntityEditor 
-        item="users"
+        item="jury"
         itemKey="name"
-        title="Участники"
+        title="Жюри"
         children={Inputs}
+        create={true}
     />
 );

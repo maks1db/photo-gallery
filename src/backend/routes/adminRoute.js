@@ -1,6 +1,7 @@
 import express from 'express';
 import usersModel from '../models/user';
 import photoModel from '../models/userPhoto';
+import juryModel from '../models/userJury';
 import crud from '../crud';
 import adminController from '../controllers/adminController';
 import adminMiddleware from '../middlewares/adminMiddleware';
@@ -17,5 +18,10 @@ router.delete('/users/:id', adminMiddleware, adminController.deleteUser);
  * users photo
  */
 router.use('/photo', adminMiddleware, new crud(photoModel).init());
+
+/**
+ * jury
+ */
+router.use('/jury', adminMiddleware, new crud(juryModel).init());
 
 module.exports = router;
