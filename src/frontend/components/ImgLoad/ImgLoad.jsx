@@ -52,7 +52,7 @@ export default class ImgLoad extends React.Component {
         let error = false;
         
         if (name.length > 1) {
-            type = name[name.length - 1];
+            type = name[name.length - 1].toLowerCase();
         }
 
         if (this.props.minSize) {
@@ -69,7 +69,7 @@ export default class ImgLoad extends React.Component {
             }
         }
 
-        if (this.props.imgType && this.props.imgType.indexOf(type) < 0) {
+        if (this.props.imgType && this.props.imgType.map(x=>x.toLowerCase()).indexOf(type) < 0) {
             this.setState({typeError: false});
             error = true;
         }

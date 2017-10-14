@@ -31,6 +31,7 @@
             left:0;
             transition: transform ease-in-out 1s, scale linear 200s;
         }
+
     }
     .active {
         animation: scale linear 200s infinite;
@@ -52,6 +53,28 @@
         }
         100% {
             transform: scale(1.5) translate(50px, -50px);
+        }
+    }
+    .screenInfo {
+        position: absolute;
+        width:100%;
+        height: 100vh;
+        z-index: -2;
+        .author{
+            left:30px;
+            bottom: 60px;
+            font-size: 30px;     
+        }
+        .description {
+            bottom: 20px;
+            font-size: 24px; 
+            left:50px;
+        }
+        .author, .description {
+            color: #fff;
+            position: fixed;
+            font-weight: bold;
+            text-shadow: 1px 2px 4px rgba(0,0,0,.8);
         }
     }
 }
