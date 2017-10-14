@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './Screen.scss';
 import ClassName from 'className.js';
+import info from '../../../../public/assets/images/info.json';
 
-
-const imgCount = 3;
+const imgCount = 6;
 
 export default class MainScreen extends React.Component {
 
@@ -33,10 +33,7 @@ export default class MainScreen extends React.Component {
             }
 
             this.setState({activeImg, setActive:true});
-            // setTimeout(() => {
-            //     this.setState({setActive:true})
-            // },1000)
-        },60000);
+        },25000);
     }
 
     componentWillUnmount() {
@@ -50,6 +47,8 @@ export default class MainScreen extends React.Component {
             activeImg,
             setActive
         } = this.state;
+
+        const photoInfo = info[`img_${activeImg +1}`];
 
         let items = [];
         let i = 1;
@@ -84,11 +83,17 @@ export default class MainScreen extends React.Component {
                                 style={
                                     {
                                         background:`url("${x.url}")`,
-                                        transform: `translateX(${x.position}px)`
+                                        transform: `translateX(${x.position}px)`,
+                                        backgroundSize:`cover`,
+                                        backgroundPosition: '50% 50%'
                                     }
                                 }
-                            ></div>))     
-                        }
+                            ></div>))       
+                        }  
+                    </div>
+                    <div className={styles.screenInfo}>
+                        <div className={styles.author}>{photoInfo.author}</div>
+                        <div className={styles.description}>{photoInfo.description}</div>
                     </div>
                     {this.props.children}
                 </div>
