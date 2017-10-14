@@ -56,6 +56,21 @@ export const itemResult = (model, id) => dispatch => {
         });
 };
 
+export const newItem = (model, key, value) => dispatch => {
+    dispatch({
+        type: adminConst.REQUEST_ITEMS
+    });
+
+    new crud(`admin/${model}`).post({[key]: value})
+        .then(() => new crud(`admin/${model}`).get({sort: {[key]: 1}}))
+        .then(x => {
+            dispatch({
+                type: adminConst.RECEIVE_ITEMS,
+                items: x.data
+            });       
+        });
+};
+
 export const saveItem = (model, obj, key) => dispatch => {
     dispatch({
         type: adminConst.REQUEST_ITEM_RESULT

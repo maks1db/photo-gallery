@@ -4,6 +4,12 @@ import styles from './AdminControls.scss';
 
 export default (props)=> (
     <div className={styles.controls}>
+        {props.create && <RaisedButton 
+            mini={true}
+            children={<i className={'fa fa-plus'}></i>} 
+            option="primary"  
+            onClick={props.onCreate}
+        />}
         <RaisedButton 
             mini={true}
             children={<i className={'fa fa-floppy-o'}></i>} 

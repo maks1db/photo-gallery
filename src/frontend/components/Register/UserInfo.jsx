@@ -11,7 +11,7 @@ export default (props) => {
         if (props.admin) {
             return {
                 errorMessage: false,
-                defaultValue: props.result.isFetching ? '' : props.result.data[key],
+                defaultValue: props.itemResult.isFetching ? '' : props.itemResult.data[key],
                 onChange: (e) => props.setModify(key, e.target.value),
             };
         }

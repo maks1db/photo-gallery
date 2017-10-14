@@ -5,6 +5,7 @@ import Main from 'containers/Main.jsx';
 import Register from 'containers/Register.jsx';
 import AdminUsers from 'containers/AdminUsers.jsx';
 import AdminPhoto from 'containers/AdminPhoto.jsx';
+import AdminJury from 'containers/AdminJury.jsx';
 import Login from 'containers/Login.jsx';
 
 // const AdminRoutes = () => (
@@ -23,6 +24,7 @@ export default () => (
             <Route path="/login" component={Login}/>
             <Route path="/admin/users" component={AdminUsers}/>
             <Route path="/admin/photo" component={AdminPhoto}/>
+            <Route path="/admin/jury" component={AdminJury}/>
         </Switch>
     </Layout>
 );

@@ -24,11 +24,11 @@ const NavItems = ({ isAdmin, role, onLogout }) => {
         <ul>
             {(role && !isAdmin) && <NavLi href={roleUrl(role)} title="Кабинет" />}
             {<NavLi href='/' title="Главная" onClick={() => scrollTo('#main')}/>}
-            {isAdmin && <NavLi href='/admin/users' title="Пользователи" />}
+            {isAdmin && <NavLi href='/admin/users' title="Участники" />}
             {isAdmin && <NavLi href='/admin/photo' title="Фото" />}
             {isAdmin && <NavLi href='/admin/jury' title="Жюри" /> }  
             {!isAdmin && <NavLi title="О нас" onClick={() => scrollTo('#about')}/>}
-            {!isAdmin && <NavLi title="Жюри" onClick={() => scrollTo('#jury')} />}
+            {!isAdmin && <NavLi title="Наше жюри" onClick={() => scrollTo('#jury')} />}
             {role && <NavLi onClick={onLogout} title="Выйти" />}
         </ul>)
 }
