@@ -119,6 +119,26 @@
         background-color: rgba(255, 255, 255, 0.85);
     }
     &.jury {
-        background-color: rgba(245, 245, 245, 0.85);
+        background-color: rgba(235, 235, 235, 0.85);
+        padding-left: 80px;
+        padding-right: 80px;
+        &>div {
+            margin-bottom: 80px;
+        }
+    }
+}
+
+.box {
+    display: block;
+    .img {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto 50px;
+        overflow: hidden;
+        position: relative;
+        background-size: cover;
+        background-position: 50% 50%;
     }
 }
