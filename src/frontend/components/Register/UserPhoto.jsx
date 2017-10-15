@@ -5,7 +5,7 @@ import Textarea from 'Controls/Textarea.jsx';
 import Col from 'Controls/Col.jsx';
 import Row from 'Controls/Row.jsx'; 
 import RaisedButton from 'Controls/RaisedButton.jsx';
-import styles from './Register.scss';
+import styles from './Input.scss';
 import ImgLoad from 'ImgLoad/ImgLoad.jsx';
 import ClassName from 'className.js';
 import PhotoInputs from './PhotoInputs.jsx';

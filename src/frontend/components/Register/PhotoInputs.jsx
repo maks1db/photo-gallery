@@ -4,6 +4,7 @@ import Select from 'Controls/Select.jsx';
 import Textarea from 'Controls/Textarea.jsx';
 import Col from 'Controls/Col.jsx';
 import Row from 'Controls/Row.jsx'; 
+import categories from 'categories.js';
 
 export default (props) => (
     <div>
@@ -19,8 +20,9 @@ export default (props) => (
                     label="Категория" 
                     {...props.init('category')}
                 >
-                    <option>Категория 1</option>
-                    <option>Категория 2</option>
+                    {
+                        categories.map(x => <option key={x}>{x}</option>)
+                    }
                 </Select>  
             </Col>
         </Row>

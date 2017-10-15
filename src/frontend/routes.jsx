@@ -7,14 +7,7 @@ import AdminUsers from 'containers/AdminUsers.jsx';
 import AdminPhoto from 'containers/AdminPhoto.jsx';
 import AdminJury from 'containers/AdminJury.jsx';
 import Login from 'containers/Login.jsx';
-
-// const AdminRoutes = () => (
-//     <Switch>
-//         <Route path="/admin/users" component={AdminUsers}/>
-//         <Route path="/admin/photo" component={AdminPhoto}/>
-//         <Redirect to="/admin/users" />
-//     </Switch>
-// );
+import Jury from 'containers/Jury.jsx';
 
 export default () => (
     <Layout>
@@ -22,6 +15,7 @@ export default () => (
             <Route exact path="/" component={Main}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
+            <Route path="/jury" component={Jury}/>
             <Route path="/admin/users" component={AdminUsers}/>
             <Route path="/admin/photo" component={AdminPhoto}/>
             <Route path="/admin/jury" component={AdminJury}/>

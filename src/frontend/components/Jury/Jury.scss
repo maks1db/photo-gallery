@@ -1,0 +1,17 @@
+.categories {
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    .btn {
+        margin: 0 10px;
+        font-weight: bold;
+        color:#fff;
+        border: 2px solid #f2f2f2;
+        padding: 12px;
+        border-radius: 4px; 
+        font-weight: 26px;
+        min-width: 70px;
+        cursor: pointer;
+    }
+}
