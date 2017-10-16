@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import VoteForm from 'Jury/VoteForm.jsx';
+import { changeCategory } from 'actions/juryActions';
 
 function mapStateToProps(state) {
     return {
-        items: state.jury
+        category: state.jury.activeCategory
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
+        onChangeCategory: (value) => dispatch(changeCategory(value))
     };
 }
 
@@ -21,12 +23,14 @@ export default class Jury extends Component {
     render() {
 
         const { 
-            onChangeKey,
-            items
+            category,
+            onChangeCategory
         } = this.props;
 
         return (
             <VoteForm 
+                category={category}
+                onChangeCategory={onChangeCategory}
             />
 
         );
