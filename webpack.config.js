@@ -7,6 +7,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const isDevelopment = NODE_ENV === 'development';
 
 const plugins = [
+    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
         'process.env': {
             BROWSER: JSON.stringify(true),
@@ -25,9 +26,11 @@ if (!isDevelopment){
         output: {comments: false}
     }));
 }
+
+plugins.push(new webpack.HotModuleReplacementPlugin())
 module.exports = {
     entry: 
-    ['./src/frontend/index.jsx'],
+    ['react-hot-loader/patch', './src/frontend/index.jsx'],
     output: {
         path:     path.resolve(__dirname, 'public', 'assets/js'),
         publicPath: '/assets/js/',
