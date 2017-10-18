@@ -8,4 +8,14 @@ const userJury = new Schema({
     about: String
 },{versionKey: false});
 
+userJury.post('save', (doc, next) => {
+    console.log('save');
+    next();
+})
+
+userJury.post('update', (doc, next) => {
+    console.log('update');
+    next();
+})
+
 module.exports = mongoose.model('user-jury', userJury);

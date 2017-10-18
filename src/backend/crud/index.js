@@ -70,12 +70,12 @@ class CRUD {
 
         const id = req.params.id;   
 
-        this.model.remove({_id: ObjectID(id)}).then((data) =>{
+        this.model.findOneAndRemove({_id: ObjectID(id)}, (err, doc) =>{
+            doc.remove();
             res.json({
-                result: data.result.ok === 1
-            });       
+                result: true
+            }); 
         });
-
     }
 
     patch(req, res){

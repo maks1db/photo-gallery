@@ -1,6 +1,6 @@
 {
   "name": "photo-gallery",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Фотовыставка туристов",
   "main": "index.js",
   "scripts": {
@@ -41,7 +41,9 @@
     "multer": "^1.3.0",
     "react-input-mask": "^1.0.7",
     "react-scroll-top": "^1.0.4",
-    "smoothscroll": "^0.3.0"
+    "smoothscroll": "^0.3.0",
+    "image-size": "^0.6.1",
+    "resize-img": "^1.1.2"
   },
   "devDependencies": {
     "eslint": "^4.7.0",

@@ -40,7 +40,7 @@ const ImgRow = (props) => {
                 deletePhotoItem={props.deletePhotoItem}
                 imgType={['jpeg','jpg']}
                 minSize={300}
-                maxSize={9000}
+                maxSize={15000}
             />   
         </Col>
         <Col number={8}>
