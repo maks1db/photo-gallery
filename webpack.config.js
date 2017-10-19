@@ -47,7 +47,7 @@ module.exports = {
             'node_modules',
             path.resolve(__dirname, 'src/frontend/'),
             path.resolve(__dirname, 'src/frontend/components/'),
-            path.resolve(__dirname, 'src/common/'),
+            path.resolve(__dirname, 'src/helpers/'),
             path.resolve(__dirname, 'node_modules/inputmaks/dist/inputmask/dependencyLibs/')
         ]
     },

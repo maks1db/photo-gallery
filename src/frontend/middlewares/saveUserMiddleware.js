@@ -62,13 +62,17 @@ const init = store => next => action => {
                                     store.dispatch({
                                         type: app.USER_REGISTER
                                     });
+                                    store.dispatch({
+                                        type: app.SAVE_PHOTO_NUMBER,
+                                        value: 0
+                                    });
                                     toastr.success('Спасибо', 'Ваша заявка принята');
                                     return;
                                 }
                 
                                 store.dispatch({
                                     type: app.SAVE_PHOTO_NUMBER,
-                                    value: state.register.photo.length - index - 1
+                                    value: state.register.photo.length - index
                                 });
                                 const item = state.register.photo[index];
                                 obj = { userId };

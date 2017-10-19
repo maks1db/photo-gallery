@@ -12,13 +12,19 @@ class CRUD {
             router = express.Router();
 
         //создание
-        router.post('/', (req, res) => this.post(req, res));
+        if (disabled.indexOf('post') < 0) {
+            router.post('/', (req, res) => this.post(req, res));
+        }
 
         //выборка объекта/объектов
-        router.get('/(:id)?', (req, res) => this.get(req, res));
+        if (disabled.indexOf('get') < 0) {
+            router.get('/(:id)?', (req, res) => this.get(req, res));
+        }
 
         //обновление объекта
-        router.patch('/:id', (req, res) => this.patch(req, res));
+        if (disabled.indexOf('delete') < 0) {
+            router.patch('/:id', (req, res) => this.patch(req, res));
+        }
 
         //удаление объекта
         if (disabled.indexOf('delete') < 0) {
