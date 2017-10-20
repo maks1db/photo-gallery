@@ -40,3 +40,35 @@
         
     }
 }
+.items {
+    padding: 16px;
+    .item {
+        margin: 12px;
+        width:23%;
+        min-width: 280px;
+        cursor: pointer;
+        img {
+            width:100%;
+            background: #fff;
+            
+            padding: 5px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+        .title {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .rating {
+            text-align: center;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            background: #fff;
+            box-shadow: 0px 2px 4px rgba(0,0,0,.4);
+            i {
+                font-size: 20px;
+            }
+        }
+    }
+}

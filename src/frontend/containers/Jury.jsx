@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import VoteForm from 'Jury/VoteForm.jsx';
-import { changeCategory } from 'actions/juryActions';
+import { changeCategory, getPhotoByCategory } from 'actions/juryActions';
 
 function mapStateToProps(state) {
     return {
-        category: state.jury.activeCategory
+        category: state.jury.activeCategory,
+        items: state.jury.items
     };
 }
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
     return {
-        onChangeCategory: (value) => dispatch(changeCategory(value))
+        onChangeCategory: (value) => {
+            dispatch(changeCategory(value));
+            dispatch(getPhotoByCategory(value));
+        },
+        onGetPhoto: (value) => dispatch(getPhotoByCategory(value))
     };
 }
 
@@ -20,17 +25,23 @@ export default class Jury extends Component {
         super();
     }
 
+    componentWillMount() {
+        this.props.onGetPhoto(this.props.category);
+    }
+
     render() {
 
         const { 
             category,
-            onChangeCategory
+            onChangeCategory,
+            items
         } = this.props;
 
         return (
             <VoteForm 
                 category={category}
                 onChangeCategory={onChangeCategory}
+                items={items}
             />
 
         );

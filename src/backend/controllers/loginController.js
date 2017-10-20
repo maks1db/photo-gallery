@@ -23,15 +23,20 @@ module.exports.login = (req, res) => {
         //try check JURY
         userJuryModel.findOne({ login, password})
             .then(x => 
-                new tokenModel({ role: 'jury', expired, userId: x._id })
+                new tokenModel({ role: 'jury', expired, userId: x.id })
                     .save()
                     .then(x => {
                         res.json({
                             token: x.id,
                             role: x.role
                         });
-                    })
-                , () => res.json({token: '', role: ''}));    
+                    }))
+            .catch(() => {
+                res.json({
+                    token: '',
+                    role: ''
+                });     
+            });    
     }
     else {
 

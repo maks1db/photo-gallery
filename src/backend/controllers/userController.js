@@ -9,7 +9,7 @@ module.exports.save = (req, res) => {
     user.save().then((doc) => {
         res.json({
             result: true,
-            id: doc._id.toString()
+            id: doc.id
         });
     });
 };
@@ -26,7 +26,7 @@ module.exports.savePhoto = (req, res) => {
     photo.save().then((doc) => {
         res.json({
             result: true,
-            id: doc._id.toString()
+            id: doc.id
         });
     });
 };

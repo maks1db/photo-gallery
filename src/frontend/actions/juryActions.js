@@ -14,10 +14,14 @@ export const getPhotoByCategory = category => dispatch => {
         type: constants.ITEMS_REQUEST
     });
 
-    let obj = {};
-    if (categories > 0) {
+    let obj = {
+        sort: {
+            create: '-1'
+        }
+    };
+    if (category > 0) {
         obj.query = {
-            category: categories[category]
+            category: categories[category-1]
         };
     }
 

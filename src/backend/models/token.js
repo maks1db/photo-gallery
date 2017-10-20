@@ -4,7 +4,7 @@ let Schema = mongoose.Schema;
 const token = new Schema({
     expired: Date,
     role: String,
-    juryId: String 
+    userId: String 
 },{versionKey: false});
 
 module.exports = mongoose.model('tokens', token);

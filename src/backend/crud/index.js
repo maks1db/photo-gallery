@@ -22,7 +22,7 @@ class CRUD {
         }
 
         //обновление объекта
-        if (disabled.indexOf('delete') < 0) {
+        if (disabled.indexOf('patch') < 0) {
             router.patch('/:id', (req, res) => this.patch(req, res));
         }
 
@@ -43,7 +43,7 @@ class CRUD {
         item.save().then((doc) => {
             res.json({
                 result: true,
-                id: doc._id.toString()
+                id: doc.id
             });
         });
     }

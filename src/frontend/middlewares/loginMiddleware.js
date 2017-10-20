@@ -20,6 +20,9 @@ export default store => next => action => {
             let token = localStorage.getItem(app.TOKEN_LOCAL_STORAGE);
 
             if (token) {
+                axios.defaults.headers.common = {
+                    'Authorization': `${token}`,
+                };
                 checkToken(token)
                     .then(x => {
                         store.dispatch({
