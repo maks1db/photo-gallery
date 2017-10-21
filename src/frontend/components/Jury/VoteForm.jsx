@@ -13,7 +13,6 @@ const masonryOptions = {
 };
 
 export default (props) => {
-    let catItem = 0;
     return (
         <div className={stylesCommon.form}>
             <div className={styles.categories}>
@@ -29,6 +28,11 @@ export default (props) => {
                         {...ClassName({[styles.active]: props.category === (x === categories[0] ? 1 : 2)}, 
                             `${styles.btn}`)}><i>{x}</i></div>);})
                 }
+                <div 
+                    onClick={() => props.onChangeCategory(-1)}
+                    {...ClassName({[styles.active]: props.category === -1}, `${styles.btn}`)}>
+                    <i>Без оценок</i>
+                </div>
             </div>
             {!props.items.isFetching && <div className={styles.items}>
                 <Masonry
@@ -36,15 +40,19 @@ export default (props) => {
                     disableImagesLoaded={false} // default false
                     updateOnEachImageLoad={false}
                 >
-                    {props.items.data.map(x => 
+                    {props.items.data.filter(x=> props.category === -1 ? x.value === 0 : true).map(x => 
                         <div key={x._id} className={styles.item}>
                             <div className={styles.title}>{x.title}</div>
-                            <img src={x.smallPicture}/>
+                            <img 
+                                src={x.smallPicture}
+                                onClick={() => props.onPreview(props.items.data.indexOf(x))}    
+                            />
                             <div className={styles.rating}>
                                 <Rating 
                                     starCount={10}
                                     name={x._id}
-                                    emptystarColor="#fff"
+                                    onStarClick={(value) => props.onUpdateRating(x._id, value)}
+                                    value={x.value}
                                 />
                             </div>
                                 

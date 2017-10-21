@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import VoteForm from 'Jury/VoteForm.jsx';
-import { changeCategory, getPhotoByCategory } from 'actions/juryActions';
+import ImgForm from 'Jury/ImgForm.jsx';
+import { 
+        changeCategory, 
+        getPhotoByCategory, 
+        updateRating,
+        setModal,
+        setModalImg
+     } from 'actions/juryActions';
 
 function mapStateToProps(state) {
     return {
         category: state.jury.activeCategory,
-        items: state.jury.items
+        items: state.jury.items,
+        rating: state.jury.rating.data,
+        openModalImg: state.jury.modal.open,
+        indexModalImg: state.jury.modal.index
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {
@@ -15,7 +25,14 @@ function mapDispatchToProps(dispatch, ownProps) {
             dispatch(changeCategory(value));
             dispatch(getPhotoByCategory(value));
         },
-        onGetPhoto: (value) => dispatch(getPhotoByCategory(value))
+        onGetPhoto: (value) => dispatch(getPhotoByCategory(value)),
+        onUpdateRating: (id, value) => dispatch(updateRating(id, value)),
+        onSetModal: (value)=> dispatch(setModal(value)),
+        onSetModalImg: (value) => dispatch(setModalImg(value)),
+        onPreview: (index) => {
+            dispatch(setModalImg(index));
+            dispatch(setModal(true));
+        }
     };
 }
 
@@ -31,19 +48,43 @@ export default class Jury extends Component {
 
     render() {
 
-        const { 
+        let { 
             category,
             onChangeCategory,
-            items
+            onUpdateRating,
+            rating,
+            items,
+            openModalImg,
+            indexModalImg,
+            onSetModal,
+            onSetModalImg,
+            onPreview
         } = this.props;
 
+        items.data = items.data.map(x => {
+            const item = rating.find(a => a.photoId === x._id);
+            x.value = item ? item.value : 0;
+            return x;
+        })
         return (
-            <VoteForm 
-                category={category}
-                onChangeCategory={onChangeCategory}
-                items={items}
-            />
-
+            <div>
+                <VoteForm 
+                    category={category}
+                    onChangeCategory={onChangeCategory}
+                    items={items}
+                    onUpdateRating={onUpdateRating}
+                    rating={rating}
+                    onPreview={onPreview}
+                />
+                <ImgForm 
+                    open={openModalImg}
+                    items={items}
+                    onUpdateRating={onUpdateRating}
+                    index={indexModalImg}
+                    onSetModalImg={onSetModalImg}
+                    onSetModal={onSetModal}
+                />
+            </div>
         );
     }
 }
