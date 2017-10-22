@@ -78,11 +78,12 @@ export default class MainScreen extends React.Component {
                     <div className={styles.screens}>
                         {
                             items.map(x=>(<div
-                                //{...ClassName({[styles.active]: setActive && x.id === activeImg})}
+                                {...ClassName({[styles.scale]: x.id === activeImg})}
                                 key={x.id} 
                                 style={
                                     {
                                         background:`url("${x.url}")`,
+                                        //left: `-${x.position}px`,
                                         transform: `translateX(${x.position}px)`,
                                         backgroundSize:`cover`,
                                         backgroundPosition: '50% 50%'

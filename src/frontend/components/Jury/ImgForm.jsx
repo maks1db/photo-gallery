@@ -6,7 +6,8 @@ export default (props) => {
     const item = props.items.data[props.index];
     return (
         props.open && <div className={styles.fullImg}>
-            <div className={styles.title}>{item.title} ({props.index + 1} из {props.items.data.length})</div>
+            <div className={styles.title}>{item.title} </div>
+            <div className={styles.count}>{props.index + 1} из {props.items.data.length}</div>
             <div className={styles.preview}>
                 <img src={item.smallPicture}/>
             </div> 

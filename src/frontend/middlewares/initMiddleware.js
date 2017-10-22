@@ -8,7 +8,7 @@ const titles = {
     '/admin/photo': 'Фото участников',
     '/admin/jury': 'Наше жюри',
     '/login': 'Авторизация',
-    '/jury': 'Профиль пользователя жюри'
+    '/jury': 'Голосование'
 };
 
 const init = store => next => action => {

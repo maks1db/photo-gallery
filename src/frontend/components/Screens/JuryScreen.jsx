@@ -11,28 +11,28 @@ export default () => (
                 <Col number={4}>
                     <div className={styles.box}>
                         <div className={styles.img} style={{
-                            backgroundImage: 'url("/assets/images/peter.jpg")'
+                            backgroundImage: 'url("/assets/images/jury/Panin.jpg")'
                         }}></div>
-                        <h3 className={styles.bold}>Питер Гриффин</h3>
-                        <p>Лучший фотограф липецкой области</p>
+                        <h3 className={styles.bold}>Сергей Панин</h3>
+                        <p>В туризме с 2001 года, был КМС. Руководитель многочисленных водных и горных походов от Мурманска и до Владивостока. Любитель фото и видео съёмки.</p>
                     </div>
                 </Col>
                 <Col number={4}>
                     <div className={styles.box}>
                         <div className={styles.img} style={{
-                            backgroundImage: 'url("/assets/images/stew.jpg")'
+                            backgroundImage: 'url("/assets/images/jury/Sorokin.jpg")'
                         }}></div>
-                        <h3 className={styles.bold}>Стьюи Гриффин</h3>
-                        <p>Совершил восхождение на Эверест с завязанными глазами</p>
+                        <h3 className={styles.bold}>Юрий Сорокин</h3>
+                        <p>Офицер запаса. Увлекся фотографией после выхода на пенсию. В основном увлекает природная фотография. Неоднократный победитель и лауреат фотоконкурсов.</p>
                     </div>
                 </Col>
                 <Col number={4}>
                     <div className={styles.box}>
                         <div className={styles.img} style={{
-                            backgroundImage: 'url("/assets/images/cartman.jpg")'
+                            backgroundImage: 'url("/assets/images/jury/Dina.jpg")'
                         }}></div>
-                        <h3 className={styles.bold}>Эрик Картмэн</h3>
-                        <p>Сплавляется по горным рекам на надувном матрасе</p>
+                        <h3 className={styles.bold}>Дина Кюнбергер</h3>
+                        <p>Pr-специалист Липецкой областной научной библиотеки. Люблю хорошие книги, уютные встречи, осенний лес и далёкие путешествия</p>
                     </div>
                 </Col>
             </Row>

@@ -116,12 +116,16 @@
         text-align: center;
     }
     &.about {
-        background-color: rgba(255, 255, 255, 0.85);
+        background-color: #f2f2f2;
     }
     &.jury {
-        background-color: rgba(235, 235, 235, 0.85);
+        background-color: rgba(235, 235, 235, 0);
         padding-left: 80px;
         padding-right: 80px;
+        color:#fff;
+        p {
+            color: #fff;
+        }
         &>div {
             margin-bottom: 80px;
         }
