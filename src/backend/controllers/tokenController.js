@@ -9,13 +9,14 @@ module.exports.get = (req, res) => {
                 role = '';
                 
             if (obj.expired.valueOf() > new Date().valueOf()) {
-                token = obj._id;
+                token = obj.id;
                 role = obj.role;
             }
             res.json({
                 token, role
             });
-        },() => {
+        })
+        .catch(() => {
             //not found
             res.json({
                 token: '',

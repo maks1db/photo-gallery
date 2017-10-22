@@ -12,13 +12,19 @@ class CRUD {
             router = express.Router();
 
         //создание
-        router.post('/', (req, res) => this.post(req, res));
+        if (disabled.indexOf('post') < 0) {
+            router.post('/', (req, res) => this.post(req, res));
+        }
 
         //выборка объекта/объектов
-        router.get('/(:id)?', (req, res) => this.get(req, res));
+        if (disabled.indexOf('get') < 0) {
+            router.get('/(:id)?', (req, res) => this.get(req, res));
+        }
 
         //обновление объекта
-        router.patch('/:id', (req, res) => this.patch(req, res));
+        if (disabled.indexOf('patch') < 0) {
+            router.patch('/:id', (req, res) => this.patch(req, res));
+        }
 
         //удаление объекта
         if (disabled.indexOf('delete') < 0) {
@@ -37,7 +43,7 @@ class CRUD {
         item.save().then((doc) => {
             res.json({
                 result: true,
-                id: doc._id.toString()
+                id: doc.id
             });
         });
     }
@@ -70,12 +76,12 @@ class CRUD {
 
         const id = req.params.id;   
 
-        this.model.remove({_id: ObjectID(id)}).then((data) =>{
+        this.model.findOneAndRemove({_id: ObjectID(id)}, (err, doc) =>{
+            doc.remove();
             res.json({
-                result: data.result.ok === 1
-            });       
+                result: true
+            }); 
         });
-
     }
 
     patch(req, res){

@@ -4,7 +4,7 @@ import Textarea from 'Controls/Textarea.jsx';
 import Col from 'Controls/Col.jsx';
 import Row from 'Controls/Row.jsx'; 
 import Checkbox from 'Controls/Checkbox.jsx';
-import styles from './Register.scss';
+import styles from './Input.scss';
 
 export default (props) => {
     const init = (key) => {

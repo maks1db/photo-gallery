@@ -29,7 +29,7 @@
             height: 100%;
             top:0;
             left:0;
-            transition: transform ease-in-out 1s, scale linear 200s;
+            transition: transform ease-in-out 1s, scale linear 60s;
         }
 
     }
@@ -76,5 +76,16 @@
             font-weight: bold;
             text-shadow: 1px 2px 4px rgba(0,0,0,.8);
         }
+    }
+}
+.scale {
+    animation: scale ease-in-out 60s, opacity linear .3s;
+}
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.3);
     }
 }

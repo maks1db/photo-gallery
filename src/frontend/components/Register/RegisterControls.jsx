@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Register.scss';
+import styles from './Input.scss';
 import Button from 'Controls/RaisedButton.jsx';
 
 export default (props) => (

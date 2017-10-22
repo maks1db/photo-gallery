@@ -1,5 +1,6 @@
 import constants from 'constants/appConstants';
 import { loginUser as loginUserApi, logoutUser as logoutUserApi } from 'api/appApi';
+import { toastr } from 'react-redux-toastr';
 
 export const saveUser = () => dispatch => {
     dispatch({
@@ -14,15 +15,22 @@ export const loginUser = (login, password) => dispatch => {
 
     loginUserApi(login, password)
         .then(x => {
-            dispatch({
-                type: constants.LOGIN_RECEIVE,
-                token: x.data.token,
-                role: x.data.role
-            });  
+
+            if (!x.data.token) {
+                toastr.error('Вход в систему', 'Неверный логин или пароль')
+            }
+            else {
+                dispatch({
+                    type: constants.LOGIN_RECEIVE,
+                    token: x.data.token,
+                    role: x.data.role
+                });  
+                
+                dispatch({
+                    type: constants.USER_REDIRECT
+                });
+            }
             
-            dispatch({
-                type: constants.USER_REDIRECT
-            });
         });
 };
 

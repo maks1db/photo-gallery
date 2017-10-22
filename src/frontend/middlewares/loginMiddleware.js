@@ -20,6 +20,9 @@ export default store => next => action => {
             let token = localStorage.getItem(app.TOKEN_LOCAL_STORAGE);
 
             if (token) {
+                axios.defaults.headers.common = {
+                    'Authorization': `${token}`,
+                };
                 checkToken(token)
                     .then(x => {
                         store.dispatch({
@@ -41,6 +44,10 @@ export default store => next => action => {
                                 store.dispatch(push('/admin/users'));
                                 return;
                             }
+                            else if (x.data.role === 'jury') {
+                                store.dispatch(push('/jury'));
+                                return;   
+                            }
                         }
                     });
             }
@@ -61,6 +68,9 @@ export default store => next => action => {
         const state = store.getState();
         if (state.app.role.indexOf('admin') >= 0) {
             store.dispatch(push('/admin/users'));    
+        } 
+        else if (state.app.role.indexOf('jury') >= 0) {
+            store.dispatch(push('/jury'));    
         } 
     }
     next(action);

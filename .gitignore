@@ -3,5 +3,6 @@ public/assets/js/
 .vscode
 .directory
 public/uploads/*.jpg
+public/uploads/*.JPG
 public/uploads/*.jpeg
 src/backend/config/config.prod.json

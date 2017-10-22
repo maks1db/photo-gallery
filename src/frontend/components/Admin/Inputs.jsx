@@ -22,7 +22,7 @@ export default (props) => {
                     >
                         {props.itemResult.data.title && <img 
                             
-                            src={props.itemResult.data.picture} 
+                            src={props.itemResult.data.smallPicture} 
                             alt={props.itemResult.data.title}    
                         />}
                     </div>

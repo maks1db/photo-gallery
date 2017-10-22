@@ -16,13 +16,13 @@ export default (props) => {
         }
         return {
             onChange: (e) => {
-                props.onChangeRegKey(key, key=== 'confirm' ? e.target.checked : e.target.value);
+                props.onChangeKey(key, key=== 'confirm' ? e.target.checked : e.target.value);
                 if (props.validationShow) {
                     props.onValidation(key);
                 }
             },
-            defaultValue: props.registerInfo[key].value,
-            errorMessage: props.registerInfo[key].errorMessage
+            defaultValue: props.items[key].value,
+            errorMessage: props.items[key].errorMessage
         };
     };
     return (

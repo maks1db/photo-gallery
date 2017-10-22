@@ -11,7 +11,7 @@ import { changeRegisterKey,
     saveUser
 } from 'actions/appActions';
 
-import styles from 'Register/Register.scss';
+import styles from 'Register/Input.scss';
 import UserInfo from 'Register/UserInfo.jsx';
 import UserPhoto from 'Register/UserPhoto.jsx';
 import RegisterControls from 'Register/RegisterControls.jsx';

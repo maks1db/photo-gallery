@@ -7,7 +7,8 @@ const titles = {
     '/admin/users': 'Заявки участников',
     '/admin/photo': 'Фото участников',
     '/admin/jury': 'Наше жюри',
-    '/login': 'Авторизация'
+    '/login': 'Авторизация',
+    '/jury': 'Голосование'
 };
 
 const init = store => next => action => {
@@ -26,8 +27,7 @@ const init = store => next => action => {
             value: action.payload.pathname.indexOf('/admin') >= 0
         });
 
-        if (action.payload.pathname === '/') {
-            
+        if (action.payload.pathname === '/') { 
             document.title = 'Туристическая фотовыставка';
         }
 
@@ -43,8 +43,7 @@ const init = store => next => action => {
                         value: x.data.date
                     });   
                 });
-        }
-        
+        }  
     }
 
     next(action);
