@@ -16,6 +16,13 @@ export const setModal = (value) => {
     };
 };
 
+export const commentShow = (value) => {
+    return {
+        type: constants.COMMENT_ACTIVE,
+        value
+    };
+};
+
 export const setModalImg = (value) => {
     return {
         type: constants.SET_MODAL_IMG,
@@ -59,17 +66,17 @@ export const getPhotoByCategory = category => dispatch => {
         });
 };
 
-export const updateRating = (id, value) => dispatch => {
+export const updateRating = (id, key, value) => dispatch => {
     dispatch({
         type: constants.RATING_UPDATE
     });   
 
     new crud('jury/rating')
-        .patch(id, { value })
+        .patch(id, { [key]: value })
         .then(() => {
             dispatch({
                 type: constants.RATING_UPDATE_COMPLETE,
-                id, value
+                id, key, value
             });
         });
 };

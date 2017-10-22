@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Jury.scss';
 import Rating from 'react-star-rating-component';
+import Button from 'Controls/RaisedButton.jsx';
 
 export default (props) => {
     const item = props.items.data[props.index];
@@ -25,22 +26,27 @@ export default (props) => {
                 </div>
                 
             </div>
+            <div className={styles.comment}>
+                <Button option="primary"><i className="fa fa-comments" aria-hidden="true"></i></Button>
+                <div className={styles.commentMessage}>Комментрировать (осталось 3шт.)</div>
+            </div>
             {props.index !== 0 && 
                 <div 
                     onClick={() => props.onSetModalImg(props.index - 1)}
                     className={styles.left}
-                ><i class="fa fa-chevron-left"></i></div>
+                ><i className="fa fa-chevron-left"></i></div>
             }
             {props.index !== props.items.data.length -1 && 
                 <div 
                     className={styles.right}
                     onClick={() => props.onSetModalImg(props.index + 1)}
-                ><i class="fa fa fa-chevron-right"></i></div>
+                ><i className="fa fa fa-chevron-right"></i></div>
             }
             <div 
                 className={styles.close}
                 onClick={()=>props.onSetModal(false)}    
-            ><i class="fa fa-times"></i></div>
+            ><i className="fa fa-times"></i></div>
+            
         </div>
     );
 };

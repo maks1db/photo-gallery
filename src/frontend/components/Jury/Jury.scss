@@ -114,6 +114,18 @@
         width: 100%;
         text-align: center;
     }
+    .comment {
+        position: fixed;
+        left: 15px;
+        bottom: 15px;
+        .commentMessage{
+            color: #fff;
+            font-size: 16px;
+            position: fixed;
+            bottom: 35px;
+            left: 110px;
+        }
+    }
     .ratingPreview {
         position: fixed;
         width: 100%;

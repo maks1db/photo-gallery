@@ -26,7 +26,7 @@ function mapDispatchToProps(dispatch, ownProps) {
             dispatch(getPhotoByCategory(value));
         },
         onGetPhoto: (value) => dispatch(getPhotoByCategory(value)),
-        onUpdateRating: (id, value) => dispatch(updateRating(id, value)),
+        onUpdateRating: (id, value) => dispatch(updateRating(id, 'value', value)),
         onSetModal: (value)=> dispatch(setModal(value)),
         onSetModalImg: (value) => dispatch(setModalImg(value)),
         onPreview: (index) => {
