@@ -41,7 +41,7 @@ export default (props) => {
                         </Col>
                         <Col number={4}>
                             <Input 
-                                label={'Возрат'}
+                                label={'Возраст'}
                                 placeholder="Ваш возраст" 
                                 type="number"
                                 {...init('age')}
@@ -61,7 +61,7 @@ export default (props) => {
                         </Col>
                         <Col number={6}>
                             <Input 
-                                label={'Email'}
+                                label={'E-mail'}
                                 type="email"
                                 placeholder="Введите адрес электронной почты"
                                 {...init('email')}
@@ -88,7 +88,7 @@ export default (props) => {
                     <Textarea 
                         label={'Туристический опыт'} 
                         rows={8}
-                        placeholder="где побывал вообще, в этом сезоне, планы на след.сезон, какой именно вид туризма"
+                        placeholder="Где побывал вообще, в этом сезоне, планы на след.сезон, какой именно вид туризма и т.д., и т.п."
                         {...init('experience')}
                     />
                     <Textarea 
@@ -102,7 +102,7 @@ export default (props) => {
             {!props.admin && <div className={styles.center}>
                 <Checkbox 
                     {...init('confirm')}
-                    label={'Разрешаю использовать указанне данные в фотовыставке и мероприятиях, связанных с ней'} />
+                    label={'Подтверждаю свое авторское право на заявленные фотографии (и несу личную ответственность в соответствии с законодательством РФ). Разрешаю использовать указанные данные в фотовыставке и мероприятиях, связанных с ней'} />
             </div>}
         </div>
     );

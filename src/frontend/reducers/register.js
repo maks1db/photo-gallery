@@ -105,7 +105,7 @@ export default (state = initialState, action) => {
                     maxLength: 4
                 },
                 info: {value: '', errorMessage: false, required:true},
-                category: {value: 'Категория 2', errorMessage: false, required:true}
+                category: {value: '', errorMessage: false, required:true}
             }]
         };
     case app.CHANGE_PHOTO_KEY: 
