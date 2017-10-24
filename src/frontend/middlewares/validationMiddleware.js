@@ -1,5 +1,6 @@
 import app from 'constants/appConstants';
 import {toastr} from 'react-redux-toastr';
+import categories from 'categories.js';
 
 function validationItem(store, item, type, key, id) {
     let hasError = false;
@@ -112,6 +113,18 @@ const validation = store => next => action => {
         else if (state.app.registerStep === 2) {
             const type = app.VALIDATION_PHOTO_KEY; 
             
+            const cat_1 = state.register.photo.filter(x=> x.category.value === categories[0]).length;
+            const cat_2 = state.register.photo.filter(x=> x.category.value === categories[1]).length;
+        
+            if (cat_1 > 3) {
+                toastr.error('Ошибка', `Количество фото категории "${categories[0]}" не должно превышать 3 шт.`);
+                hasError = true;
+            }
+            if (cat_2 === 2) {
+                toastr.error('Ошибка', `Количество фото категории "${categories[1]}" не должно превышать 2 шт.`);
+                hasError = true;
+            }
+
             state.register.photo.forEach(x=> {
                 Object.keys(x).forEach(key => {
 

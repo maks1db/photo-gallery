@@ -6,23 +6,6 @@ import Col from 'Controls/Col.jsx';
 import Row from 'Controls/Row.jsx'; 
 import categories from 'categories.js';
 
-
-function categoriesData(props) {
-    if (!props.categoriesCount) {
-        return categories;
-    }
-
-    if (props.categoriesCount.count_1 === 3) {
-        return [categories[1]];
-    }
-
-    if (props.categoriesCount.count_2 === 2) {
-        return [categories[0]];
-    }
-
-    return categories;
-}
-
 export default (props) => (
     <div>
         <Row>
@@ -38,7 +21,7 @@ export default (props) => (
                     {...props.init('category')}
                 >
                     {
-                        categoriesData(props).map(x => <option key={x}>{x}</option>)
+                        categories.map(x => <option key={x}>{x}</option>)
                     }
                 </Select>  
             </Col>
