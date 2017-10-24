@@ -1,4 +1,5 @@
 import app from 'constants/appConstants';
+import categories from 'categories.js';
 
 const initialState = {
     photo: [],
@@ -72,7 +73,23 @@ const initialState = {
     photoNumber: 0
 };
 
+function category(state) {
+    const cat_1 = state.photo.filter(x=> x.category.value === categories[0]).length;
+    const cat_2 = state.photo.filter(x=> x.category.value === categories[1]).length;
+
+    if (cat_1 === 3) {
+        return categories[1];
+    }
+    if (cat_2 === 2) {
+        return categories[0];
+    }
+
+    return categories[0];
+}
+
 export default (state = initialState, action) => {
+    
+
     switch (action.type) {
     case app.CHANGE_REGISTER_KEY:
         
@@ -105,7 +122,7 @@ export default (state = initialState, action) => {
                     maxLength: 4
                 },
                 info: {value: '', errorMessage: false, required:true},
-                category: {value: '', errorMessage: false, required:true}
+                category: {value: category(state), errorMessage: false, required:true}
             }]
         };
     case app.CHANGE_PHOTO_KEY: 

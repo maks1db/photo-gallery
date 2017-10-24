@@ -7,7 +7,10 @@ export default ({ dateEnd }) => (
     <div className={styles.main}>
         <article className={styles.article}>
             <div>
-                <h4>2 декабря 2017 г. 16:00, Липецк</h4>
+                <h4>
+                    2 декабря 2017 г. 16:00<br />
+                    Липецкая областная универсальная научная библиотека
+                </h4>
                 <h1>Ежегодная туристическая фотовыставка</h1>
                 <Link to="/register" className={styles.register}>
                      Подать заявку<span className="fa fa-long-arrow-right"></span>
