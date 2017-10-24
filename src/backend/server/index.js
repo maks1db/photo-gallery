@@ -1,8 +1,8 @@
-import express from 'express';                      
-import bodyParser from 'body-parser';
-import path from 'path';
-import routes from '../routes';
-import db from '../db';
+const express = require('express');                      
+const bodyParser = require('body-parser');
+const path = require('path');
+const routes = require('../routes');
+const db = require('../db');
 
 const app = express();  
 

@@ -6,17 +6,20 @@ const initialState = {
     rating: { isFetching: false, data: []},
     modal: {
         open: false,
-        index: -1
+        index: -1,
+        commentActive: false
     }
 };
 
-function updateRating(state, id, value) {
+function updateRating(state, id, key, value) {
+    let obj = state.find(x => x.photoId === id) || {};
     let arr = state.filter(x => x.photoId !== id);
-
-    arr.push({
+    obj = {
         photoId: id,
-        value
-    });
+        [key]: value
+    };
+
+    arr.push(obj);
 
     return arr;
 }
@@ -51,7 +54,7 @@ export default (state = initialState, action) => {
     case constants.RATING_UPDATE_COMPLETE:
         return {...state,
             rating: { isFetching: false, data: updateRating(state.rating.data,
-                action.id, action.value) 
+                action.id, action.key, action.value) 
             }};
     case constants.SET_MODAL:
         return {...state,
@@ -63,6 +66,12 @@ export default (state = initialState, action) => {
         return {...state,
             modal: {
                 ...state.modal, index: action.value
+            }
+        };
+    case constants.COMMENT_ACTIVE:
+        return {...state,
+            modal: {
+                ...state.modal, commentActive: action.value
             }
         };
     } 

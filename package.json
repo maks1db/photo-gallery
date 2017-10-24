@@ -1,6 +1,6 @@
 {
   "name": "photo-gallery",
-  "version": "0.8.7",
+  "version": "0.8.10",
   "description": "Фотовыставка туристов",
   "main": "index.js",
   "scripts": {
@@ -79,6 +79,7 @@
     "url-loader": "^0.5.8",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "eslint-plugin-async-await": "^0.0.0"
   }
 }

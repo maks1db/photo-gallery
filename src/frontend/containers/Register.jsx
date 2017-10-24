@@ -10,6 +10,7 @@ import { changeRegisterKey,
     setPhotoActive,
     saveUser
 } from 'actions/appActions';
+import categories from 'categories.js';
 
 import styles from 'Register/Input.scss';
 import UserInfo from 'Register/UserInfo.jsx';
@@ -69,6 +70,9 @@ export default class Register extends Component {
             userRegister
         } = this.props;
 
+        const count_1 = photo.filter(x => x.category.value === categories[0]).length;
+        const count_2 = photo.filter(x => x.category.value === categories[1]).length;
+
         return (
             <div className={styles.form}>
             {
@@ -89,6 +93,7 @@ export default class Register extends Component {
                         userRegister={userRegister}
                         validationShow={validationShow}
                         onValidation={onValidation}
+                        categoriesCount= {{count_1, count_2}}
                     />
             }
             <RegisterControls 

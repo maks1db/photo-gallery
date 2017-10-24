@@ -6,34 +6,51 @@ import Col from 'Controls/Col.jsx';
 import Row from 'Controls/Row.jsx'; 
 import categories from 'categories.js';
 
+
+function categoriesData(props) {
+    if (!props.categoriesCount) {
+        return categories;
+    }
+
+    if (props.categoriesCount.count_1 === 3) {
+        return [categories[1]];
+    }
+
+    if (props.categoriesCount.count_2 === 2) {
+        return [categories[0]];
+    }
+
+    return categories;
+}
+
 export default (props) => (
     <div>
         <Row>
-            <Col number={8}>
+            <Col number={7}>
                 <Input 
                     label="Название снимка" 
                     {...props.init('title')}
                 />
             </Col>
-            <Col number={4}>
+            <Col number={5}>
                 <Select 
                     label="Категория" 
                     {...props.init('category')}
                 >
                     {
-                        categories.map(x => <option key={x}>{x}</option>)
+                        categoriesData(props).map(x => <option key={x}>{x}</option>)
                     }
                 </Select>  
             </Col>
         </Row>
         <Row>
-            <Col number={8}>
+            <Col number={7}>
                 <Input 
                     label="Название похода" 
                     {...props.init('description')}
                 />
             </Col>
-            <Col number={4}>
+            <Col number={5}>
                 <Input 
                     label="Год" 
                     type="number"

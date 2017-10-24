@@ -19,7 +19,7 @@ const store = configureStore(history);
 const render = Component => {
     ReactDOM.render(
         <Provider store={store}>
-            <AppContainer warnings={false}>
+            <AppContainer>
                 <Component history={history} />
             </AppContainer>
         </Provider>,

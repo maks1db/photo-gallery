@@ -7,7 +7,8 @@ import {
         getPhotoByCategory, 
         updateRating,
         setModal,
-        setModalImg
+        setModalImg,
+        commentShow
      } from 'actions/juryActions';
 
 function mapStateToProps(state) {
@@ -16,7 +17,8 @@ function mapStateToProps(state) {
         items: state.jury.items,
         rating: state.jury.rating.data,
         openModalImg: state.jury.modal.open,
-        indexModalImg: state.jury.modal.index
+        indexModalImg: state.jury.modal.index,
+        commentActive: state.jury.modal.commentActive
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {
@@ -26,13 +28,20 @@ function mapDispatchToProps(dispatch, ownProps) {
             dispatch(getPhotoByCategory(value));
         },
         onGetPhoto: (value) => dispatch(getPhotoByCategory(value)),
-        onUpdateRating: (id, value) => dispatch(updateRating(id, value)),
+        onUpdateRating: (id, value) => dispatch(updateRating(id, 'value', value)),
         onSetModal: (value)=> dispatch(setModal(value)),
-        onSetModalImg: (value) => dispatch(setModalImg(value)),
+        onSetModalImg: (value) => {
+            dispatch(setModalImg(value));
+            dispatch(commentShow(false))
+        },
         onPreview: (index) => {
             dispatch(setModalImg(index));
             dispatch(setModal(true));
-        }
+        },
+        onCommentShow: (value) => {
+            dispatch(commentShow(value))
+        },
+        onUpdateComment: (id, value) => dispatch(updateRating(id, 'comment', value))
     };
 }
 
@@ -58,7 +67,10 @@ export default class Jury extends Component {
             indexModalImg,
             onSetModal,
             onSetModalImg,
-            onPreview
+            onPreview,
+            commentActive,
+            onCommentShow,
+            onUpdateComment
         } = this.props;
 
         items.data = items.data.map(x => {
@@ -83,6 +95,9 @@ export default class Jury extends Component {
                     index={indexModalImg}
                     onSetModalImg={onSetModalImg}
                     onSetModal={onSetModal}
+                    commentActive={commentActive}
+                    onCommentShow={onCommentShow}
+                    onUpdateComment={onUpdateComment}
                 />
             </div>
         );

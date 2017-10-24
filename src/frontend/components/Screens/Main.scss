@@ -94,6 +94,15 @@
     padding: 120px 0;
     position: relative;
     z-index: 1;
+    a {
+        cursor: pointer;
+    }
+    .toLeft {
+        text-align: left !important;
+    }
+    .ident_20 {
+        text-indent: 20px;
+    }
     h5 {
         font-weight: 300;
         margin-bottom: 55px;
