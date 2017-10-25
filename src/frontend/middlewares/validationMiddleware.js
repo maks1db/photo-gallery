@@ -120,7 +120,7 @@ const validation = store => next => action => {
                 toastr.error('Ошибка', `Количество фото категории "${categories[0]}" не должно превышать 3 шт.`);
                 hasError = true;
             }
-            if (cat_2 === 2) {
+            if (cat_2 > 2) {
                 toastr.error('Ошибка', `Количество фото категории "${categories[1]}" не должно превышать 2 шт.`);
                 hasError = true;
             }
