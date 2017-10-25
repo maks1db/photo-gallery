@@ -44,13 +44,16 @@ export default class Header extends React.Component {
 
     onScroll = () => {
         const background = this.state.background;
+        const { onScroll } = this.props;
 
         if (background && window.scrollY < 10) {
             this.setState({background: false});
+            onScroll(false);
         }
 
         if (!background && window.scrollY > 10) {
             this.setState({background: true});
+            onScroll(true)
         }
 
     }

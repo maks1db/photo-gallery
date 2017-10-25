@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Header from 'Layout/Header.jsx';
 import MainScreen from 'Layout/MainScreen.jsx';
 import { logoutUser } from 'actions/appActions';
+import { onScroll as onScrollAction } from 'actions/layoutActions';
 
 function mapStateToProps(state) {
     return {
@@ -10,12 +11,14 @@ function mapStateToProps(state) {
         title: state.layout.title,
         showMainLink: state.layout.showMainLink,
         adminDashboard: state.layout.adminDashboard,
-        role: state.app.role
+        role: state.app.role,
+        appScroll: state.layout.onScroll
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
-        onLogout: () => dispatch(logoutUser())
+        onLogout: () => dispatch(logoutUser()),
+        onScroll: (value) => dispatch(onScrollAction(value))
     };
 }
 
@@ -33,16 +36,21 @@ export default class Layout extends Component {
             showMainLink,
             adminDashboard,
             role,
-            onLogout
+            onLogout,
+            onScroll,
+            appScroll
         } = this.props;
         return (
-            <MainScreen>
+            <MainScreen
+                appScroll={appScroll}
+            >
                 { visible && <Header 
                     title={title} 
                     showMainLink={showMainLink} 
                     adminDashboard={adminDashboard}
                     role={role}
                     onLogout={onLogout}
+                    onScroll={onScroll}
                 />}
                 {this.props.children}
             </MainScreen>

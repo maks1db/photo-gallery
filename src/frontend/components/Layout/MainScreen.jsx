@@ -47,6 +47,7 @@ export default class MainScreen extends React.Component {
             activeImg,
             setActive
         } = this.state;
+        const {appScroll} = this.props;
 
         const photoInfo = info[`img_${activeImg +1}`];
 
@@ -92,10 +93,10 @@ export default class MainScreen extends React.Component {
                             ></div>))       
                         }  
                     </div>
-                    <div className={styles.screenInfo}>
+                    {!appScroll && <div className={styles.screenInfo}>
                         <div className={styles.author}>{photoInfo.author}</div>
                         <div className={styles.description}>{photoInfo.description}</div>
-                    </div>
+                    </div>}
                     {this.props.children}
                 </div>
             )
