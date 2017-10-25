@@ -11,7 +11,7 @@ import { changeRegisterKey,
     saveUser
 } from 'actions/appActions';
 import categories from 'categories.js';
-
+import Operation from 'Register/Operation.jsx';
 import styles from 'Register/Input.scss';
 import UserInfo from 'Register/UserInfo.jsx';
 import UserPhoto from 'Register/UserPhoto.jsx';
@@ -103,7 +103,7 @@ export default class Register extends Component {
                 userRegister={userRegister}
                 onSaveUser={() => !validationShow && onSaveUser()}
             />
-              
+            <Operation open={onSave} text={`Подождите, выполняется регистрация заявки (${photoNumber})...`} />      
         </div>
         );
     }
