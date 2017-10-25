@@ -7,6 +7,13 @@ export const visibleLayout = (state) => {
     };
 };
 
+export const onScroll = (value) => {
+    return {
+        type: constants.ON_SCROLL,
+        value
+    };
+};
+
 export const activateAdminDashboard = (value) => {
     return {
         type: constants.ADMIN_DASHBOARD,
