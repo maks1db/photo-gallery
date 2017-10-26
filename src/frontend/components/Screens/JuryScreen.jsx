@@ -11,6 +11,16 @@ export default () => (
                 <Col number={4}>
                     <div className={styles.box}>
                         <div className={styles.img} style={{
+                            backgroundImage: 'url("/assets/images/jury/Estropov.jpg")',
+                            backgroundPositionY: '0px'
+                        }}></div>
+                        <h3 className={styles.bold}>Анатолий Евстропов</h3>
+                        <p>Редактор отдела фотоиллюстраций издательского дома "Липецкая газета". Интересуется фотографией с 15 лет. В 1990 году увлечение переросло в профессию. Лауреат и дипломант всероссийских и областных фотоконкурсов.</p>
+                    </div>
+                </Col>
+                <Col number={4}>
+                    <div className={styles.box}>
+                        <div className={styles.img} style={{
                             backgroundImage: 'url("/assets/images/jury/Sorokin.jpg")'
                         }}></div>
                         <h3 className={styles.bold}>Юрий Сорокин</h3>
@@ -27,6 +37,9 @@ export default () => (
                     </div>
                 </Col>
                 
+                
+            </Row>
+            <Row>
                 <Col number={4}>
                     <div className={styles.box}>
                         <div className={styles.img} style={{
@@ -36,6 +49,7 @@ export default () => (
                         <p>Pr-специалист Липецкой областной научной библиотеки. Люблю хорошие книги, уютные встречи, осенний лес и далёкие путешествия.</p>
                     </div>
                 </Col>
+                
             </Row>
         </div>
         

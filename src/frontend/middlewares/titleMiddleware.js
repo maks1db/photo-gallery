@@ -3,7 +3,7 @@ import app from 'constants/appConstants';
 
 const init = store => next => action => {
 
-    if (action.type === layout.SET_TITLE) {  
+    if (action.type === layout.SET_TITLE && action.title) {  
         document.title = action.title;
     }
     if (action.type === app.CHANGE_REGISTER_STEP) {
