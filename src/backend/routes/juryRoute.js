@@ -17,5 +17,6 @@ router.use('/photo', juryMiddleware, new crud(photoModel).init(['delete','post',
 router.get('/rating', ratingController.get);
 router.get('/rating/:id', ratingController.get);
 router.patch('/rating/:id', ratingController.update);
+router.get('/ratingEmpty', ratingController.empty);
 
 module.exports = router;

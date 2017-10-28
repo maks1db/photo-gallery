@@ -8,7 +8,8 @@ import {
         updateRating,
         setModal,
         setModalImg,
-        commentShow
+        commentShow,
+        changeComment
      } from 'actions/juryActions';
 
 function mapStateToProps(state) {
@@ -18,7 +19,8 @@ function mapStateToProps(state) {
         rating: state.jury.rating.data,
         openModalImg: state.jury.modal.open,
         indexModalImg: state.jury.modal.index,
-        commentActive: state.jury.modal.commentActive
+        commentActive: state.jury.modal.commentActive,
+        commentMessage: state.jury.modal.commentMessage
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {
@@ -41,7 +43,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         onCommentShow: (value) => {
             dispatch(commentShow(value))
         },
-        onUpdateComment: (id, value) => dispatch(updateRating(id, 'comment', value))
+        onUpdateComment: (id, value) => dispatch(updateRating(id, 'comment', value)),
+        onChangeComment: (value) => dispatch(changeComment(value))
     };
 }
 
@@ -70,14 +73,21 @@ export default class Jury extends Component {
             onPreview,
             commentActive,
             onCommentShow,
-            onUpdateComment
+            onUpdateComment,
+            commentMessage,
+            onChangeComment
         } = this.props;
 
+        let commentCount = 0;
         items.data = items.data.map(x => {
             const item = rating.find(a => a.photoId === x._id);
             x.value = item ? item.value : 0;
+            x.comment = item ? item.comment : '';
+
+            if (x.comment) commentCount++;
             return x;
-        })
+        });
+
         return (
             <div>
                 <VoteForm 
@@ -97,7 +107,10 @@ export default class Jury extends Component {
                     onSetModal={onSetModal}
                     commentActive={commentActive}
                     onCommentShow={onCommentShow}
-                    onUpdateComment={onUpdateComment}
+                    onUpdateComment={(id) => onUpdateComment(id, commentMessage)}
+                    onChangeComment={onChangeComment}
+                    commentMessage={commentMessage}
+                    commentCount={commentCount}
                 />
             </div>
         );

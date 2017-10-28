@@ -3,26 +3,30 @@ import styles from './Jury.scss';
 import Rating from 'react-star-rating-component';
 import Button from 'Controls/RaisedButton.jsx';
 import Textarea from 'Controls/Textarea.jsx';
+import ClassName from 'className.js';
 
 export default (props) => {
     const item = props.items.data[props.index];
     return (
-        props.open && <div className={styles.fullImg}>
+        props.open && <div {...ClassName({[styles.item_comment]: item.comment !== ''}, `${styles.fullImg}`)}>
             <div className={styles.title}>{item.title} </div>
             <div className={styles.count}>{props.index + 1} из {props.items.data.length}</div>
             {!props.commentActive && <div className={styles.preview}>
                 <img src={item.smallPicture}/>
+                {(item.comment && !props.commentActive) && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
             </div>} 
             <div className={styles.description}>
                 {item.info}
             </div>
+            
             {props.commentActive && <div className={styles.commentArea}>
                 <Textarea 
-                    defaultValue={item.comment || ''}
+                    defaultValue={props.commentMessage || item.comment || ''}
                     errorMessage={false}
                     label="Ваш комментарий"
                     rows={15}
                     placeholder="Введите ваш комментарий..."
+                    onChange={(e) => props.onChangeComment(e.target.value)}
                 />
             </div>}
             <div className={styles.ratingPreview}>
@@ -36,19 +40,31 @@ export default (props) => {
                 </div>
                 
             </div>
-            {!props.commentActive && <div className={styles.comment}>
+            {(!props.commentActive && (item.comment || props.commentCount < 3)) && <div className={styles.comment}>
                 <Button 
                     onClick={() => props.onCommentShow(true)}
                     option="primary"
                 ><i className="fa fa-comments" aria-hidden="true"></i></Button>
-                <div className={styles.commentMessage}>Комментрировать (осталось 3 шт.)</div>
+                <div 
+                    className={styles.commentMessage}
+                    children={item.comment ? 'Редактировать комментарий' : `Комментрировать (осталось ${3 - props.commentCount} шт.)`}    
+                ></div>
             </div>}
-            {props.commentActive && <div className={styles.comment}>
+            {props.commentActive && <div className={`${styles.comment} ${styles.buttonSave}`}>
                 <Button 
-                    onClick={() => props.onCommentShow(false)}
+                    onClick={() => props.onUpdateComment(item._id)}
                     option="success"
+                    mini={true}
                 ><i className="fa fa-floppy-o" aria-hidden="true"></i></Button>
                 <div className={styles.commentMessage}>Сохранить комментарий</div>
+            </div>}
+            {props.commentActive && <div className={`${styles.comment} ${styles.buttonClose}`}>
+                <Button 
+                    onClick={() => props.onCommentShow(false)}
+                    option="danger"
+                    mini={true}
+                ><i className="fa fa-times" aria-hidden="true"></i></Button>
+                <div className={styles.commentMessage}>Закрыть</div>
             </div>}
             {props.index !== 0 && 
                 <div 

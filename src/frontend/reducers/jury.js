@@ -7,7 +7,8 @@ const initialState = {
     modal: {
         open: false,
         index: -1,
-        commentActive: false
+        commentActive: false,
+        commentMessage: ''
     }
 };
 
@@ -15,6 +16,7 @@ function updateRating(state, id, key, value) {
     let obj = state.find(x => x.photoId === id) || {};
     let arr = state.filter(x => x.photoId !== id);
     obj = {
+        ...obj,
         photoId: id,
         [key]: value
     };
@@ -47,7 +49,8 @@ export default (state = initialState, action) => {
             rating: { isFetching: false, data: action.items.map(x =>{
                 return {
                     photoId: x.photoId,
-                    value: x.value
+                    value: x.value,
+                    comment: x.comment
                 };
             })}
         };
@@ -59,13 +62,19 @@ export default (state = initialState, action) => {
     case constants.SET_MODAL:
         return {...state,
             modal: {
-                ...state.modal, open: action.value
+                ...state.modal, open: action.value, commentMessage: '', commentActive: false
             }
         };
     case constants.SET_MODAL_IMG:
         return {...state,
             modal: {
-                ...state.modal, index: action.value
+                ...state.modal, index: action.value, commentMessage: ''
+            }
+        };
+    case constants.CHANGE_COMMENT:
+        return {...state,
+            modal: {
+                ...state.modal, commentMessage: action.value
             }
         };
     case constants.COMMENT_ACTIVE:
