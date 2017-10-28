@@ -48,14 +48,16 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.empty = (req, res) => {
+    let rating = [];
     tokenModel.findById(req.headers.authorization).
         then(x => {
             return ratingModel.find({userId: x.userId});      
         }).
         then(x => {
-            return photoModel.find({photoId: { $nin: [x.map(x=>x.photoId)]}}).sort({create: -1});
+            rating = x;
+            return photoModel.find({}).sort({create: -1});
         }).
         then(x => {
-            res.json(x);
+            res.json(x.filter(x => rating.find(r => r.value > 0 && r.photoId === x._id.toString()) === undefined));
         });
 };
