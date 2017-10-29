@@ -66,8 +66,13 @@ userPhoto.pre('save', function(next) {
  */
 userPhoto.post('remove',(doc, next) => {
     const p = path.join(__dirname, '../../../public/', doc.picture);
+    const sp = path.join(__dirname, '../../../public/', doc.smallPicture);
     if (fs.existsSync(p)) {
         fs.unlinkSync(p);
+    }
+
+    if (fs.existsSync(sp)) {
+        fs.unlinkSync(sp);
     }
     next();
 });
