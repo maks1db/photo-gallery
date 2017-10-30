@@ -23,6 +23,13 @@ export const commentShow = (value) => {
     };
 };
 
+export const changeComment = (value) => {
+    return {
+        type: constants.CHANGE_COMMENT,
+        value
+    };
+};
+
 export const setModalImg = (value) => {
     return {
         type: constants.SET_MODAL_IMG,
@@ -42,15 +49,19 @@ export const getPhotoByCategory = category => dispatch => {
             create: '-1'
         }
     };
+    let route = 'jury/photo';
     if (category > 0) {
         obj.query = {
             category: categories[category-1]
         };
     }
+    else if (category < 0) {
+        route = 'jury/ratingEmpty';    
+    }
 
     Promise.all(
         [
-            new crud('jury/photo').get(obj),
+            new crud(route).get(obj),
             new crud('jury/rating').get()
         ]
     )

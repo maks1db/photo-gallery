@@ -40,13 +40,14 @@ export default (props) => {
                     disableImagesLoaded={false} // default false
                     updateOnEachImageLoad={false}
                 >
-                    {props.items.data.filter(x=> props.category === -1 ? x.value === 0 : true).map(x => 
-                        <div key={x._id} className={styles.item}>
+                    {props.items.data.map(x => 
+                        <div key={x._id} {...ClassName({[styles.item_comment]: x.comment !== ''}, `${styles.item}`)}>
                             <div className={styles.title}>{x.title}</div>
                             <img 
                                 src={x.smallPicture}
                                 onClick={() => props.onPreview(props.items.data.indexOf(x))}    
                             />
+                            {x.comment && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
                             <div className={styles.rating}>
                                 <Rating 
                                     starCount={10}
