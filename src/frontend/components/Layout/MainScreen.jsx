@@ -3,7 +3,7 @@ import styles from './Screen.scss';
 import ClassName from 'className.js';
 import info from '../../../../public/assets/images/info.json';
 
-const imgCount = 6;
+const imgCount = 7;
 
 export default class MainScreen extends React.Component {
 
@@ -79,7 +79,7 @@ export default class MainScreen extends React.Component {
                     <div className={styles.screens}>
                         {
                             items.map(x=>(<div
-                                {...ClassName({[styles.scale]: x.id === activeImg})}
+                                {...(info[`img_${x.id +1}`].animation && photoInfo.author === info[`img_${x.id +1}`].author) && {className: styles[info[`img_${x.id +1}`].animation]}}
                                 key={x.id} 
                                 style={
                                     {
