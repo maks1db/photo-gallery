@@ -71,3 +71,16 @@
         }
     }
 }
+
+.move {
+    animation: move-animation linear 30s;
+
+}
+@keyframes move-animation {
+    0% {
+        background-position-y: 0
+    }
+    100% {
+        background-position-y: -800px
+    }
+}
