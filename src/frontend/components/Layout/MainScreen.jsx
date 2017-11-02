@@ -79,7 +79,7 @@ export default class MainScreen extends React.Component {
                     <div className={styles.screens}>
                         {
                             items.map(x=>(<div
-                                {...(info[`img_${x.id +1}`].animation && photoInfo.author === info[`img_${x.id +1}`].author) && {className: styles[info[`img_${x.id +1}`].animation]}}
+                                {...info[`img_${x.id +1}`].style && {className: styles[info[`img_${x.id +1}`].style]}}
                                 key={x.id} 
                                 style={
                                     {

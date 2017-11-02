@@ -72,9 +72,11 @@
     }
 }
 
-.move {
-    animation: move-animation linear 30s;
-
+.bigSize {
+    // animation: move-animation linear 30s;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    background-color: #313131 !important;
 }
 @keyframes move-animation {
     0% {
