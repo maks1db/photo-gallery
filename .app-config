@@ -6,3 +6,7 @@ https://kuroikaze85.wordpress.com/2010/01/19/using-nginx-with-node-js/
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
 
 sudo apt-get purge --auto-remove nodejs
+
+перезагрузка nginx
+sudo nginx -t
+sudo systemctl reload nginx
