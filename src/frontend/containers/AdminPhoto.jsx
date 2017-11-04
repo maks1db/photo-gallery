@@ -7,6 +7,7 @@ export default () => (
         item="users"
         subItem="photo"
         itemKey="name"
+        itemSort={{create: -1}}
         subItemKey="title"
         title="Фото участников"
         subItemBind="userId"

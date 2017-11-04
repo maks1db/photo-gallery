@@ -10,7 +10,11 @@ const user = new Schema({
     workPlace: String,
     post: String,
     experience: String,
-    info: String
+    info: String,
+    create: {
+        type: Date,
+        default: new Date()
+    }
 },{versionKey: false});
 
 module.exports = mongoose.model('user', user);
