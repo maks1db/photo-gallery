@@ -13,6 +13,7 @@ const router = express.Router();
  */
 router.use('/users', adminMiddleware, new crud(usersModel).init(['delete']));
 router.delete('/users/:id', adminMiddleware, adminController.deleteUser);
+router.get('/userPhoto/:id', adminMiddleware, adminController.userPhoto);
 
 /**
  * users photo

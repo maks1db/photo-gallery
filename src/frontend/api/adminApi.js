@@ -8,3 +8,5 @@ if (process.env.DEV){
 API_PREFIX += '/api/v1';
 
 export const deleteUser = (id) => axios.delete(`${API_PREFIX}/admin/users/${id}`);
+
+export const getUserPhoto = (id) => axios.get(`${API_PREFIX}/admin/userPhoto/${id}`);

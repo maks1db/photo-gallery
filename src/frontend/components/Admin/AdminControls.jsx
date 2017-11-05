@@ -10,6 +10,13 @@ export default (props)=> (
             option="primary"  
             onClick={props.onCreate}
         />}
+        {!props.create && <RaisedButton 
+            mini={true}
+            children={<i className={'fa fa-picture-o'}></i>} 
+            option="primary"  
+            disabled={!props.active} 
+            onClick={props.onGetUserPhoto}
+        />}
         <RaisedButton 
             mini={true}
             children={<i className={'fa fa-floppy-o'}></i>} 

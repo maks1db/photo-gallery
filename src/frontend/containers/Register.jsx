@@ -103,7 +103,11 @@ export default class Register extends Component {
                 userRegister={userRegister}
                 onSaveUser={() => !validationShow && onSaveUser()}
             />
-            <Operation open={onSave} text={`Подождите, выполняется регистрация заявки (${photoNumber})...`} />      
+            {photoNumber > 0 && 
+            <Operation 
+                open={onSave} 
+                text={`Подождите, выполняется регистрация заявки (${photoNumber})...`} />
+            }      
         </div>
         );
     }

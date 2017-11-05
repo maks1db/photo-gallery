@@ -41,54 +41,66 @@ const init = store => next => action => {
                     return;     
                 }
                 
-                // prepare object
-                var obj = {};
-                Object.keys(state.register.init).forEach(x=> obj[x] = state.register.init[x].value);  
-                
-                //save user
-                saveUser(obj)
-                    .then(x => {
-                        //save user photo
-                        
-                        new Promise((resolve) => {
-                            const userId = x.data.id;
-                            const save = (index) => {
-                                if (index === state.register.photo.length) {
-                                    resolve('ok');
-                
-                                    store.dispatch({
-                                        type: app.SAVE_USER_COMPLETE
-                                    });
-                                    store.dispatch({
-                                        type: app.USER_REGISTER
-                                    });
-                                    store.dispatch({
-                                        type: app.SAVE_PHOTO_NUMBER,
-                                        value: 0
-                                    });
-                                    toastr.success('Спасибо', 'Ваша заявка принята');
-                                    return;
-                                }
-                
-                                store.dispatch({
-                                    type: app.SAVE_PHOTO_NUMBER,
-                                    value: state.register.photo.length - index
-                                });
-                                const item = state.register.photo[index];
-                                obj = { userId };
-                                obj.picture = item.picture.value[0];
-                                Object.keys(item)
-                                    .filter(x => ['id', 'active', 'picture'].indexOf(x) < 0)
-                                    .forEach(x=> obj[x] = item[x].value);
-                
-                                savePhoto(obj)
-                                    .then(() => save(++index));
-                                
-                            };
-                            
-                            save(0);
+                const toastrConfirmOptions = {
+                    onCancel: () => {
+                        store.dispatch({
+                            type: app.SAVE_USER_COMPLETE
                         });
-                    });  
+                    },
+                    onOk: () => {
+                        // prepare object
+                        let obj = {};
+                        Object.keys(state.register.init).forEach(x=> obj[x] = state.register.init[x].value);
+                        //save user
+                        saveUser(obj)
+                            .then(x => {
+                                //save user photo
+                                
+                                new Promise((resolve) => {
+                                    const userId = x.data.id;
+                                    const save = (index) => {
+                                        if (index === state.register.photo.length) {
+                                            resolve('ok');
+                        
+                                            store.dispatch({
+                                                type: app.SAVE_USER_COMPLETE
+                                            });
+                                            store.dispatch({
+                                                type: app.USER_REGISTER
+                                            });
+                                            store.dispatch({
+                                                type: app.SAVE_PHOTO_NUMBER,
+                                                value: 0
+                                            });
+                                            toastr.success('Спасибо', 'Ваша заявка принята');
+                                            return;
+                                        }
+                        
+                                        store.dispatch({
+                                            type: app.SAVE_PHOTO_NUMBER,
+                                            value: state.register.photo.length - index
+                                        });
+                                        const item = state.register.photo[index];
+                                        obj = { userId };
+                                        obj.picture = item.picture.value[0];
+                                        Object.keys(item)
+                                            .filter(x => ['id', 'active', 'picture'].indexOf(x) < 0)
+                                            .forEach(x=> obj[x] = item[x].value);
+                        
+                                        savePhoto(obj)
+                                            .then(() => save(++index));
+                                        
+                                    };
+                                    
+                                    save(0);
+                                });
+                            }); 
+
+                    },
+                    okText: 'Отправить',
+                    cancelText: 'Отмена'
+                };
+                toastr.confirm('Отправить заявку или продолжим добавление фото?', toastrConfirmOptions);  
             });
 
     }
