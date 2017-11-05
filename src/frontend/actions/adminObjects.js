@@ -124,5 +124,3 @@ export const setItemActive = (id) => {
         id
     };
 };
-
-

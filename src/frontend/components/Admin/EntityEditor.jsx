@@ -11,9 +11,9 @@ import { items,
     saveItem, 
     setModify, 
     removeItem,
-    newItem } from 'actions/adminObjects';
+    newItem} from 'actions/adminObjects';
 import { toastr } from 'react-redux-toastr';
-
+import { getUserPhoto as getUserPhotoApi } from 'api/adminApi';
 
 function mapStateToProps(state) {
     return {
@@ -74,6 +74,21 @@ export default class AdminPhoto extends Component {
             items = {isFetching: false, data: arr};
         }
         return items;
+    }
+
+    onGetUserPhoto = () => {
+        const items = this.props.subItem ? this.props.subItems : this.props.items;
+        const activeItem = items.data.find(x=>x.active);
+
+        let id = activeItem.userId ? activeItem.userId : activeItem._id;
+        getUserPhotoApi(id)
+            .then(x => {
+                var a = 1;
+            },
+        e => {
+            var a = 1;
+        })
+
     }
 
     onDelete= () => {
@@ -145,6 +160,7 @@ export default class AdminPhoto extends Component {
                     active={itActive}
                     onSave={() => onSave({...modify, '_id': items.data.find(x=>x.active)._id})}
                     onDelete={this.onDelete}
+                    onGetUserPhoto={this.onGetUserPhoto}
                 /> }
             </div>
             
