@@ -14,6 +14,7 @@ import { items,
     newItem} from 'actions/adminObjects';
 import { toastr } from 'react-redux-toastr';
 import { getUserPhoto as getUserPhotoApi } from 'api/adminApi';
+const FileDownload = require('react-file-download');
 
 function mapStateToProps(state) {
     return {
@@ -83,6 +84,10 @@ export default class AdminPhoto extends Component {
         let id = activeItem.userId ? activeItem.userId : activeItem._id;
         getUserPhotoApi(id)
             .then(x => {
+                // FileDownload(x.data, 'result.zip');
+                var blob = new Blob([x.data], {type: "octet/stream"});
+                var fileName = "QCPReport.zip";
+                saveAs(blob, fileName);
                 var a = 1;
             },
         e => {
