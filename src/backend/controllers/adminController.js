@@ -1,8 +1,10 @@
 import photoModel from '../models/userPhoto';
 import userModel from '../models/user';
 const ObjectID = require('mongodb').ObjectID;
-import zip from 'express-zip';
+import fs from 'fs';
 import path from 'path';
+import archiver from 'archiver';
+import converter from 'helpers/convertStrToSave.js';
 
 /**
  * Delete photo user and user obj
@@ -15,19 +17,31 @@ module.exports.deleteUser = (req, res) => {
 
 module.exports.userPhoto = (req,res) => {
     const id = req.params.id;
+    let user;
     
-    photoModel.find({userId: id})
+    userModel.findById(id)
         .then(x => {
-            let arr = [];
-            let i = 0;
-            x.forEach(f => {
-                i++;
-                arr.push({
-                    path: path.join(__dirname, '../../../', f.picture),
-                    name: `${i}.jpg`
-                });
+            user = x.toJSON();
+            return photoModel.find({userId: id});
+        })
+        .then(x => {
+
+            res.set('Content-Type', 'application/zip');
+
+            const zip = archiver('zip');
+            zip.pipe(res);
+
+            zip.on('error', function(err) {
+                res.status(500).send({error: err.message});
             });
-            res.zip(arr);
+
+            x.forEach(f => {
+                const fData = f.path.split('.');
+                const type = fData.length > 1 ? fData[1] : 'jpg';
+                zip.append(fs.createReadStream(path.join(__dirname, '../../../', f.path)),
+                    {name: `${converter(f.title)}.${type}`});
+            });
+            zip.finalize();
         });
 
 };

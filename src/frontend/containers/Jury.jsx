@@ -43,7 +43,7 @@ function mapDispatchToProps(dispatch, ownProps) {
         onCommentShow: (value) => {
             dispatch(commentShow(value))
         },
-        onUpdateComment: (id, value) => dispatch(updateRating(id, 'comment', value)),
+        onUpdateComment: (id, value) => dispatch(updateRating(id, 'comment', value, 'Комментарий сохранен в базе данных')),
         onChangeComment: (value) => dispatch(changeComment(value))
     };
 }

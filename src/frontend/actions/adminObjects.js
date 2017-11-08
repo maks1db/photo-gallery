@@ -124,3 +124,10 @@ export const setItemActive = (id) => {
         id
     };
 };
+
+export const setStateRequestPhoto = (state) => {
+    return {
+        type: adminConst.STATE_REQUEST_PHOTO,
+        state 
+    };
+};

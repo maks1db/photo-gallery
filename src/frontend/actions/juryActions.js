@@ -1,6 +1,7 @@
 import constants from 'constants/juryConstants';
 import crud from 'api/crud';
 import categories from 'categories.js';
+import { toastr } from 'react-redux-toastr';
 
 export const changeCategory = (value) => {
     return {
@@ -77,7 +78,7 @@ export const getPhotoByCategory = category => dispatch => {
         });
 };
 
-export const updateRating = (id, key, value) => dispatch => {
+export const updateRating = (id, key, value, message) => dispatch => {
     dispatch({
         type: constants.RATING_UPDATE
     });   
@@ -89,5 +90,9 @@ export const updateRating = (id, key, value) => dispatch => {
                 type: constants.RATING_UPDATE_COMPLETE,
                 id, key, value
             });
+
+            if (message) {
+                toastr.success('Сохранено', message);
+            }
         });
 };
