@@ -11,7 +11,9 @@ import { items,
     saveItem, 
     setModify, 
     removeItem,
-    newItem} from 'actions/adminObjects';
+    newItem,
+    setStateRequestPhoto
+} from 'actions/adminObjects';
 import { toastr } from 'react-redux-toastr';
 import { getUserPhoto as getUserPhotoApi } from 'api/adminApi';
 import * as saver from 'file-saver';
@@ -24,7 +26,8 @@ function mapStateToProps(state) {
         itemResult: state.admin.itemResult,
         modify: state.admin.modify,
         itActive: state.admin.items.data.filter(x=>x.active).length > 0,
-        role: state.app.role
+        role: state.app.role,
+        requestPhotoState: state.admin.requestPhoto
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {
@@ -45,7 +48,8 @@ function mapDispatchToProps(dispatch, ownProps) {
             ownProps.subItem || ownProps.item, 
             ownProps.subItem ? ownProps.subItemKey : ownProps.itemKey,
             'Новый элемент'
-        ))
+        )),
+        requestPhoto: (value) => dispatch(setStateRequestPhoto(value))
     };
 }
 
@@ -79,6 +83,8 @@ export default class AdminPhoto extends Component {
     }
 
     onGetUserPhoto = () => {
+
+        this.props.requestPhoto(true);
         const items = this.props.subItem ? this.props.subItems : this.props.items;
         const activeItem = items.data.find(x=>x.active);
 
@@ -89,6 +95,7 @@ export default class AdminPhoto extends Component {
                 var blob = new Blob([x.data], {type: 'octet/stream'});
                 var fileName = `${converter(user.name)}.zip`;
                 saver.saveAs(blob, fileName);
+                this.props.requestPhoto(false);
             });
     }
 
@@ -131,7 +138,8 @@ export default class AdminPhoto extends Component {
             itemKey,
             subItemKey,
             create,
-            onCreate     
+            onCreate,
+            requestPhotoState     
         } = this.props;
 
         const Inputs = this.props.children;
@@ -162,6 +170,7 @@ export default class AdminPhoto extends Component {
                     onSave={() => onSave({...modify, '_id': items.data.find(x=>x.active)._id})}
                     onDelete={this.onDelete}
                     onGetUserPhoto={this.onGetUserPhoto}
+                    downloadImg={requestPhotoState}
                 /> }
             </div>
             

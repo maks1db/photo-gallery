@@ -14,7 +14,7 @@ export default (props)=> (
             mini={true}
             children={<i className={'fa fa-picture-o'}></i>} 
             option="primary"  
-            disabled={!props.active} 
+            disabled={!props.active || props.downloadImg} 
             onClick={props.onGetUserPhoto}
         />}
         <RaisedButton 
