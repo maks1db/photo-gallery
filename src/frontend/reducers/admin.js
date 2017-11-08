@@ -4,7 +4,8 @@ const initialState = {
     items: {isFetching: false, data: []},
     subItems: {isFetching: false, data: []},
     itemResult: {isFetching: false, data: {}},
-    modify: {}
+    modify: {},
+    requestPhoto: false
 };
 
 export default (state = initialState, action) => {
@@ -56,6 +57,8 @@ export default (state = initialState, action) => {
                 [action.key]: action.value
             }
         };
+    case constants.STATE_REQUEST_PHOTO:
+        return {...state, requestPhoto: action.state};
     case constants.CHANGE_ITEMS_KEY:
         return {...state,
             items: {

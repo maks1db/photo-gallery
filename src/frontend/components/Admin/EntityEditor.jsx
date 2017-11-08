@@ -14,7 +14,8 @@ import { items,
     newItem} from 'actions/adminObjects';
 import { toastr } from 'react-redux-toastr';
 import { getUserPhoto as getUserPhotoApi } from 'api/adminApi';
-const FileDownload = require('react-file-download');
+import * as saver from 'file-saver';
+import converter from 'convertStrToSave.js';
 
 function mapStateToProps(state) {
     return {
@@ -82,18 +83,13 @@ export default class AdminPhoto extends Component {
         const activeItem = items.data.find(x=>x.active);
 
         let id = activeItem.userId ? activeItem.userId : activeItem._id;
+        let user = this.props.items.data.find(x=> x._id === id);
         getUserPhotoApi(id)
             .then(x => {
-                // FileDownload(x.data, 'result.zip');
-                var blob = new Blob([x.data], {type: "octet/stream"});
-                var fileName = "QCPReport.zip";
-                saveAs(blob, fileName);
-                var a = 1;
-            },
-        e => {
-            var a = 1;
-        })
-
+                var blob = new Blob([x.data], {type: 'octet/stream'});
+                var fileName = `${converter(user.name)}.zip`;
+                saver.saveAs(blob, fileName);
+            });
     }
 
     onDelete= () => {
