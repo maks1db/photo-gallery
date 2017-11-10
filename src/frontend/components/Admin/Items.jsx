@@ -16,7 +16,8 @@ export default (props) => {
                         <tr 
                             {...ClassName({
                                 [styles.active]: x.active,
-                                [styles.subItem]: x.subItem
+                                [styles.subItem]: x.subItem, 
+                                'warning': withSubItems && !x.subItem
                             })}
                             key={x._id}
                             onClick={() => {
