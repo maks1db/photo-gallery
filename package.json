@@ -1,6 +1,6 @@
 {
   "name": "photo-gallery",
-  "version": "0.8.25",
+  "version": "0.8.26",
   "description": "Фотовыставка туристов",
   "main": "index.js",
   "scripts": {
