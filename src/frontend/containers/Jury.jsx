@@ -111,6 +111,7 @@ export default class Jury extends Component {
                     onChangeComment={onChangeComment}
                     commentMessage={commentMessage}
                     commentCount={commentCount}
+                    category={category}
                 />
             </div>
         );

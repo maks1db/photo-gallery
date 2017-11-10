@@ -41,7 +41,7 @@ export default class ImgForm extends React.PureComponent{
                 <div className={styles.count}>{props.index + 1} из {props.items.data.length}</div>
                 {!props.commentActive && <div className={styles.preview}>
                     <img src={item.smallPicture}/>
-                    {(item.comment && !props.commentActive) && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
+                    {[1,2].indexOf(props.category) >= 0 && (item.comment && !props.commentActive) && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
                 </div>} 
                 <div className={styles.description}>
                     {item.info}
@@ -68,7 +68,7 @@ export default class ImgForm extends React.PureComponent{
                     </div>
                     
                 </div>
-                {(!props.commentActive && (item.comment || props.commentCount < 3)) && <div className={styles.comment}>
+                {(!props.commentActive && (item.comment || props.commentCount < 3)) && [1,2].indexOf(props.category) >= 0 && <div className={styles.comment}>
                     <Button 
                         onClick={() => props.onCommentShow(true)}
                         option="primary"

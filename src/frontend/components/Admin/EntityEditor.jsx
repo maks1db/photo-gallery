@@ -34,7 +34,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         activate: (value) => dispatch(activateAdminDashboard(value)),
         getItems: () => dispatch(items(ownProps.item,
-            ownProps.itemSort ?  {...ownProps.itemSort, [ownProps.itemKey]: 1} : {[ownProps.itemKey]: 1})),
+            ownProps.itemSort || {[ownProps.itemKey]: 1})),
         getSubItems: (id) => dispatch(subItems(ownProps.subItem,{[ownProps.itemKey]: 1})),
         setItemActive: (id) => {
             dispatch(setItemActive(id)); 
