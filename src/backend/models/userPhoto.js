@@ -49,6 +49,8 @@ userPhoto.pre('save', function(next) {
     let res = ~~(dimension.width/1024);
     if (res < 1) res = 1;
 
+    res = Math.max(res, 3);
+
     resizeImg(fs.readFileSync(p), 
         {
             width: ~~(dimension.width/res), 
