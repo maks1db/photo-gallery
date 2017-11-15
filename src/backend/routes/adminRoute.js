@@ -1,10 +1,10 @@
-import express from 'express';
-import usersModel from '../models/user';
-import photoModel from '../models/userPhoto';
-import juryModel from '../models/userJury';
-import crud from '../crud';
-import adminController from '../controllers/adminController';
-import adminMiddleware from '../middlewares/adminMiddleware';
+const express = require('express');
+const usersModel = require('../models/user');
+const photoModel = require('../models/userPhoto');
+const juryModel = require('../models/userJury');
+const crud = require('../crud');
+const adminController = require('../controllers/adminController');
+const adminMiddleware = require('../middlewares/adminMiddleware');
 
 const router = express.Router();
 

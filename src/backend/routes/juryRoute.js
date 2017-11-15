@@ -1,8 +1,8 @@
-import express from 'express';
-import photoModel from '../models/userPhoto';
-import crud from '../crud';
-import juryMiddleware from '../middlewares/juryMiddleware';
-import ratingController from '../controllers/ratingController';
+const express = require('express');
+const photoModel = require('../models/userPhoto');
+const crud = require('../crud');
+const juryMiddleware = require('../middlewares/juryMiddleware');
+const ratingController = require('../controllers/ratingController');
 
 const router = express.Router();
 

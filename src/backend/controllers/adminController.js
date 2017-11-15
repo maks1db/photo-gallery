@@ -1,10 +1,10 @@
-import photoModel from '../models/userPhoto';
-import userModel from '../models/user';
+const photoModel = require('../models/userPhoto');
+const userModel = require('../models/user');
 const ObjectID = require('mongodb').ObjectID;
-import fs from 'fs';
-import path from 'path';
-import archiver from 'archiver';
-import converter from 'helpers/convertStrToSave.js';
+const fs = require('fs');
+const path = require('path');
+const archiver = require('archiver');
+const converter = require('helpers/convertStrToSave.js');
 
 /**
  * Delete photo user and user obj

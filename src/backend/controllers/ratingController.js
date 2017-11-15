@@ -1,6 +1,6 @@
-import tokenModel from '../models/token';
-import ratingModel from '../models/rating';
-import photoModel from '../models/userPhoto';
+const tokenModel = require('../models/token');
+const ratingModel = require('../models/rating');
+const photoModel = require('../models/userPhoto');
 
 module.exports.get = (req, res) => {
 

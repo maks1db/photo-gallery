@@ -1,4 +1,4 @@
-import tokenModel from '../models/token';
+const tokenModel = require('../models/token');
 
 module.exports = (req, res, next) => {
 

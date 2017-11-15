@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import sizeOf from 'image-size';
-import resizeImg from 'resize-img';
-import userModel from './user';
+const fs = require('fs');
+const path = require('path');
+const sizeOf = require('image-size');
+const resizeImg = require('resize-img');
+const userModel = require('./user');
 
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
