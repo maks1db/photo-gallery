@@ -1,9 +1,9 @@
-import express from 'express';
-import userController from '../controllers/userController';
+const express = require('express');
+const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-import multer from 'multer';
+const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

@@ -1,6 +1,6 @@
-import tokenModel from '../models/token';
-import userJuryModel from '../models/userJury';
-import config from '../config';
+const tokenModel = require('../models/token');
+const userJuryModel = require('../models/userJury');
+const config = require('../config');
 const ObjectID = require('mongodb').ObjectID;
 
 module.exports.login = (req, res) => {

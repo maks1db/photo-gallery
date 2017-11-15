@@ -1,5 +1,5 @@
-import express from 'express';
-import mainController from '../controllers/mainController';
+const express = require('express');
+const mainController = require('../controllers/mainController');
 
 const router = express.Router();
 

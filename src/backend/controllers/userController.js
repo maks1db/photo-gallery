@@ -1,5 +1,5 @@
-import modelUser from '../models/user';
-import modelPhoto from '../models/userPhoto';
+const modelUser = require('../models/user');
+const modelPhoto = require('../models/userPhoto');
 
 /**
  * Save user
