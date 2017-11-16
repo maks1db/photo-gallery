@@ -7,7 +7,7 @@ export default () => (
         item="users"
         itemKey="name"
         title="Участники"
-        itemSort={{create: -1}}
+        itemSort={{'_id': -1}}
         children={Inputs}
     />
 );
