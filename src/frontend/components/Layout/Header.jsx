@@ -19,7 +19,7 @@ const scrollTo = (selector) => setTimeout(function() {
     smoothScroll(document.querySelector(selector))
 }, 50)
 
-const NavItems = ({ isAdmin, role, onLogout }) => {
+const NavItems = ({ isAdmin, role, onLogout, dateEnd }) => {
     return(
         <ul>
             {(role && !isAdmin) && <NavLi href={roleUrl(role)} title="Кабинет" />}
@@ -29,11 +29,15 @@ const NavItems = ({ isAdmin, role, onLogout }) => {
             {isAdmin && <NavLi href='/admin/jury' title="Жюри" /> }  
             {!isAdmin && <NavLi title="О конкурсе" onClick={() => scrollTo('#about')}/>}
             {!isAdmin && <NavLi title="Наше жюри" onClick={() => scrollTo('#jury')} />}
+            {role === '' && 
+                !dateEnd.isFetching && 
+                dateEnd.value < new Date() && 
+                <NavLi title="Голосование" href="/login" />}
             {!isAdmin && <NavLi title="Контакты" onClick={() => scrollTo('#contacts')} />}
             {role && <NavLi onClick={onLogout} title="Выйти" />}
         </ul>)
 }
-export default class Header extends React.Component {
+export default class Header extends React.PureComponent {
 
     constructor() {
         super();
@@ -68,7 +72,7 @@ export default class Header extends React.Component {
 
     render() {
 
-        const { title, showMainLink, adminDashboard, role, onLogout } = this.props;
+        const { title, showMainLink, adminDashboard, role, onLogout, dateEnd } = this.props;
         return (<div {...ClassName({[styles.background]: this.state.background}, styles.header)}>
             <div className={styles.title}>{title}</div> 
             <nav className={styles.navigation}>
@@ -76,6 +80,7 @@ export default class Header extends React.Component {
                     isAdmin={adminDashboard}
                     role={role}
                     onLogout={onLogout}
+                    dateEnd={dateEnd}
                 />   
             </nav>
             <div className={styles['to-top']} >

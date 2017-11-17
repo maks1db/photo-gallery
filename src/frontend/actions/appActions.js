@@ -17,7 +17,7 @@ export const loginUser = (login, password) => dispatch => {
         .then(x => {
 
             if (!x.data.token) {
-                toastr.error('Вход в систему', 'Неверный логин или пароль')
+                toastr.error('Вход в систему', 'Неверный логин или пароль');
             }
             else {
                 dispatch({
@@ -31,7 +31,7 @@ export const loginUser = (login, password) => dispatch => {
                 });
             }
             
-        });
+        }, () => toastr.error('Вход в систему', 'Неверный логин или пароль'));
 };
 
 export const logoutUser = (login, password) => dispatch => {

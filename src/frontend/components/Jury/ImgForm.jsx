@@ -22,7 +22,7 @@ export default class ImgForm extends React.PureComponent{
             props.onSetModalImg(props.index - 1);     
         }
     }
-
+  
     componentWillMount() {
         document.addEventListener('keyup', this.onKeyUp);
     }

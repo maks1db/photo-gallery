@@ -12,7 +12,8 @@ function mapStateToProps(state) {
         showMainLink: state.layout.showMainLink,
         adminDashboard: state.layout.adminDashboard,
         role: state.app.role,
-        appScroll: state.layout.onScroll
+        appScroll: state.layout.onScroll,
+        dateEnd: state.app.dateEnd
     };
 }
 function mapDispatchToProps(dispatch) {
@@ -38,7 +39,8 @@ export default class Layout extends Component {
             role,
             onLogout,
             onScroll,
-            appScroll
+            appScroll,
+            dateEnd
         } = this.props;
         return (
             <MainScreen
@@ -51,6 +53,7 @@ export default class Layout extends Component {
                     role={role}
                     onLogout={onLogout}
                     onScroll={onScroll}
+                    dateEnd={dateEnd}
                 />}
                 {this.props.children}
             </MainScreen>

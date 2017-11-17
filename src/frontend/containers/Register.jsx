@@ -16,7 +16,7 @@ import styles from 'Register/Input.scss';
 import UserInfo from 'Register/UserInfo.jsx';
 import UserPhoto from 'Register/UserPhoto.jsx';
 import RegisterControls from 'Register/RegisterControls.jsx';
-
+import { push } from 'react-router-redux';
 
 function mapStateToProps(state) {
     return {
@@ -26,7 +26,8 @@ function mapStateToProps(state) {
         photo: state.register.photo,
         onSave: state.register.onSave,
         photoNumber: state.register.photoNumber,
-        userRegister: state.app.userRegister
+        userRegister: state.app.userRegister,
+        dateEnd: state.app.dateEnd
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {
@@ -39,7 +40,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         setPhotoActive: (id) => dispatch(setPhotoActive(id)),
         deletePhoto: () => dispatch(deletePhoto()),
         deletePhotoItem: (id) => dispatch(deletePhotoItem(id)),
-        onSaveUser: (user) => dispatch(saveUser(user))
+        onSaveUser: (user) => dispatch(saveUser(user)),
+        onSetRoute: (route) => dispatch(push(route))
     };
 }
 
@@ -49,8 +51,25 @@ export default class Register extends Component {
         super();
     }
 
+    onInit = (props) => {
+        const { dateEnd, onSetRoute } = props || this.props;
+        
+        if (!dateEnd.isFetching && dateEnd.value < new Date()) {
+            onSetRoute('/')
+        }
+    }
+
+    componentWillReceiveProps(props) {
+        this.onInit(props);     
+    }
+
+    componentWillMount() {
+        this.onInit();
+    }
+
     render() {
         const { 
+            dateEnd,
             onChangeRegKey, 
             validationUserInfo,
             onValidation,
@@ -71,7 +90,7 @@ export default class Register extends Component {
         } = this.props;
 
         return (
-            <div className={styles.form}>
+            !dateEnd.isFetching && <div className={styles.form}>
             {
                 registerStep === 1 ?
                     <UserInfo 
