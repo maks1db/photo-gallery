@@ -13,17 +13,23 @@ export default (props) => {
         };
     };
 
+    const onKeyUp = (e) => {
+        if (e.keyCode === 13) props.onLogin(props.login, props.password);
+    };
+
     return (
         <div className={styles.login}>
             <div className={styles.content}>
                 <Input
                     label="Логин"
                     {...init('login')}
+                    onKeyUp={onKeyUp}
                 />
                 <Input
                     label="Пароль"
                     {...init('password')}
                     type="password"
+                    onKeyUp={onKeyUp}
                 />
                 <div className={styles.button}>
                     <Button 

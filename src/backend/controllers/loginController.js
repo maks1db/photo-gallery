@@ -9,7 +9,7 @@ module.exports.login = (req, res) => {
 
     let role = '';
     //10 days
-    const expired = new Date().valueOf() + 10 * 24 * 60 * 60 * 1000;
+    const expired = new Date().valueOf() + 30 * 24 * 60 * 60 * 1000;
 
     if (admin.login === login && admin.password === password) {
         role = 'admin';

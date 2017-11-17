@@ -16,3 +16,15 @@
         font-weight: bold !important;
     }
 }
+@media (max-width: 900px) {
+    .login {
+        margin: 0 6%;
+    }
+    
+}
+@media (max-width: 600px) {
+    .login {
+        margin: 0 1%;
+    }
+    
+}
