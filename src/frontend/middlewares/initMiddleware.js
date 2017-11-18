@@ -5,6 +5,7 @@ import { dateEnd } from 'api/appApi';
 const titles = {
     '/register': 'Шаг 1 из 2',
     '/admin/users': 'Заявки участников',
+    '/admin/dashboard': 'Административная консоль',
     '/admin/photo': 'Фото участников',
     '/admin/jury': 'Наше жюри',
     '/login': 'Авторизация',

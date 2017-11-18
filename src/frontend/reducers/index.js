@@ -6,6 +6,7 @@ import app from './app';
 import register from './register';
 import admin from './admin';
 import jury from './jury';
+import dashboard from './dashboard';
 
 export default combineReducers({
     toastr,
@@ -14,5 +15,6 @@ export default combineReducers({
     register,
     routing: routerReducer,
     admin,
-    jury
+    jury,
+    dashboard
 });
