@@ -30,5 +30,6 @@ router.use('/jury', adminMiddleware, new crud(juryModel).init());
  * download
  */
 router.get('/download/users', adminMiddleware, downloadController.getUsers);
+router.get('/download/autors', adminMiddleware, downloadController.getAutors);
 
 module.exports = router;
