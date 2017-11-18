@@ -3,8 +3,6 @@ import adminConst from 'constants/adminDashboard';
 import deleteProps from 'deleteProps.js';
 import { toastr } from 'react-redux-toastr';
 
-const deleteApi = {};
-
 const afterDeleteActions = {
     photo: {
         items: 'users', 
@@ -131,3 +129,4 @@ export const setStateRequestPhoto = (state) => {
         state 
     };
 };
+

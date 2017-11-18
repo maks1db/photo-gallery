@@ -12,3 +12,7 @@ export const deleteUser = (id) => axios.delete(`${API_PREFIX}/admin/users/${id}`
 export const getUserPhoto = (id) => axios.get(`${API_PREFIX}/admin/userPhoto/${id}`,{
     responseType: 'arraybuffer'
 });
+
+export const getUsers = () => axios.get(`${API_PREFIX}/admin/download/users`,{
+    responseType: 'arraybuffer'
+});

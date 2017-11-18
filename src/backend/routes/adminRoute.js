@@ -5,6 +5,7 @@ const juryModel = require('../models/userJury');
 const crud = require('../crud');
 const adminController = require('../controllers/adminController');
 const adminMiddleware = require('../middlewares/adminMiddleware');
+const downloadController = require('../controllers/downloadController');
 
 const router = express.Router();
 
@@ -24,5 +25,10 @@ router.use('/photo', adminMiddleware, new crud(photoModel).init());
  * jury
  */
 router.use('/jury', adminMiddleware, new crud(juryModel).init());
+
+/**
+ * download
+ */
+router.get('/download/users', adminMiddleware, downloadController.getUsers);
 
 module.exports = router;

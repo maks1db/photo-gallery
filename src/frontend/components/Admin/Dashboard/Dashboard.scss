@@ -1,0 +1,20 @@
+.content {
+    background: #fff;
+    top:60px;
+    position: relative;
+    z-index: 1;
+    margin:12px 30px;
+    
+    .center {
+        text-align: center;
+    }
+    ul {
+        text-align: center;
+    }
+    a {
+        cursor: pointer;
+    }
+}
+.pad {
+    padding: 12px;
+}

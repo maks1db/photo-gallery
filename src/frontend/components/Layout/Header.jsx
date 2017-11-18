@@ -8,9 +8,9 @@ import smoothScroll from 'smoothscroll';
 const roleUrl = (role) => {
     switch (role) {
         case 'admin':
-            return '/admin/users';
+            return '/admin/dashboard';
         case 'superadmin':
-            return '/admin/users';
+            return '/admin/dashboard';
         case 'jury':
             return '/jury'
     }
@@ -24,6 +24,7 @@ const NavItems = ({ isAdmin, role, onLogout, dateEnd }) => {
         <ul>
             {(role && !isAdmin) && <NavLi href={roleUrl(role)} title="Кабинет" />}
             {<NavLi href='/' title="Главная" onClick={() => scrollTo('#main')}/>}
+            {isAdmin && <NavLi href='/admin/dashboard' title="Консоль" />}
             {isAdmin && <NavLi href='/admin/users' title="Участники" />}
             {isAdmin && <NavLi href='/admin/photo' title="Фото" />}
             {isAdmin && <NavLi href='/admin/jury' title="Жюри" /> }  
