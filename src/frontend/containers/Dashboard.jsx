@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Content from 'Admin/Dashboard/Content.jsx';
 import { setTab } from 'actions/dashboard';
 import Download from 'Admin/Dashboard/Download.jsx';
-import { getUsers } from 'api/adminApi';
+import { download } from 'api/adminApi';
 import * as saver from 'file-saver';
 
 function mapStateToProps(state) {
@@ -18,16 +18,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 const onDownload = (route) => {
-    let func, name;
-    if (route === 'users') {
-        func = getUsers;
-        name = 'users.zip';
-    }
 
-    func()
+    download(route)
         .then(x => {
             var blob = new Blob([x.data], {type: 'octet/stream'});
-            saver.saveAs(blob, name);
+            saver.saveAs(blob, `${route}.zip`);
         });
 };
 

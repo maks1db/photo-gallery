@@ -5,6 +5,22 @@ const path = require('path');
 const archiver = require('archiver');
 const StringBuilder = require('string-builder');
 
+const year = (val) => {
+    const s = String(val);
+    const min = parseInt(s.substring(s.length-1, s.length)); 
+
+    if (min === 0) return `${val} лет`;
+    else if (min >1 && min < 5) return `${val} года`;
+    else if (min >= 5) return `${val} лет`;
+
+    return `${val} год`;
+};
+
+const getVal = (arr, key) => {
+    const value = arr.find(d => d[key] !== '');
+    return value ? value[key] : undefined;
+};
+
 module.exports.getUsers = async (req, res) => {
     const users = await userModel.find({}).sort({name: 1});
     let sb = new StringBuilder();
@@ -37,6 +53,50 @@ module.exports.getUsers = async (req, res) => {
         })
         sb.appendLine();
     });
+
+    res.set('Content-Type', 'application/zip');
+    
+    const zip = archiver('zip');
+    zip.pipe(res);
+
+    zip.on('error', function(err) {
+        res.status(500).send({error: err.message});
+    });
+
+    zip.append(sb.toString(),
+        {name: 'users.txt'});
+    zip.finalize();
+};
+
+module.exports.getAutors = async (req, res) => {
+    const users = await userModel.find({}).sort({name: 1});
+    let sb = new StringBuilder();
+    let names = [];
+
+    users.forEach(x => {
+        if (names.indexOf(x.name) < 0){
+            names.push(x.name);
+        }
+    });
+
+    names.forEach(x => {
+        const data = users.filter(u => u.name === x);
+        const item = new StringBuilder(x + ', ');
+        
+        item.appendFormat('{0}, ', year(getVal(data, 'age') || 0));
+        item.appendFormat('{0}. ', getVal(data, 'town'));
+        item.appendFormat('{0}, ', getVal(data, 'post'));
+        item.appendFormat('{0}. ', getVal(data, 'workPlace'));
+        item.appendFormat('{0}. ', getVal(data, 'experience'));
+
+        const info = getVal(data, 'info');
+        if (info) {
+            item.appendFormat('{0}. ', info);    
+        }
+
+        sb.appendLine(item.toString());
+        sb.appendLine();
+    });   
 
     res.set('Content-Type', 'application/zip');
     
