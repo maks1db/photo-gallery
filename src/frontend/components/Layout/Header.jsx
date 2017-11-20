@@ -30,11 +30,11 @@ const NavItems = ({ isAdmin, role, onLogout, dateEnd }) => {
             {isAdmin && <NavLi href='/admin/jury' title="Жюри" /> }  
             {!isAdmin && <NavLi title="О конкурсе" onClick={() => scrollTo('#about')}/>}
             {!isAdmin && <NavLi title="Наше жюри" onClick={() => scrollTo('#jury')} />}
+            {!isAdmin && <NavLi title="Контакты" onClick={() => scrollTo('#contacts')} />}
             {role === '' && 
                 !dateEnd.isFetching && 
                 dateEnd.value < new Date() && 
                 <NavLi title="Голосование" href="/login" />}
-            {!isAdmin && <NavLi title="Контакты" onClick={() => scrollTo('#contacts')} />}
             {role && <NavLi onClick={onLogout} title="Выйти" />}
         </ul>)
 }
