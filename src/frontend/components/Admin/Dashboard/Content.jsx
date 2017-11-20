@@ -11,9 +11,14 @@ const Nav = ( { tab, onSetTab }) => (
             </div>
             <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav">
+                    <li {...ClassName({active: tab === 0 })}>
+                        <a onClick={() => onSetTab(0)}>
+                            Выгрузка данных
+                        </a>
+                    </li>
                     <li {...ClassName({active: tab === 1 })}>
                         <a onClick={() => onSetTab(1)}>
-                            Выгрузка данных
+                            Фото
                         </a>
                     </li>
                     <li {...ClassName({active: tab === 2 })}>

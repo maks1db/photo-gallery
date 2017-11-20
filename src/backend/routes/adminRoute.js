@@ -27,6 +27,11 @@ router.use('/photo', adminMiddleware, new crud(photoModel).init());
 router.use('/jury', adminMiddleware, new crud(juryModel).init());
 
 /**
+ * Info
+ */
+router.get('/get/rating', adminMiddleware, adminController.ratingPhoto);
+
+/**
  * download
  */
 router.get('/download/users', adminMiddleware, downloadController.getUsers);

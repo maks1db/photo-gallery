@@ -45,3 +45,7 @@ module.exports.userPhoto = (req,res) => {
         });
 
 };
+
+module.exports.ratingPhoto = (req, res) => {
+
+};
