@@ -6,3 +6,10 @@ export const setTab = (tab) => {
         tab
     };
 };
+
+export const setPhotoTab = (tab) => {
+    return {
+        type: adminConst.SET_PHOTO_TAB,
+        tab
+    };
+};

@@ -1,4 +1,9 @@
 .categories {
+    // &.black {
+    //     .btn {
+    //         color: #329bdd;
+    //     }
+    // }
     width: 100%;
     padding: 16px;
     text-align: center;
@@ -33,7 +38,7 @@
         }
     }
     .active {
-        
+        color: #fff !important;
         &:after{
             top: 0 !important;
         }
