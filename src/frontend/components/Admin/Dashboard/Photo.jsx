@@ -2,6 +2,11 @@ import React, {PureComponent} from 'react';
 import styles from 'Jury/Jury.scss';
 import ClassName from 'className.js';
 import categories from 'categories.js';
+import Masonry from 'react-masonry-component';
+
+const masonryOptions = {
+    transitionDuration: 500
+};
 
 export default class Photo extends PureComponent {
 
@@ -13,15 +18,23 @@ export default class Photo extends PureComponent {
         this.setState({category});
     }
 
+    componentWillMount() {
+        const {
+            photoTab, onGetRatingPhoto
+        } = this.props;
+
+        onGetRatingPhoto(photoTab);
+    }
+
     render() {
 
         const {
-            photoTab, onSetPhotoTab
+            photoTab, onSetPhotoTab, photo
         } = this.props;
 
         return (
             <div>
-                <div className={`${styles.categories} ${styles.black}`}>
+                <div className={`${styles.categories}`}>
                     <div 
                         onClick={() => onSetPhotoTab(0)}
                         {...ClassName({[styles.active]: photoTab === 0}, `${styles.btn}`)}>
@@ -40,6 +53,22 @@ export default class Photo extends PureComponent {
                         <i>Без оценок</i>
                     </div>
                 </div>
+                {!photo.isFetching && <div className={styles.items}>
+                    <Masonry
+                        options={masonryOptions} // default {}
+                        disableImagesLoaded={false} // default false
+                        updateOnEachImageLoad={false}
+                    >
+                        {photo.data.map(x => 
+                            <div key={x._id} className={styles.item}>
+                                <div className={styles.title}>{x.title}</div>
+                                <img 
+                                    src={x.smallPicture}    
+                                />
+                                <div className={styles.value}>{x.rating}</div>
+                            </div>)}   
+                    </Masonry>
+                </div>}
             </div>
         );
     }

@@ -9,7 +9,7 @@ import Masonry from 'react-masonry-component';
 import Rating from 'react-star-rating-component';
 
 const masonryOptions = {
-    transitionDuration: 0
+    transitionDuration: 500
 };
 
 export default (props) => {

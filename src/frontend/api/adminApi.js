@@ -17,4 +17,4 @@ export const download = (route) => axios.get(`${API_PREFIX}/admin/download/${rou
     responseType: 'arraybuffer'
 });
 
-export const get = (route) => axios.get(`${API_PREFIX}/admin/get/${route}`);
+export const get = (route, params = {}) => axios.get(`${API_PREFIX}/admin/get/${route}`, { params });
