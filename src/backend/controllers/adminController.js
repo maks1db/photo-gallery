@@ -1,5 +1,6 @@
 const photoModel = require('../models/userPhoto');
 const userModel = require('../models/user');
+const ratingModel = require('../models/rating');
 const ObjectID = require('mongodb').ObjectID;
 const fs = require('fs');
 const path = require('path');
@@ -46,6 +47,32 @@ module.exports.userPhoto = (req,res) => {
 
 };
 
-module.exports.ratingPhoto = (req, res) => {
+module.exports.ratingPhoto = async (req, res) => {
 
+    let query = {};
+    if (['all', 'empty'].indexOf(req.query.category) < 0) {
+        query.category = req.query.category;
+    }
+
+    const photo = await photoModel.find(query);
+    const rating = await ratingModel.find({});
+
+    let result = photo.map(x => {
+
+        let doc = x.toJSON();
+        let val = 0;
+
+        rating
+            .filter(r => r.photoId === x._id.toString())
+            .forEach(r => val += r.value);
+
+        doc.rating = val;
+        return doc;
+    });
+
+    if (req.query.category === 'empty') {
+        result = result.filter(x => x.rating === 0);
+    }
+
+    res.json(result.sort((a,b) => b.rating - a.rating));
 };

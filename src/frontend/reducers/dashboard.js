@@ -2,7 +2,8 @@ import constants from 'constants/adminDashboard';
 
 const initialState = {
     tab: 0,
-    photoTab: 0
+    photoTab: 0,
+    photo: {isFetching: false, data: []}
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +12,10 @@ export default (state = initialState, action) => {
         return {...state, tab: action.tab};
     case constants.SET_PHOTO_TAB:
         return {...state, photoTab: action.tab};
+    case constants.REQUEST_DASHBOARD_PHOTO:
+        return {...state, photo: {isFetching:true, data: []}};
+    case constants.RECEIVE_DASHBOARD_PHOTO:
+        return {...state, photo: {isFetching:false, data: action.items}};
     }
 
     return state;
