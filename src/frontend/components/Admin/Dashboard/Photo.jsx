@@ -3,6 +3,7 @@ import styles from 'Jury/Jury.scss';
 import ClassName from 'className.js';
 import categories from 'categories.js';
 import Masonry from 'react-masonry-component';
+import ImgForm from 'Jury/ImgForm.jsx';
 
 const masonryOptions = {
     transitionDuration: 500
@@ -12,6 +13,11 @@ export default class Photo extends PureComponent {
 
     constructor(){
         super();
+
+        this.state ={
+            index: 0,
+            open: false
+        }
     }
 
     onChangeCategory = (category) => {
@@ -26,14 +32,42 @@ export default class Photo extends PureComponent {
         onGetRatingPhoto(photoTab);
     }
 
+    onClickImg = (x) => {
+        this.setState({
+            open: true,
+            index: this.props.photo.data.indexOf(x)
+        });
+    }
+
+    onChangeIndex = (index) => {
+        this.setState({
+            index
+        });
+    }
+
+    onCloseImg = () => {
+        this.setState({
+            open: false
+        });
+    }
+
     render() {
 
         const {
             photoTab, onSetPhotoTab, photo
         } = this.props;
 
+        const { index, open } = this.state;
         return (
             <div>
+                <ImgForm 
+                    items={photo}
+                    open={open}
+                    shortRating={true}
+                    index={index}
+                    onSetModal={this.onCloseImg}
+                    onSetModalImg={this.onChangeIndex}
+                />
                 <div className={`${styles.categories}`}>
                     <div 
                         onClick={() => onSetPhotoTab(0)}
@@ -60,7 +94,10 @@ export default class Photo extends PureComponent {
                         updateOnEachImageLoad={false}
                     >
                         {photo.data.map(x => 
-                            <div key={x._id} className={styles.item}>
+                            <div key={x._id} 
+                                className={styles.item}
+                                onClick={() => this.onClickImg(x)}
+                                >
                                 <div className={styles.title}>{x.title}</div>
                                 <img 
                                     src={x.smallPicture}    

@@ -30,7 +30,7 @@ const onDownload = (route) => {
     download(route)
         .then(x => {
             var blob = new Blob([x.data], {type: 'octet/stream'});
-            saver.saveAs(blob, `${route}.zip`);
+            saver.saveAs(blob, `${route}.txt`);
         });
 };
 

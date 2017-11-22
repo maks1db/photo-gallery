@@ -57,7 +57,7 @@ export default class ImgForm extends React.PureComponent{
                         onChange={(e) => props.onChangeComment(e.target.value)}
                     />
                 </div>}
-                <div className={styles.ratingPreview}>
+                {props.shortRating !== true && <div className={styles.ratingPreview}>
                     <div className={styles.content}>
                         <Rating 
                             starCount={10}
@@ -65,9 +65,9 @@ export default class ImgForm extends React.PureComponent{
                             onStarClick={(value) => props.onUpdateRating(item._id, value)}
                             value={item.value}
                         />
-                    </div>
-                    
-                </div>
+                    </div>   
+                </div>}
+                
                 {(!props.commentActive && (item.comment || props.commentCount < 3)) && [1,2].indexOf(props.category) >= 0 && <div className={styles.comment}>
                     <Button 
                         onClick={() => props.onCommentShow(true)}
