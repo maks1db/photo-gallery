@@ -36,5 +36,7 @@ router.get('/get/rating', adminMiddleware, adminController.ratingPhoto);
  */
 router.get('/download/users', adminMiddleware, downloadController.getUsers);
 router.get('/download/autors', adminMiddleware, downloadController.getAutors);
+router.get('/download/town', adminMiddleware, downloadController.getTown);
+router.get('/download/workplace', adminMiddleware, downloadController.getWorkPlace);
 
 module.exports = router;

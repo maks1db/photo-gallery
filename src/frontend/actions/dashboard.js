@@ -28,7 +28,7 @@ export const getRatingPhoto = category => dispatch => {
     else if (category === 0){
         obj.category = 'all';
     }
-    else if (categories === -1) {
+    else if (category === -1) {
         obj.category = 'empty';
     }
 

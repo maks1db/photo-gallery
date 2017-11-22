@@ -2,7 +2,6 @@
     background: rgba(255,255,255,.3);
     top:60px;
     position: relative;
-    z-index: 1;
     margin:12px 30px;
     span {
         color: #fff;
@@ -19,4 +18,10 @@
 }
 .pad {
     padding: 12px;
+}
+.group {
+    margin-bottom: 14px;
+    button {
+        width: 200px;
+    }
 }

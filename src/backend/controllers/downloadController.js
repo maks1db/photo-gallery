@@ -44,7 +44,7 @@ module.exports.getUsers = async (req, res) => {
 
     names.forEach(x => {
         const data = users.filter(u => u.name === x);
-        sb.appendLine(x)
+        sb.appendLine(x);
         Object.keys(keys).forEach(k => {
             const value = data.find(d => d[k] !== '');
             if (value !== undefined) {
@@ -54,18 +54,19 @@ module.exports.getUsers = async (req, res) => {
         sb.appendLine();
     });
 
-    res.set('Content-Type', 'application/zip');
+    res.set('Content-Type', 'application/txt');
     
-    const zip = archiver('zip');
-    zip.pipe(res);
+    // const zip = archiver('zip');
+    // zip.pipe(res);
 
-    zip.on('error', function(err) {
-        res.status(500).send({error: err.message});
-    });
+    // zip.on('error', function(err) {
+    //     res.status(500).send({error: err.message});
+    // });
 
-    zip.append(sb.toString(),
-        {name: 'users.txt'});
-    zip.finalize();
+    // zip.append(sb.toString(),
+    //     {name: 'users.txt'});
+    // zip.finalize();
+    res.send(sb.toString());
 };
 
 module.exports.getAutors = async (req, res) => {
@@ -98,16 +99,42 @@ module.exports.getAutors = async (req, res) => {
         sb.appendLine();
     });   
 
-    res.set('Content-Type', 'application/zip');
+    res.set('Content-Type', 'application/txt');
     
-    const zip = archiver('zip');
-    zip.pipe(res);
+    // const zip = archiver('zip');
+    // zip.pipe(res);
 
-    zip.on('error', function(err) {
-        res.status(500).send({error: err.message});
+    // zip.on('error', function(err) {
+    //     res.status(500).send({error: err.message});
+    // });
+
+    // zip.append(sb.toString(),
+    //     {name: 'users.txt'});
+    // zip.finalize();
+    res.send(sb.toString());
+};
+
+const distinctUserData = async (key) => {
+    const result = await userModel.distinct(key);
+    
+    let sb = new StringBuilder('');
+    result.sort().forEach(x => {
+        const k = x.trim();
+
+        if (k !== '') {
+            sb.append(k);
+            sb.appendLine();
+        }
     });
 
-    zip.append(sb.toString(),
-        {name: 'users.txt'});
-    zip.finalize();
+    return sb;
+}
+module.exports.getTown = async (req, res) => {
+    const sb = await distinctUserData('town');
+    res.send(sb.toString());
+};
+
+module.exports.getWorkPlace = async (req, res) => {
+    const sb = await distinctUserData('workPlace');
+    res.send(sb.toString());
 };
