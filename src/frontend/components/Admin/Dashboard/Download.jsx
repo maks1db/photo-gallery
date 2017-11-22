@@ -32,7 +32,7 @@ export default class Download extends React.PureComponent {
                     города участников    
                 </Group>  
                 <Group 
-                    onClick={()=>onDownload('workPlace')} 
+                    onClick={()=>onDownload('post')} 
                     name="Рабочие места">
                     рабочие места участников    
                 </Group> 

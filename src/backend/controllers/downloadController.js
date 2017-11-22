@@ -134,7 +134,7 @@ module.exports.getTown = async (req, res) => {
     res.send(sb.toString());
 };
 
-module.exports.getWorkPlace = async (req, res) => {
-    const sb = await distinctUserData('workPlace');
+module.exports.getPost = async (req, res) => {
+    const sb = await distinctUserData('post');
     res.send(sb.toString());
 };
