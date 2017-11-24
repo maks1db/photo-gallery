@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
 const StringBuilder = require('string-builder');
+const convert = require('helpers/convertStrToSave');
 
 const year = (val) => {
     const s = String(val);
@@ -21,6 +22,25 @@ const getVal = (arr, key) => {
     return value ? value[key] : undefined;
 };
 
+const keys = {
+    age: 'возраст',
+    phone: 'телефон',
+    email: 'e-mail',
+    town: 'город',
+    workPlace: 'место работы/учебы',
+    post: 'должность',
+    experience: 'туристический опыт',
+    info: 'доп. информация',
+};
+
+const keysPhoto = {
+    description: 'описание',
+    year: 'год',
+    title: 'название',
+    category: 'категория',
+    info: 'где сделано'
+};
+
 module.exports.getUsers = async (req, res) => {
     const users = await userModel.find({}).sort({name: 1});
     let sb = new StringBuilder();
@@ -31,16 +51,6 @@ module.exports.getUsers = async (req, res) => {
             names.push(x.name);
         }
     });
-    const keys = {
-        age: 'возраст',
-        phone: 'телефон',
-        email: 'e-mail',
-        town: 'город',
-        workPlace: 'место работы/учебы',
-        post: 'должность',
-        experience: 'туристический опыт',
-        info: 'доп. информация',
-    };
 
     names.forEach(x => {
         const data = users.filter(u => u.name === x);
@@ -138,3 +148,66 @@ module.exports.getPost = async (req, res) => {
     const sb = await distinctUserData('post');
     res.send(sb.toString());
 };
+
+module.exports.getAll = async (req, res) => {
+    const users = await userModel.find({}).sort({name: 1});
+    const photo = await photoModel.find({}).sort({title: 1});
+
+    let names = [];
+    
+    users.forEach(x => {
+        if (names.indexOf(x.name) < 0){
+            names.push(x.name);
+        }
+    });
+
+    const zip = archiver('zip', {
+        zlib: { level: 9 }
+    });
+    zip.pipe(res);
+
+    zip.on('error', function(err) {
+        res.status(500).send({error: err.message});
+    });
+    
+    names.forEach(n => {
+
+        const name = convert(n);
+        const data = users.filter(u => u.name === n).map(u => u.toJSON());
+        const userPhoto = photo.filter(p => data.find(u => u._id.toString() === p.userId));
+        
+        //get user info
+        const user = new StringBuilder();
+        user.append(n).appendLine();
+
+        Object.keys(keys).forEach(k => {
+            const value = getVal(data, k)
+            if (value !== undefined && value !== null) {
+                user.appendLine(`\t${keys[k]}: ${value}`);
+            }
+        });
+
+        //get photo info
+        const photoInfo = new StringBuilder();
+        userPhoto.forEach(x => {
+
+            Object.keys(keysPhoto).forEach(k => {
+                photoInfo.append(`${keysPhoto[k]}: ${x[k]}`).appendLine();  
+            });
+            photoInfo.appendLine();
+
+            const fData = x.path.split('.');
+            const type = fData.length > 1 ? fData[1] : 'jpg';
+            zip.append(fs.createReadStream(path.join(__dirname, '../../../', x.path)),
+                {name: `${name}/${convert(x.title)} (${convert(x.category)}).${type}`});
+        });
+
+        
+        zip.append(user.toString(),
+            {name: `${name}/info.txt`});
+        zip.append(photoInfo.toString(),
+            {name: `${name}/photo.txt`});
+    });
+
+    zip.finalize();
+}
