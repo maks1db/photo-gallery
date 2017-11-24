@@ -16,6 +16,18 @@ export const setPhotoTab = (tab) => {
     };
 };
 
+export const requestDownload = () => {
+    return {
+        type: adminConst.DOWNLOAD_FILE_REQUEST
+    };
+};
+
+export const receiveDownload = () => {
+    return {
+        type: adminConst.DOWNLOAD_FILE_RECEIVE
+    };
+};
+
 export const getRatingPhoto = category => dispatch => {
     dispatch({
         type: adminConst.REQUEST_DASHBOARD_PHOTO
