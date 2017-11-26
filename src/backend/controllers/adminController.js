@@ -56,10 +56,9 @@ module.exports.ratingPhoto = async (req, res) => {
     }
 
     const photo = await photoModel.find(query);
-    const rating = await ratingModel.find({});
+    const rating = await ratingModel.find({}).sort({'_id': -1});
     const jury = await juryModel.find({});
     
-
     let result = photo.map(x => {
 
         let doc = x.toJSON();
@@ -70,13 +69,22 @@ module.exports.ratingPhoto = async (req, res) => {
             .filter(r => r.photoId === x._id.toString())
             .forEach(r => {
 
-                ratingInfo.push({
-                    user: jury.find(x => x._id.toString() === r.userId).name,
-                    value: r.value,
-                    comment: r.comment
-                });
-
-                val += r.value;
+                const index = ratingInfo.findIndex(x => x.userId === r.userId);
+                //берем первое значение
+                if (index < 0) {
+                    ratingInfo.push({
+                        userId: r.userId,
+                        user: jury.find(x => x._id.toString() === r.userId).name,
+                        value: r.value,
+                        comment: r.comment
+                    });
+                    val += r.value;
+                }
+                else {
+                    if (r.comment) {
+                        ratingInfo[index].comment = r.comment
+                    }
+                }
             });
 
         doc.rating = val;

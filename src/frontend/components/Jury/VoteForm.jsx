@@ -48,13 +48,14 @@ export default (props) => {
                                 onClick={() => props.onPreview(props.items.data.indexOf(x))}    
                             />
                             {x.comment && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
-                            <div className={styles.rating}>
-                                <Rating 
+                            <div {...ClassName({[styles.rating_update]: props.ratingUpdate}, styles.rating)}>
+                                {<Rating 
                                     starCount={10}
                                     name={x._id}
-                                    onStarClick={(value) => props.onUpdateRating(x._id, value)}
+                                    onStarClick={(value) => 
+                                        props.onUpdateRating(x._id, value)}
                                     value={x.value}
-                                />
+                                />}
                             </div>
                                 
                         </div>)}   

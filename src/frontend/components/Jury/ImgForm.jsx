@@ -78,7 +78,7 @@ export default class ImgForm extends React.PureComponent{
                     />
                 </div>}
                 {props.shortRating !== true && <div className={styles.ratingPreview}>
-                    <div className={styles.content}>
+                    <div {...ClassName({[styles.rating_update]: props.ratingUpdate}, styles.content)}>
                         <Rating 
                             starCount={10}
                             name="rating"
