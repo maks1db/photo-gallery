@@ -93,6 +93,11 @@ export default class Photo extends PureComponent {
                         {...ClassName({[styles.active]: photoTab === -1}, `${styles.btn}`)}>
                         <i>Без оценок</i>
                     </div>
+                    <div 
+                        onClick={() => onSetPhotoTab(-2)}
+                        {...ClassName({[styles.active]: photoTab === -2}, `${styles.btn}`)}>
+                        <i>С комментариями</i>
+                    </div>
                 </div>
                 {!photo.isFetching && <div className={styles.items}>
                     <Masonry
