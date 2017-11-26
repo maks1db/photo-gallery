@@ -51,7 +51,7 @@ module.exports.userPhoto = (req,res) => {
 module.exports.ratingPhoto = async (req, res) => {
 
     let query = {};
-    if (['all', 'empty'].indexOf(req.query.category) < 0) {
+    if (['all', 'empty', 'comments'].indexOf(req.query.category) < 0) {
         query.category = req.query.category;
     }
 
@@ -94,6 +94,9 @@ module.exports.ratingPhoto = async (req, res) => {
 
     if (req.query.category === 'empty') {
         result = result.filter(x => x.rating === 0);
+    }
+    else if (req.query.category === 'comments') {
+        result = result.filter(x => x.ratingInfo.find(r => r.comment) !== undefined);
     }
 
     res.json(result.sort((a,b) => b.rating - a.rating));
