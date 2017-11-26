@@ -39,7 +39,7 @@ export default class ImgForm extends React.PureComponent{
             props.open && <div {...ClassName({[styles.item_comment]: item.comment !== ''}, `${styles.fullImg}`)}>
                 <div className={styles.title}>{item.title} </div>
                 <div className={styles.count}>{props.index + 1} из {props.items.data.length}</div>
-                {(!props.commentActive && !props.ratingInfoShow) && <div className={styles.preview}>
+                {(!props.commentActive) && <div {...ClassName({[styles.ratingShowImg]:props.ratingInfoShow},styles.preview)}>
                     <img src={item.smallPicture}/>
                     {[1,2].indexOf(props.category) >= 0 && (item.comment && !props.commentActive) && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
                 </div>} 
@@ -63,9 +63,9 @@ export default class ImgForm extends React.PureComponent{
                             </div>)
                         }
                     </div>}
-                <div className={styles.description}>
+                {!props.ratingInfoShow && <div className={styles.description}>
                     {item.info}
-                </div>
+                </div>}
                 
                 {props.commentActive && <div className={styles.commentArea}>
                     <Textarea 
