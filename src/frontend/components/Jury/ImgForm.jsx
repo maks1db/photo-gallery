@@ -39,10 +39,30 @@ export default class ImgForm extends React.PureComponent{
             props.open && <div {...ClassName({[styles.item_comment]: item.comment !== ''}, `${styles.fullImg}`)}>
                 <div className={styles.title}>{item.title} </div>
                 <div className={styles.count}>{props.index + 1} из {props.items.data.length}</div>
-                {!props.commentActive && <div className={styles.preview}>
+                {(!props.commentActive && !props.ratingInfoShow) && <div className={styles.preview}>
                     <img src={item.smallPicture}/>
                     {[1,2].indexOf(props.category) >= 0 && (item.comment && !props.commentActive) && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
                 </div>} 
+
+                {props.ratingInfoShow && 
+                    <div className={styles.rating_info}>
+                        <h2>Оценки</h2>
+                        {
+                            item.ratingInfo.map(x => 
+                                <div>
+                                    <b>{x.user}: </b>{x.value}
+                                </div>)
+                        }
+                        {
+                            item.ratingInfo.find(x=>x.comment) !== undefined &&
+                            (
+                            <h2>Комментарии</h2>)}
+                        {item.ratingInfo.filter(x=>x.comment).map(x => 
+                            <div>
+                                <b>{x.user}: </b>{x.comment}
+                            </div>)
+                        }
+                    </div>}
                 <div className={styles.description}>
                     {item.info}
                 </div>
@@ -78,6 +98,12 @@ export default class ImgForm extends React.PureComponent{
                         children={item.comment ? 'Редактировать комментарий' : `Комментрировать (осталось ${3 - props.commentCount} шт.)`}    
                     ></div>
                 </div>}
+                {(item.ratingInfo && !props.ratingInfoShow) && <div className={styles.comment}>
+                    <Button 
+                        onClick={() => props.onRatingInfoShow(true)}
+                        option="primary"
+                    ><i className="fa fa-star-half-o" aria-hidden="true"></i></Button>
+                </div>}
                 {props.commentActive && <div className={`${styles.comment} ${styles.buttonSave}`}>
                     <Button 
                         onClick={() => props.onUpdateComment(item._id)}
@@ -89,6 +115,14 @@ export default class ImgForm extends React.PureComponent{
                 {props.commentActive && <div className={`${styles.comment} ${styles.buttonClose}`}>
                     <Button 
                         onClick={() => props.onCommentShow(false)}
+                        option="danger"
+                        mini={true}
+                    ><i className="fa fa-times" aria-hidden="true"></i></Button>
+                    <div className={styles.commentMessage}>Закрыть</div>
+                </div>}
+                {props.ratingInfoShow && <div className={`${styles.comment} ${styles.buttonClose}`}>
+                    <Button 
+                        onClick={() => props.onRatingInfoShow(false)}
                         option="danger"
                         mini={true}
                     ><i className="fa fa-times" aria-hidden="true"></i></Button>

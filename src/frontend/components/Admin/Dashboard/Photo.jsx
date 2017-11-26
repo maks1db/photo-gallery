@@ -16,12 +16,17 @@ export default class Photo extends PureComponent {
 
         this.state ={
             index: 0,
-            open: false
+            open: false,
+            ratingInfoShow: false
         }
     }
 
     onChangeCategory = (category) => {
         this.setState({category});
+    }
+
+    onRatingInfoShow = (ratingInfoShow) => {
+        this.setState({ratingInfoShow});
     }
 
     componentWillMount() {
@@ -57,7 +62,7 @@ export default class Photo extends PureComponent {
             photoTab, onSetPhotoTab, photo
         } = this.props;
 
-        const { index, open } = this.state;
+        const { index, open, ratingInfoShow } = this.state;
         return (
             <div>
                 <ImgForm 
@@ -67,6 +72,8 @@ export default class Photo extends PureComponent {
                     index={index}
                     onSetModal={this.onCloseImg}
                     onSetModalImg={this.onChangeIndex}
+                    ratingInfoShow={ratingInfoShow}
+                    onRatingInfoShow={this.onRatingInfoShow}
                 />
                 <div className={`${styles.categories}`}>
                     <div 
@@ -95,13 +102,14 @@ export default class Photo extends PureComponent {
                     >
                         {photo.data.map(x => 
                             <div key={x._id} 
-                                className={styles.item}
+                                {...ClassName({[styles.item_comment]: x.ratingInfo.find(i => i.comment) !== undefined}, `${styles.item}`)}
                                 onClick={() => this.onClickImg(x)}
                                 >
                                 <div className={styles.title}>{x.title}</div>
                                 <img 
                                     src={x.smallPicture}    
                                 />
+                                {x.ratingInfo.find(i => i.comment) !== undefined && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
                                 <div className={styles.value}>{x.rating}</div>
                             </div>)}   
                     </Masonry>
