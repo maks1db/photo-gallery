@@ -42,12 +42,12 @@ const onDownload = (route, type = 'txt', onRequestDownload, onReceiveDownload) =
 const DashboardComponent = (props) => {
 
     switch (props.tab) {
-    case 0: return <Download onDownload={(route, type) => 
+    case 1: return <Download onDownload={(route, type) => 
             onDownload(route, 
                 type, 
                 props.onRequestDownload,
                 props.onReceiveDownload)} {...props} />;
-    case 1: return <Photo {...props} />;
+    case 0: return <Photo {...props} />;
     }
 }
 

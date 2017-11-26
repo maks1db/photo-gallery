@@ -13,12 +13,12 @@ const Nav = ( { tab, onSetTab }) => (
                 <ul className="nav navbar-nav">
                     <li {...ClassName({active: tab === 0 })}>
                         <a onClick={() => onSetTab(0)}>
-                            Выгрузка данных
+                            Фото
                         </a>
                     </li>
                     <li {...ClassName({active: tab === 1 })}>
                         <a onClick={() => onSetTab(1)}>
-                            Фото
+                            Выгрузка данных
                         </a>
                     </li>
                     <li {...ClassName({active: tab === 2 })}>
