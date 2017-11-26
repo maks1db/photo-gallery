@@ -20,7 +20,8 @@ function mapStateToProps(state) {
         openModalImg: state.jury.modal.open,
         indexModalImg: state.jury.modal.index,
         commentActive: state.jury.modal.commentActive,
-        commentMessage: state.jury.modal.commentMessage
+        commentMessage: state.jury.modal.commentMessage,
+        ratingUpdate: state.jury.ratingUpdate
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {
@@ -75,7 +76,8 @@ export default class Jury extends Component {
             onCommentShow,
             onUpdateComment,
             commentMessage,
-            onChangeComment
+            onChangeComment,
+            ratingUpdate
         } = this.props;
 
         let commentCount = 0;
@@ -97,8 +99,10 @@ export default class Jury extends Component {
                     onUpdateRating={onUpdateRating}
                     rating={rating}
                     onPreview={onPreview}
+                    ratingUpdate={ratingUpdate}
                 />
                 <ImgForm 
+                    ratingUpdate={ratingUpdate}
                     open={openModalImg}
                     items={items}
                     onUpdateRating={onUpdateRating}

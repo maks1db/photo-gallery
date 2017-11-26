@@ -9,7 +9,8 @@ const initialState = {
         index: -1,
         commentActive: false,
         commentMessage: ''
-    }
+    },
+    ratingUpdate: false
 };
 
 function updateRating(state, id, key, value) {
@@ -54,8 +55,11 @@ export default (state = initialState, action) => {
                 };
             })}
         };
+    case constants.RATING_UPDATE:
+        return {...state, ratingUpdate: true};
     case constants.RATING_UPDATE_COMPLETE:
         return {...state,
+            ratingUpdate: false,
             rating: { isFetching: false, data: updateRating(state.rating.data,
                 action.id, action.key, action.value) 
             }};
