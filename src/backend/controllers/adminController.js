@@ -1,5 +1,6 @@
 const photoModel = require('../models/userPhoto');
 const userModel = require('../models/user');
+const juryModel = require('../models/userJury');
 const ratingModel = require('../models/rating');
 const ObjectID = require('mongodb').ObjectID;
 const fs = require('fs');
@@ -56,17 +57,30 @@ module.exports.ratingPhoto = async (req, res) => {
 
     const photo = await photoModel.find(query);
     const rating = await ratingModel.find({});
+    const jury = await juryModel.find({});
+    
 
     let result = photo.map(x => {
 
         let doc = x.toJSON();
         let val = 0;
+        let ratingInfo = [];
 
         rating
             .filter(r => r.photoId === x._id.toString())
-            .forEach(r => val += r.value);
+            .forEach(r => {
+
+                ratingInfo.push({
+                    user: jury.find(x => x._id.toString() === r.userId).name,
+                    value: r.value,
+                    comment: r.comment
+                });
+
+                val += r.value;
+            });
 
         doc.rating = val;
+        doc.ratingInfo = ratingInfo;
         return doc;
     });
 
