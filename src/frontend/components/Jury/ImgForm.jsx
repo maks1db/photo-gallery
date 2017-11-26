@@ -5,6 +5,42 @@ import Button from 'Controls/RaisedButton.jsx';
 import Textarea from 'Controls/Textarea.jsx';
 import ClassName from 'className.js';
 
+const FormInfo = ({ title, index, items }) => (
+    <div>
+        <div className={styles.title}>{title}</div>
+        <div className={styles.count}>{index + 1} из {items.data.length}</div>
+    </div>
+);
+
+const Img = ( { ratingInfoShow, src, category, item, commentActive }) => (
+    (!commentActive) && <div {...ClassName({[styles.ratingShowImg]:ratingInfoShow},styles.preview)}>
+    <img src={src}/>
+    {[1,2].indexOf(category) >= 0 && (item.comment && !commentActive) && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
+    </div>
+);
+
+const RatingInfo = ({ ratingInfoShow, item}) => (
+    ratingInfoShow && 
+        <div className={styles.rating_info}>
+            <h2>Оценки</h2>
+            {
+                item.ratingInfo.map(x => 
+                    <div>
+                        <b>{x.user}: </b>{x.value}
+                    </div>)
+            }
+            {
+                item.ratingInfo.find(x=>x.comment) !== undefined &&
+                (
+                <h2>Комментарии</h2>)}
+            {item.ratingInfo.filter(x=>x.comment).map(x => 
+                <div>
+                    <b>{x.user}: </b>{x.comment}
+                </div>)
+            }
+        </div>  
+)
+
 export default class ImgForm extends React.PureComponent{
 
     constructor() {
@@ -37,32 +73,22 @@ export default class ImgForm extends React.PureComponent{
         const item = props.items.data[props.index];
         return (
             props.open && <div {...ClassName({[styles.item_comment]: item.comment !== ''}, `${styles.fullImg}`)}>
-                <div className={styles.title}>{item.title} </div>
-                <div className={styles.count}>{props.index + 1} из {props.items.data.length}</div>
-                {(!props.commentActive) && <div {...ClassName({[styles.ratingShowImg]:props.ratingInfoShow},styles.preview)}>
-                    <img src={item.smallPicture}/>
-                    {[1,2].indexOf(props.category) >= 0 && (item.comment && !props.commentActive) && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
-                </div>} 
-
-                {props.ratingInfoShow && 
-                    <div className={styles.rating_info}>
-                        <h2>Оценки</h2>
-                        {
-                            item.ratingInfo.map(x => 
-                                <div>
-                                    <b>{x.user}: </b>{x.value}
-                                </div>)
-                        }
-                        {
-                            item.ratingInfo.find(x=>x.comment) !== undefined &&
-                            (
-                            <h2>Комментарии</h2>)}
-                        {item.ratingInfo.filter(x=>x.comment).map(x => 
-                            <div>
-                                <b>{x.user}: </b>{x.comment}
-                            </div>)
-                        }
-                    </div>}
+                <FormInfo 
+                    title={item.title}
+                    index={props.index}
+                    items={props.items}
+                />
+                <Img 
+                    ratingInfoShow={props.ratingInfoShow}
+                    src={item.smallPicture}
+                    category={props.category}
+                    item={item.comment}
+                    commentActive={props.commentActive}
+                />
+                <RatingInfo 
+                    ratingInfoShow={props.ratingInfoShow}
+                    item={item} 
+                />
                 {!props.ratingInfoShow && <div className={styles.description}>
                     {item.info}
                 </div>}
