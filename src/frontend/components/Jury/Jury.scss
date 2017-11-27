@@ -45,7 +45,12 @@
         
     }
 }
-.rating_update {
+
+.reg_info {
+    color: #fff;
+    text-align: center;
+}
+.rating_update, .vote_end  {
     position: relative;
     &:before {
         position: absolute;
@@ -54,8 +59,17 @@
         top:0;
         left: 0;
         z-index: 1000;
-        cursor: wait;
         content: " ";
+    }
+}
+.rating_update {
+    &:before {
+        cursor: wait;
+    }
+}
+.vote_end {
+    &:before {
+        cursor: not-allowed;
     }
 }
 .item_comment {

@@ -39,5 +39,6 @@ router.get('/download/autors', adminMiddleware, downloadController.getAutors);
 router.get('/download/town', adminMiddleware, downloadController.getTown);
 router.get('/download/post', adminMiddleware, downloadController.getPost);
 router.get('/download/all', adminMiddleware, downloadController.getAll);
+router.get('/download/first/:count', adminMiddleware, downloadController.getFirst);
 
 module.exports = router;

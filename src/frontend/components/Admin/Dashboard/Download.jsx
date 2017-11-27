@@ -12,6 +12,41 @@ const Group = ({children, onClick, name, option, downloadFile}) => (
     </div>
 );
 
+class GroupPhoto extends React.PureComponent {
+
+    constructor() {
+        super();
+        this.state = {
+            input: 0
+        };
+    }
+
+    componentWillMount() {
+        this.setState({input: this.props.defaultValue});
+    }   
+
+    render() {
+        const {children, name, option, downloadFile, onDownload, route} = this.props;
+        const { input } = this.state;
+
+        return (
+            <div className={styles.group_control}>
+                <Button 
+                    disabled={downloadFile}
+                    option={option || 'success'} 
+                    onClick={() => onDownload(`${route}/${input}`, 'zip')}>{name}</Button>
+                <input type="number" 
+                    className="form-control" 
+                    value={input}
+                    onChange={(e) => this.setState({input: e.target.value})}
+                />
+                <span> - {children} {input} шт.</span>
+                
+            </div>
+        );   
+    }
+}
+
 export default class Download extends React.PureComponent {
 
     render() {
@@ -42,7 +77,15 @@ export default class Download extends React.PureComponent {
                     onClick={()=>onDownload('post')} 
                     name="Рабочие места">
                     рабочие места участников    
-                </Group> 
+                </Group>
+                <GroupPhoto 
+                    downloadFile={downloadFile}
+                    onDownload={onDownload}
+                    defaultValue={40}
+                    route={'first'}
+                    name="Фото">
+                    выгрузить первые
+                </GroupPhoto> 
                 <Group 
                     downloadFile={downloadFile}
                     option={'primary'}

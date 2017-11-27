@@ -21,7 +21,8 @@ function mapStateToProps(state) {
         indexModalImg: state.jury.modal.index,
         commentActive: state.jury.modal.commentActive,
         commentMessage: state.jury.modal.commentMessage,
-        ratingUpdate: state.jury.ratingUpdate
+        ratingUpdate: state.jury.ratingUpdate,
+        dateEnd: state.jury.dateEnd.value
     };
 }
 function mapDispatchToProps(dispatch, ownProps) {
@@ -77,7 +78,8 @@ export default class Jury extends Component {
             onUpdateComment,
             commentMessage,
             onChangeComment,
-            ratingUpdate
+            ratingUpdate,
+            dateEnd
         } = this.props;
 
         let commentCount = 0;
@@ -100,8 +102,10 @@ export default class Jury extends Component {
                     rating={rating}
                     onPreview={onPreview}
                     ratingUpdate={ratingUpdate}
+                    dateEnd={dateEnd}
                 />
                 <ImgForm 
+                    dateEnd={dateEnd}
                     ratingUpdate={ratingUpdate}
                     open={openModalImg}
                     items={items}

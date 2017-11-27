@@ -1,10 +1,12 @@
 const photoModel = require('../models/userPhoto');
 const userModel = require('../models/user');
+const ratingModel = require('../models/rating');
 const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
 const StringBuilder = require('string-builder');
 const convert = require('helpers/convertStrToSave');
+const categories = require('helpers/categories');
 
 const year = (val) => {
     const s = String(val);
@@ -66,16 +68,6 @@ module.exports.getUsers = async (req, res) => {
 
     res.set('Content-Type', 'application/txt');
     
-    // const zip = archiver('zip');
-    // zip.pipe(res);
-
-    // zip.on('error', function(err) {
-    //     res.status(500).send({error: err.message});
-    // });
-
-    // zip.append(sb.toString(),
-    //     {name: 'users.txt'});
-    // zip.finalize();
     res.send(sb.toString());
 };
 
@@ -111,16 +103,6 @@ module.exports.getAutors = async (req, res) => {
 
     res.set('Content-Type', 'application/txt');
     
-    // const zip = archiver('zip');
-    // zip.pipe(res);
-
-    // zip.on('error', function(err) {
-    //     res.status(500).send({error: err.message});
-    // });
-
-    // zip.append(sb.toString(),
-    //     {name: 'users.txt'});
-    // zip.finalize();
     res.send(sb.toString());
 };
 
@@ -207,6 +189,72 @@ module.exports.getAll = async (req, res) => {
             {name: `${name}/info.txt`});
         zip.append(photoInfo.toString(),
             {name: `${name}/photo.txt`});
+    });
+
+    zip.finalize();
+}
+
+module.exports.getFirst = async (req, res) => {
+    const count = req.params.count;  
+
+    const photo = await photoModel.find({});
+    const rating = await ratingModel.find({}).sort({'_id': -1});
+    const dataCategories = [];
+    
+    let result = photo.map(x => {
+
+        let doc = x.toJSON();
+        let val = 0;
+        let ratingInfo = [];
+
+        rating
+            .filter(r => r.photoId === x._id.toString())
+            .forEach(r => {
+
+                const index = ratingInfo.findIndex(x => x.userId === r.userId);
+                //берем первое значение
+                if (index < 0) {
+                    ratingInfo.push({
+                        userId: r.userId,
+                        value: r.value,
+                        comment: r.comment
+                    });
+                    val += r.value;
+                }
+                else {
+                    if (r.comment) {
+                        ratingInfo[index].comment = r.comment
+                    }
+                }
+            });
+
+        doc.rating = val;
+        doc.ratingInfo = ratingInfo;
+        return doc;
+    }).sort((a,b) => b.rating - a.rating);
+
+    const zip = archiver('zip', {
+        zlib: { level: 9 }
+    });
+    zip.pipe(res);
+
+    zip.on('error', function(err) {
+        res.status(500).send({error: err.message});
+    });
+
+    categories.forEach(x => {
+
+        let i = 0;
+        result.filter( r => r.category === x).forEach( r => {
+            i++;
+            if (i > count) return;
+
+            const fData = r.path.split('.');
+            const type = fData.length > 1 ? fData[1] : 'jpg';
+            zip.append(fs.createReadStream(path.join(__dirname, '../../../', r.path)),
+                {name: `${convert(x)}/${convert(r.user.name)} - ${convert(r.title)} - ${r.rating || 0}.${type}`});
+   
+        });
     });
 
     zip.finalize();

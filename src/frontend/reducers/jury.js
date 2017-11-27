@@ -10,7 +10,11 @@ const initialState = {
         commentActive: false,
         commentMessage: ''
     },
-    ratingUpdate: false
+    ratingUpdate: false,
+    dateEnd: {
+        isFetching: false,
+        value: undefined
+    }   
 };
 
 function updateRating(state, id, key, value) {
@@ -87,6 +91,10 @@ export default (state = initialState, action) => {
                 ...state.modal, commentActive: action.value
             }
         };
+    case constants.REQUEST_DATE_END:
+        return {...state, dateEnd: {isFetching: true, value: undefined }};
+    case constants.RECEIVE_DATE_END:
+        return {...state, dateEnd: {isFetching: false, value: new Date(action.value) }};
     } 
     return state;
 };

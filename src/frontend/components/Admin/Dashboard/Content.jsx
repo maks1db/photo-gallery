@@ -2,6 +2,14 @@ import React from 'react';
 import styles from './Dashboard.scss';
 import ClassName from 'className.js';
 
+const NavItem = ({tab, onSetTab, children, number}) => (
+    <li {...ClassName({active: tab === number })}>
+        <a onClick={() => onSetTab(number)}>
+            {children}
+        </a>
+    </li>   
+);
+
 const Nav = ( { tab, onSetTab }) => (
 
     <nav className="navbar navbar-inverse" role="navigation">
@@ -11,21 +19,9 @@ const Nav = ( { tab, onSetTab }) => (
             </div>
             <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav">
-                    <li {...ClassName({active: tab === 0 })}>
-                        <a onClick={() => onSetTab(0)}>
-                            Фото
-                        </a>
-                    </li>
-                    <li {...ClassName({active: tab === 1 })}>
-                        <a onClick={() => onSetTab(1)}>
-                            Выгрузка данных
-                        </a>
-                    </li>
-                    <li {...ClassName({active: tab === 2 })}>
-                        <a onClick={() => onSetTab(2)}>
-                            Статистика
-                        </a>
-                    </li>
+                    <NavItem tab={tab} number={0} onSetTab={onSetTab}>Фото</NavItem>
+                    <NavItem tab={tab} number={1} onSetTab={onSetTab}>Выгрузка данных</NavItem>
+                    <NavItem tab={tab} number={2} onSetTab={onSetTab}>Статистика</NavItem>
                 </ul>
             </div>
         </div>
