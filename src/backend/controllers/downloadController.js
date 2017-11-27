@@ -252,7 +252,7 @@ module.exports.getFirst = async (req, res) => {
             const fData = r.path.split('.');
             const type = fData.length > 1 ? fData[1] : 'jpg';
             zip.append(fs.createReadStream(path.join(__dirname, '../../../', r.path)),
-                {name: `${r.rating || 0} - ${convert(x)}/${convert(r.user.name)} - ${convert(r.title)}.${type}`});
+                {name: `${convert(x)}/${r.rating || 0} - ${convert(r.user.name)} - ${convert(r.title)}.${type}`});
    
         });
     });
