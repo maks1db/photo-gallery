@@ -9,6 +9,8 @@ API_PREFIX += '/api/v1';
 
 export const dateEnd = () => axios.get(`${API_PREFIX}/dateEnd`);
 
+export const dateVoteEnd = () => axios.get(`${API_PREFIX}/dateVoteEnd`);
+
 export const saveUser = (user) => axios.post(`${API_PREFIX}/user/item`, {user});
 
 export const loginUser = (login, password) => axios.post(`${API_PREFIX}/auth/login`, { login, password })

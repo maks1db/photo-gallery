@@ -19,8 +19,7 @@ const Img = ( { ratingInfoShow, src, category, item, commentActive }) => (
     </div>
 );
 
-const RatingInfo = ({ ratingInfoShow, item}) => (
-    ratingInfoShow && 
+const RatingInfo = ({ item}) => ( 
         <div className={styles.rating_info}>
             <h2>Оценки</h2>
             {
@@ -85,10 +84,9 @@ export default class ImgForm extends React.PureComponent{
                     item={item.comment}
                     commentActive={props.commentActive}
                 />
-                <RatingInfo 
-                    ratingInfoShow={props.ratingInfoShow}
+                {props.ratingInfoShow &&<RatingInfo 
                     item={item} 
-                />
+                />}
                 {!props.ratingInfoShow && <div className={styles.description}>
                     {item.info}
                 </div>}
@@ -104,7 +102,10 @@ export default class ImgForm extends React.PureComponent{
                     />
                 </div>}
                 {props.shortRating !== true && <div className={styles.ratingPreview}>
-                    <div {...ClassName({[styles.rating_update]: props.ratingUpdate}, styles.content)}>
+                    <div {...ClassName({
+                        [styles.rating_update]: props.ratingUpdate,
+                        [styles.vote_end]: props.dateEnd && props.dateEnd < new Date()
+                    }, styles.content)}>
                         <Rating 
                             starCount={10}
                             name="rating"

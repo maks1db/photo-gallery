@@ -1,6 +1,7 @@
 import layout from 'constants/layoutConstants';
 import app from 'constants/appConstants';
-import { dateEnd } from 'api/appApi';
+import jury from 'constants/juryConstants';
+import { dateEnd, dateVoteEnd } from 'api/appApi';
 
 const titles = {
     '/register': 'Шаг 1 из 2',
@@ -45,6 +46,19 @@ const init = store => next => action => {
                     });   
                 });
         }  
+
+        if (!state.jury.dateEnd.value) {
+            store.dispatch({
+                type: jury.REQUEST_DATE_END
+            });
+            dateVoteEnd()
+                .then(x => {
+                    store.dispatch({
+                        type: jury.RECEIVE_DATE_END,
+                        value: x.data.date
+                    });   
+                });
+        } 
     }
 
     next(action);

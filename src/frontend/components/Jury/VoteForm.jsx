@@ -7,14 +7,25 @@ import categories from 'categories.js';
 import ClassName from 'className.js';
 import Masonry from 'react-masonry-component';
 import Rating from 'react-star-rating-component';
+import Calendar from 'Calendar/Calendar.jsx';
 
 const masonryOptions = {
     transitionDuration: 500
 };
 
+const Timer = ({dateEnd}) => (
+    <div>
+        {dateEnd && dateEnd > new Date() && <Calendar dateEnd={dateEnd} />}
+        {dateEnd && dateEnd < new Date() && 
+            <h2 className={styles.reg_info}>Спасибо. Срок голосования завершен.</h2>
+        }
+    </div>
+);
+
 export default (props) => {
     return (
         <div className={stylesCommon.form}>
+            <Timer dateEnd={props.dateEnd} />
             <div className={styles.categories}>
                 <div 
                     onClick={() => props.onChangeCategory(0)}
@@ -48,7 +59,10 @@ export default (props) => {
                                 onClick={() => props.onPreview(props.items.data.indexOf(x))}    
                             />
                             {x.comment && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
-                            <div {...ClassName({[styles.rating_update]: props.ratingUpdate}, styles.rating)}>
+                            <div {...ClassName({
+                                [styles.rating_update]: props.ratingUpdate,
+                                [styles.vote_end]: props.dateEnd && props.dateEnd < new Date(),
+                            }, styles.rating)}>
                                 {<Rating 
                                     starCount={10}
                                     name={x._id}
