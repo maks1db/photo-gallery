@@ -81,7 +81,7 @@ export default class ImgForm extends React.PureComponent{
                     ratingInfoShow={props.ratingInfoShow}
                     src={item.smallPicture}
                     category={props.category}
-                    item={item.comment}
+                    item={item}
                     commentActive={props.commentActive}
                 />
                 {props.ratingInfoShow &&<RatingInfo 
