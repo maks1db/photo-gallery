@@ -131,6 +131,12 @@ export default class ImgForm extends React.PureComponent{
                         option="primary"
                     ><i className="fa fa-star-half-o" aria-hidden="true"></i></Button>
                 </div>}
+                {item.ratingInfo && <div className={styles.selectPhoto}>
+                    <Button 
+                        onClick={() => props.onSelectPhoto(item._id, !item.selected)}
+                        option={!item.selected ? 'primary' : 'warning'}
+                    ><i className="fa fa-thumbs-o-up" aria-hidden="true"></i></Button>
+                </div>}
                 {props.commentActive && <div className={`${styles.comment} ${styles.buttonSave}`}>
                     <Button 
                         onClick={() => props.onUpdateComment(item._id)}

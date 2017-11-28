@@ -21,6 +21,15 @@ export default (state = initialState, action) => {
         return {...state, downloadFile: true};
     case constants.DOWNLOAD_FILE_RECEIVE:
         return {...state, downloadFile: false};
+    case constants.SELECT_PHOTO_COMPLETE:
+        return {...state,
+            photo: { isFetching: false, data: state.photo.data.map(x => {
+                if (x._id === action.id) {
+                    x.selected = action.selected;
+                }
+
+                return x;
+            })}};
     }
 
     return state;

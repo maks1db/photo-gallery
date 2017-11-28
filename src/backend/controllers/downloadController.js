@@ -194,6 +194,24 @@ module.exports.getAll = async (req, res) => {
     zip.finalize();
 }
 
+const photoInfo = (item) => {
+    const sb = new StringBuilder();
+
+    const endStr = (val = '') => {
+        const end = val.substring(val.length -1, val.length);
+        return `${val}${['!', '.'].indexOf(end) < 0 ? '. ' : ' '}`;
+    }
+
+    sb.append(item.user.name + '. ')
+        .append(endStr(item.title))
+        .append(endStr(item.description))
+        .append(item.info + ', ')
+        .append(item.description + ', ')
+        .append(item.year + ' г.');
+
+    return sb.toString();
+}
+
 module.exports.getFirst = async (req, res) => {
     const count = req.params.count;  
 
@@ -245,6 +263,7 @@ module.exports.getFirst = async (req, res) => {
     categories.forEach(x => {
 
         let i = 0;
+        let info = new StringBuilder();
         result.filter( r => r.category === x).forEach( r => {
             i++;
             if (i > count) return;
@@ -253,9 +272,39 @@ module.exports.getFirst = async (req, res) => {
             const type = fData.length > 1 ? fData[1] : 'jpg';
             zip.append(fs.createReadStream(path.join(__dirname, '../../../', r.path)),
                 {name: `${convert(x)}/${r.rating || 0} - ${convert(r.user.name)} - ${convert(r.title)}.${type}`});
-   
+            info.append(photoInfo(r)).appendLine().appendLine();
         });
+
+        zip.append(info.toString(), {name: `${convert(x)}/info.txt`});
     });
+
+    zip.finalize();
+}
+
+module.exports.getSelected = async (req, res) => {
+
+    const photo = await photoModel.find({selected: true});
+
+    const zip = archiver('zip', {
+        zlib: { level: 9 }
+    });
+    zip.pipe(res);
+
+    zip.on('error', function(err) {
+        res.status(500).send({error: err.message});
+    });
+
+    let info = new StringBuilder();
+    photo.forEach( r => {
+
+        const fData = r.path.split('.');
+        const type = fData.length > 1 ? fData[1] : 'jpg';
+        zip.append(fs.createReadStream(path.join(__dirname, '../../../', r.path)),
+            {name: `${convert(r.user.name)} - ${convert(r.title)}.${type}`});
+        info.append(photoInfo(r)).appendLine().appendLine();
+    });
+
+    zip.append(info.toString(), {name: `info.txt`});
 
     zip.finalize();
 }

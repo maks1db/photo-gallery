@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Content from 'Admin/Dashboard/Content.jsx';
-import { setTab, setPhotoTab, getRatingPhoto, requestDownload, receiveDownload } from 'actions/dashboard';
+import { 
+    setTab, 
+    setPhotoTab, 
+    getRatingPhoto, 
+    requestDownload, 
+    receiveDownload,
+    selectPhoto 
+} from 'actions/dashboard';
 import Download from 'Admin/Dashboard/Download.jsx';
 import Photo from 'Admin/Dashboard/Photo.jsx';
 import { download } from 'api/adminApi';
@@ -24,7 +31,8 @@ function mapDispatchToProps(dispatch) {
             dispatch(setPhotoTab(tab))
             dispatch(getRatingPhoto(tab))
         },
-        onGetRatingPhoto: (tab) => dispatch(getRatingPhoto(tab))
+        onGetRatingPhoto: (tab) => dispatch(getRatingPhoto(tab)),
+        onSelectPhoto: (id, value) => dispatch(selectPhoto(id, value))
     };
 }
 

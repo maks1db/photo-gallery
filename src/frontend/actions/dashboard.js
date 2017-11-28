@@ -1,5 +1,5 @@
 import adminConst from 'constants/adminDashboard';
-import { get } from 'api/adminApi';
+import { get, selectPhoto as selectPhotoApi } from 'api/adminApi';
 import categories from 'categories.js';
 
 export const setTab = (tab) => {
@@ -14,6 +14,21 @@ export const setPhotoTab = (tab) => {
         type: adminConst.SET_PHOTO_TAB,
         tab
     };
+};
+
+export const selectPhoto = (id, selected) => dispatch => {
+    dispatch({
+        type: adminConst.SELECT_PHOTO_REQUEST
+    });
+
+    selectPhotoApi(id, selected)
+        .then(() => {
+            dispatch({
+                type: adminConst.SELECT_PHOTO_COMPLETE,
+                selected,
+                id
+            });
+        });
 };
 
 export const requestDownload = () => {

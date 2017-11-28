@@ -17,6 +17,7 @@ const userPhoto = new Schema({
     info: String,
     category: String,
     userId: String,
+    selected: Boolean,
     create: { type: Date, default: new Date()},
     user: {
         name: String,
