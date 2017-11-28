@@ -13,6 +13,8 @@ export const getUserPhoto = (id) => axios.get(`${API_PREFIX}/admin/userPhoto/${i
     responseType: 'arraybuffer'
 });
 
+export const selectPhoto = (id, selected) => axios.patch(`${API_PREFIX}/admin/selectPhoto/${id}`, { selected });
+
 export const download = (route) => axios.get(`${API_PREFIX}/admin/download/${route}`,{
     responseType: 'arraybuffer'
 });

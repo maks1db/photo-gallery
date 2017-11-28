@@ -89,6 +89,13 @@ export default class Download extends React.PureComponent {
                 <Group 
                     downloadFile={downloadFile}
                     option={'primary'}
+                    onClick={()=>onDownload('selected', 'zip')} 
+                    name="Отмеченные">
+                    выгрузка всех отмеченных фото    
+                </Group> 
+                <Group 
+                    downloadFile={downloadFile}
+                    option={'primary'}
                     onClick={()=>onDownload('all', 'zip')} 
                     name="Выгрузить все">
                     выгрузка всех данных базы    

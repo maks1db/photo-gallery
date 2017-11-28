@@ -48,6 +48,15 @@ module.exports.userPhoto = (req,res) => {
 
 };
 
+module.exports.selectPhoto = async (req, res) => {
+    const id = req.params.id;
+    const selected = req.body.selected;
+    
+    const result = await photoModel.update({_id: id}, { selected });
+
+    res.json({ update: true });
+}
+
 module.exports.ratingPhoto = async (req, res) => {
 
     let query = {};

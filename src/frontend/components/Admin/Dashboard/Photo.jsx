@@ -59,7 +59,7 @@ export default class Photo extends PureComponent {
     render() {
 
         const {
-            photoTab, onSetPhotoTab, photo
+            photoTab, onSetPhotoTab, photo, onSelectPhoto
         } = this.props;
 
         const { index, open, ratingInfoShow } = this.state;
@@ -74,6 +74,7 @@ export default class Photo extends PureComponent {
                     onSetModalImg={this.onChangeIndex}
                     ratingInfoShow={ratingInfoShow}
                     onRatingInfoShow={this.onRatingInfoShow}
+                    onSelectPhoto={onSelectPhoto}
                 />
                 <div className={`${styles.categories}`}>
                     <div 
@@ -114,6 +115,9 @@ export default class Photo extends PureComponent {
                                 <img 
                                     src={x.smallPicture}    
                                 />
+                                {x.selected && <div className={styles.selected}>
+                                    <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                </div>}
                                 {x.ratingInfo.find(i => i.comment) !== undefined && <i className="fa fa-commenting-o" aria-hidden="true"></i>}
                                 <div className={styles.value}>{x.rating}</div>
                             </div>)}   

@@ -15,7 +15,7 @@ const router = express.Router();
 router.use('/users', adminMiddleware, new crud(usersModel).init(['delete']));
 router.delete('/users/:id', adminMiddleware, adminController.deleteUser);
 router.get('/userPhoto/:id', adminMiddleware, adminController.userPhoto);
-
+router.patch('/selectPhoto/:id', adminMiddleware, adminController.selectPhoto);
 /**
  * users photo
  */
@@ -39,6 +39,7 @@ router.get('/download/autors', adminMiddleware, downloadController.getAutors);
 router.get('/download/town', adminMiddleware, downloadController.getTown);
 router.get('/download/post', adminMiddleware, downloadController.getPost);
 router.get('/download/all', adminMiddleware, downloadController.getAll);
+router.get('/download/selected', adminMiddleware, downloadController.getSelected);
 router.get('/download/first/:count', adminMiddleware, downloadController.getFirst);
 
 module.exports = router;
