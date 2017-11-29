@@ -65,7 +65,13 @@ export default class Download extends React.PureComponent {
                     onClick={()=>onDownload('autors')} 
                     name="Авторы">
                     данные об авторах    
-                </Group>  
+                </Group>
+                <Group 
+                    downloadFile={downloadFile}
+                    onClick={()=>onDownload('autorsAge')} 
+                    name="Авторы (по возрасту)">
+                    данные об авторах с сортировкой по возрасту   
+                </Group>   
                 <Group 
                     downloadFile={downloadFile}
                     onClick={()=>onDownload('town')} 
