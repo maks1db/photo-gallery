@@ -106,6 +106,41 @@ module.exports.getAutors = async (req, res) => {
     res.send(sb.toString());
 };
 
+module.exports.getAutorsAge = async (req, res) => {
+    const users = await userModel.find({}).sort({age: 1});
+    let sb = new StringBuilder();
+    let names = [];
+
+    users.forEach(x => {
+        if (names.indexOf(x.name) < 0){
+            names.push(x.name);
+        }
+    });
+
+    names.forEach(x => {
+        const data = users.filter(u => u.name === x);
+        const item = new StringBuilder(x + ', ');
+        
+        item.appendFormat('{0}, ', year(getVal(data, 'age') || 0));
+        item.appendFormat('{0}. ', getVal(data, 'town'));
+        item.appendFormat('{0}, ', getVal(data, 'post'));
+        item.appendFormat('{0}. ', getVal(data, 'workPlace'));
+        item.appendFormat('{0}. ', getVal(data, 'experience'));
+
+        const info = getVal(data, 'info');
+        if (info) {
+            item.appendFormat('{0}. ', info);    
+        }
+
+        sb.appendLine(item.toString());
+        sb.appendLine();
+    });   
+
+    res.set('Content-Type', 'application/txt');
+    
+    res.send(sb.toString());
+};
+
 const distinctUserData = async (key) => {
     const result = await userModel.distinct(key);
     
@@ -283,7 +318,7 @@ module.exports.getFirst = async (req, res) => {
 
 module.exports.getSelected = async (req, res) => {
 
-    const photo = await photoModel.find({selected: true});
+    const photo = await photoModel.find({selected: true}).sort({'user.name': 1});
 
     const zip = archiver('zip', {
         zlib: { level: 9 }
