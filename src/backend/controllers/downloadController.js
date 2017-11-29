@@ -241,7 +241,6 @@ const photoInfo = (item) => {
         .append(endStr(item.title))
         .append(endStr(item.description))
         .append(item.info + ', ')
-        .append(item.description + ', ')
         .append(item.year + ' г.');
 
     return sb.toString();
