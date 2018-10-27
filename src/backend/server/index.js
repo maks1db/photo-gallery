@@ -11,8 +11,8 @@ app.use(bodyParser.json());
 //app.use('/',express.static(path.join(__dirname, '../../../public/favicon.ico')));
 
 app.use(
-    '/uploads',
-    express.static(path.join(__dirname, '../../../public/uploads'))
+    '/assets',
+    express.static(path.join(__dirname, '../../../public/assets'))
 );
 app.use(
     '/uploads',
