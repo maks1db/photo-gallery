@@ -1,6 +1,6 @@
 {
     "name": "photo-gallery",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Фотовыставка туристов",
     "main": "index.js",
     "scripts": {
@@ -22,6 +22,7 @@
         "url": "https://github.com/maks1db/photo-gallery.git"
     },
     "dependencies": {
+        "@babel/polyfill": "^7.0.0",
         "array-sort": "^0.1.2",
         "express": "4.15.3",
         "mongodb": "^2.2.31",

@@ -1,64 +1,77 @@
-import app from 'constants/appConstants';
-import {toastr} from 'react-redux-toastr';
 import categories from 'categories.js';
+import app from 'constants/appConstants';
+import { toastr } from 'react-redux-toastr';
 
 function validationItem(store, item, type, key, id) {
     let hasError = false;
     if (item.minLength && item.value.length < item.minLength) {
         hasError = true;
         store.dispatch({
-            type, key, id,
-            value: `Длина реквизита минимум ${item.minLength} сим.` 
+            type,
+            key,
+            id,
+            value: `Длина реквизита минимум ${item.minLength} сим.`
         });
-    }
-    else if (item.maxLength && item.value.length > item.maxLength) {
+    } else if (item.maxLength && item.value.length > item.maxLength) {
         hasError = true;
         store.dispatch({
-            type, key,id,
-            value: `Длина реквизита максимум ${item.maxLength} сим.` 
-        });    
-    }
-    else if (item.min !== undefined && parseInt(item.value) <= item.min) {
-        hasError = true;
-        store.dispatch({
-            type, key,id,
-            value: `Мин. значение ${item.min}` 
+            type,
+            key,
+            id,
+            value: `Длина реквизита максимум ${item.maxLength} сим.`
         });
-    }
-    else if (item.max !== undefined && parseInt(item.value) > item.max) {
+    } else if (item.min !== undefined && parseInt(item.value) <= item.min) {
         hasError = true;
         store.dispatch({
-            type, key,id,
+            type,
+            key,
+            id,
+            value: `Мин. значение ${item.min}`
+        });
+    } else if (item.max !== undefined && parseInt(item.value) > item.max) {
+        hasError = true;
+        store.dispatch({
+            type,
+            key,
+            id,
             value: `Макс. значение ${item.max}`
-        }); 
-    }
-    else if (item.forbidden && item.forbidden.filter(x => item.value.indexOf(x) >= 0).length) {
+        });
+    } else if (
+        item.forbidden &&
+        item.forbidden.filter(x => item.value.indexOf(x) >= 0).length
+    ) {
         hasError = true;
         store.dispatch({
-            type, key,id,
+            type,
+            key,
+            id,
             value: `Недопустимые символы "${item.forbidden.join(', ')}"`
         });
-    }
-    else if (item.regexp && String(item.value.match(item.regexp.reg)) === 'null') {
-
+    } else if (
+        item.regexp &&
+        String(item.value.match(item.regexp.reg)) === 'null'
+    ) {
         hasError = true;
         store.dispatch({
-            type, key,id,
+            type,
+            key,
+            id,
             value: item.regexp.message
-        }); 
-        
-    }
-    else if (item.required && !item.value) {
+        });
+    } else if (item.required && !item.value) {
         hasError = true;
         store.dispatch({
-            type, key,id,
-            value: 'Не заполнен реквизит' 
+            type,
+            key,
+            id,
+            value: 'Не заполнен реквизит'
         });
-    }
-    else {
+    } else {
         store.dispatch({
-            type, key,id,
-            value: false 
+            type,
+            key,
+            id,
+            value: false
         });
     }
 
@@ -66,18 +79,17 @@ function validationItem(store, item, type, key, id) {
 }
 
 const validation = store => next => action => {
-
     //toastrError означает, что проверка валидации вызвана из изменения реквизита
-    let hasError = false, hasErrorConfirm = false;
+    let hasError = false,
+        hasErrorConfirm = false;
     if (action.type === app.VALIDATION_USER_INFO) {
-
-        const state = store.getState();      
+        const state = store.getState();
         if (state.app.userRegister) {
             if (state.app.registerStep === 1) {
                 store.dispatch({
                     type: app.CHANGE_REGISTER_STEP,
                     step: 2
-                });    
+                });
             }
             next(action);
             return;
@@ -86,18 +98,21 @@ const validation = store => next => action => {
         const mainKey = action.key;
         if (state.app.registerStep === 1) {
             const type = app.VALIDATION_REGISTER_KEY;
-            
-            Object.keys(state.register.init).filter(x => x !== 'confirm')
-                .forEach(key => {
 
+            Object.keys(state.register.init)
+                .filter(x => x !== 'confirm')
+                .forEach(key => {
                     const item = state.register.init[key];
                     if (validationItem(store, item, type, key)) {
                         hasError = true;
-                    }  
+                    }
                 });
-    
+
             if (!state.register.init.confirm.value && mainKey === '') {
-                toastr.error('Ошибка', 'Необходимо разрешить использование указанных данных.'); 
+                toastr.error(
+                    'Ошибка',
+                    'Необходимо разрешить использование указанных данных.'
+                );
                 hasErrorConfirm = true;
             }
 
@@ -107,29 +122,66 @@ const validation = store => next => action => {
                     step: 2
                 });
             }
+        } else if (state.app.registerStep === 2) {
+            const type = app.VALIDATION_PHOTO_KEY;
 
-            
-        }
-        else if (state.app.registerStep === 2) {
-            const type = app.VALIDATION_PHOTO_KEY; 
-            
-            const cat_1 = state.register.photo.filter(x=> x.category.value === categories[0]).length;
-            const cat_2 = state.register.photo.filter(x=> x.category.value === categories[1]).length;
-        
+            const cat_1 = state.register.photo.filter(
+                x => x.category.value === categories[0]
+            ).length;
+            const cat_2 = state.register.photo.filter(
+                x => x.category.value === categories[1]
+            ).length;
+            const cat_3 = state.register.photo.filter(
+                x => x.category.value === categories[2]
+            ).length;
+            const cat_4 = state.register.photo.filter(
+                x => x.category.value === categories[3]
+            ).length;
+
             if (cat_1 > 3) {
-                toastr.error('Ошибка', `Количество фото категории "${categories[0]}" не должно превышать 3 шт.`);
+                toastr.error(
+                    'Ошибка',
+                    `Количество фото категории "${
+                        categories[0]
+                    }" не должно превышать 3 шт.`
+                );
                 hasError = true;
             }
-            if (cat_2 > 2) {
-                toastr.error('Ошибка', `Количество фото категории "${categories[1]}" не должно превышать 2 шт.`);
+            if (cat_2 > 1) {
+                toastr.error(
+                    'Ошибка',
+                    `Количество фото категории "${
+                        categories[1]
+                    }" не должно превышать 1 шт.`
+                );
+                hasError = true;
+            }
+            if (cat_3 > 1) {
+                toastr.error(
+                    'Ошибка',
+                    `Количество фото категории "${
+                        categories[2]
+                    }" не должно превышать 1 шт.`
+                );
+                hasError = true;
+            }
+            if (cat_4 > 1) {
+                toastr.error(
+                    'Ошибка',
+                    `Количество фото категории "${
+                        categories[3]
+                    }" не должно превышать 1 шт.`
+                );
                 hasError = true;
             }
 
-            state.register.photo.forEach(x=> {
+            state.register.photo.forEach(x => {
                 Object.keys(x).forEach(key => {
-
-                    if (['id','active'].indexOf(key) < 0 && validationItem(store, x[key], type, key, x.id)) {
-                        hasError = true; 
+                    if (
+                        ['id', 'active'].indexOf(key) < 0 &&
+                        validationItem(store, x[key], type, key, x.id)
+                    ) {
+                        hasError = true;
                     }
                 });
             });
@@ -138,19 +190,20 @@ const validation = store => next => action => {
         //DEMO
         store.dispatch({
             type: app.VALIDATION_ERRORS_SHOW,
-            validation: hasError 
+            validation: hasError
         });
 
         if (mainKey === '') {
             if (hasError) {
-                toastr.error('Ошибка', 'Заполните правильно необходимые реквизиты');
-            } 
+                toastr.error(
+                    'Ошибка',
+                    'Заполните правильно необходимые реквизиты'
+                );
+            }
         }
-        
     }
 
     next(action);
-
 };
 
 export default validation;

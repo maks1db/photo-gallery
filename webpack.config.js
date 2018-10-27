@@ -20,22 +20,28 @@ const plugins = [
     })
 ];
 
-if (!isDevelopment){
-    plugins.push(new uglifyPlugin({
-        sourceMap: false,
-        output: {comments: false}
-    }));
+if (!isDevelopment) {
+    plugins.push(
+        new uglifyPlugin({
+            sourceMap: false,
+            output: { comments: false }
+        })
+    );
 }
 
-plugins.push(new webpack.HotModuleReplacementPlugin())
+plugins.push(new webpack.HotModuleReplacementPlugin());
 module.exports = {
-    entry: 
-    ['react-hot-loader/patch', './src/frontend/index.jsx'],
+    entry: [
+        '@babel/polyfill',
+        isDevelopment && 'react-hot-loader/patch',
+        './src/frontend/index.jsx'
+    ].filter(x => x !== false),
     output: {
-        path:     path.resolve(__dirname, 'public', 'assets/js'),
+        path: path.resolve(__dirname, 'public', 'assets/js'),
         publicPath: '/assets/js/',
-        filename: `index.js${isDevelopment ? '' : '?v=' + require('./package.json').version}`,
-        sourceMapFilename: 'index.js.map'
+        filename: `index.js${
+            isDevelopment ? '' : '?v=' + require('./package.json').version
+        }`
     },
     devtool: isDevelopment && 'inline-source-map',
     devServer: {
@@ -48,33 +54,39 @@ module.exports = {
             path.resolve(__dirname, 'src/frontend/'),
             path.resolve(__dirname, 'src/frontend/components/'),
             path.resolve(__dirname, 'src/helpers/'),
-            path.resolve(__dirname, 'node_modules/inputmaks/dist/inputmask/dependencyLibs/')
+            path.resolve(
+                __dirname,
+                'node_modules/inputmaks/dist/inputmask/dependencyLibs/'
+            )
         ]
     },
     module: {
-        loaders: [{
-            test: /\.(js|jsx)$/,
-            exclude: /node_modules/,
-            loader: ['react-hot-loader/webpack', 'babel-loader']
-        },
-        { 
-            test: /\.scss$/, 
-            use: ['style-loader', 
-                'css-loader?source-map&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-                'sass-loader'] 
-        },
-        {
-            test: /\.css$/,
-            use: [ 'style-loader', 'css-loader' ]
-        },
-        {
-            test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-            loader: 'file-loader?name=[path][name].[ext]'
-        },
-        {
-            test: /\.(png)?$/,
-            loader: 'file-loader?name=[path][name].[ext]'
-        }
+        loaders: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                loader: ['react-hot-loader/webpack', 'babel-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader?source-map&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+                    'sass-loader'
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+                loader: 'file-loader?name=[path][name].[ext]'
+            },
+            {
+                test: /\.(png)?$/,
+                loader: 'file-loader?name=[path][name].[ext]'
+            }
         ]
     },
     plugins: plugins
