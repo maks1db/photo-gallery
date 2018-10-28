@@ -4,6 +4,7 @@ import info from '../../../../public/assets/images/info.json';
 import styles from './Screen.scss';
 
 const imgCount = 6;
+const YEAR = new Date().getFullYear();
 
 export default class MainScreen extends React.Component {
     constructor() {
@@ -48,10 +49,11 @@ export default class MainScreen extends React.Component {
 
         let items = [];
         let i = 1;
+
         for (i = 1; i <= imgCount; i++) {
             items.push({
                 id: i - 1,
-                url: `/assets/images/img_${i}.jpg`,
+                url: `/assets/images/img_${i}.jpg?v=${YEAR}`,
                 position: 0
             });
         }
