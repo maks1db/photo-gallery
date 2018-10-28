@@ -137,39 +137,33 @@ const validation = store => next => action => {
             const cat_4 = state.register.photo.filter(
                 x => x.category.value === categories[3]
             ).length;
+            const cat_5 = state.register.photo.filter(
+                x => x.category.value === categories[4]
+            ).length;
 
-            if (cat_1 > 3) {
+            if (cat_1 + cat_2 > 3) {
                 toastr.error(
                     'Ошибка',
-                    `Количество фото категории "${
-                        categories[0]
+                    `Количество фото категории "${categories[0]}" и "${
+                        categories[1]
                     }" не должно превышать 3 шт.`
                 );
                 hasError = true;
             }
-            if (cat_2 > 1) {
+            if (cat_3 + cat_4 > 2) {
                 toastr.error(
                     'Ошибка',
-                    `Количество фото категории "${
-                        categories[1]
-                    }" не должно превышать 1 шт.`
-                );
-                hasError = true;
-            }
-            if (cat_3 > 1) {
-                toastr.error(
-                    'Ошибка',
-                    `Количество фото категории "${
-                        categories[2]
-                    }" не должно превышать 1 шт.`
-                );
-                hasError = true;
-            }
-            if (cat_4 > 1) {
-                toastr.error(
-                    'Ошибка',
-                    `Количество фото категории "${
+                    `Количество фото категории "${categories[2]}" и "${
                         categories[3]
+                    }" не должно превышать 2 шт.`
+                );
+                hasError = true;
+            }
+            if (cat_5 > 1) {
+                toastr.error(
+                    'Ошибка',
+                    `Количество фото категории "${
+                        categories[4]
                     }" не должно превышать 1 шт.`
                 );
                 hasError = true;
