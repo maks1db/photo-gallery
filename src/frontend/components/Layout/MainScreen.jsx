@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './Screen.scss';
-import ClassName from 'className.js';
-import info from '../../../../public/assets/images/info.json';
 
-const imgCount = 7;
+import info from '../../../../public/assets/images/info.json';
+import styles from './Screen.scss';
+
+const imgCount = 6;
+const YEAR = new Date().getFullYear();
 
 export default class MainScreen extends React.Component {
-
     constructor() {
         super();
         this.state = {
@@ -32,8 +32,8 @@ export default class MainScreen extends React.Component {
                 activeImg = 0;
             }
 
-            this.setState({activeImg, setActive:true});
-        },25000);
+            this.setState({ activeImg, setActive: true });
+        }, 25000);
     }
 
     componentWillUnmount() {
@@ -42,64 +42,65 @@ export default class MainScreen extends React.Component {
     }
 
     render() {
-        const {
-            width,
-            activeImg,
-            setActive
-        } = this.state;
-        const {appScroll} = this.props;
+        const { width, activeImg, setActive } = this.state;
+        const { appScroll } = this.props;
 
-        const photoInfo = info[`img_${activeImg +1}`];
+        const photoInfo = info[`img_${activeImg + 1}`];
 
         let items = [];
         let i = 1;
-        for (i = 1; i<=imgCount; i++) {
+
+        for (i = 1; i <= imgCount; i++) {
             items.push({
-                id:i-1,
-                url: `/assets/images/img_${i}.jpg`,
+                id: i - 1,
+                url: `/assets/images/img_${i}.jpg?v=${YEAR}`,
                 position: 0
             });
         }
 
-        let a = activeImg -1; i= 0;
-        while (a>= 0) {
+        let a = activeImg - 1;
+        i = 0;
+        while (a >= 0) {
             i++;
             items[a].position = -i * width;
             a -= 1;
         }
 
-        a = activeImg + 1; i = 0;
-        for (a = activeImg + 1; a<=imgCount-1; a++) {
+        a = activeImg + 1;
+        i = 0;
+        for (a = activeImg + 1; a <= imgCount - 1; a++) {
             i++;
             items[a].position = i * width;
         }
         return (
-            (
-                <div className={`${styles.subheader}`} id="main">
-                    <div className={styles.screens}>
-                        {
-                            items.map(x=>(<div
-                                {...info[`img_${x.id +1}`].style && {className: styles[info[`img_${x.id +1}`].style]}}
-                                key={x.id} 
-                                style={
-                                    {
-                                        background:`url("${x.url}")`,
-                                        //left: `-${x.position}px`,
-                                        transform: `translateX(${x.position}px)`,
-                                        backgroundSize:`cover`,
-                                        backgroundPosition: '50% 50%'
-                                    }
-                                }
-                            ></div>))       
-                        }  
-                    </div>
-                    {!appScroll && <div className={styles.screenInfo}>
-                        <div className={styles.author}>{photoInfo.author}</div>
-                        <div className={styles.description}>{photoInfo.description}</div>
-                    </div>}
-                    {this.props.children}
+            <div className={`${styles.subheader}`} id="main">
+                <div className={styles.screens}>
+                    {items.map(x => (
+                        <div
+                            {...info[`img_${x.id + 1}`].style && {
+                                className: styles[info[`img_${x.id + 1}`].style]
+                            }}
+                            key={x.id}
+                            style={{
+                                background: `url("${x.url}")`,
+                                //left: `-${x.position}px`,
+                                transform: `translateX(${x.position}px)`,
+                                backgroundSize: `cover`,
+                                backgroundPosition: '50% 50%'
+                            }}
+                        />
+                    ))}
                 </div>
-            )
+                {!appScroll && (
+                    <div className={styles.screenInfo}>
+                        <div className={styles.author}>{photoInfo.author}</div>
+                        <div className={styles.description}>
+                            {photoInfo.description}
+                        </div>
+                    </div>
+                )}
+                {this.props.children}
+            </div>
         );
     }
 }
