@@ -1,6 +1,6 @@
 module.exports.dateEnd = (req, res) => {
     res.json({
-        date: new Date(2018, 10, 15, 23, 59, 59)
+        date: new Date(2019, 10, 15, 23, 59, 59)
     });
 };
 

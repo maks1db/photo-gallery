@@ -29,7 +29,7 @@ export default ({ dateEnd }) => (
         <article className={styles.article}>
             <div>
                 <h4>
-                    24 ноября 2018 г. 15:00
+                    24 ноября 2019 г. 15:00
                     <br />
                     Липецкая областная универсальная научная библиотека
                 </h4>
