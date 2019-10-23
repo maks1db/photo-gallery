@@ -6,7 +6,7 @@ export default () => (
     <section className={`${styles.section} ${styles.about}`} id="about">
         <div className={styles.content}>
             <h5>О КОНКУРСЕ</h5>
-            <h2>Фотовыставка-2018</h2>
+            <h2>Фотовыставка-2019</h2>
             <div className={styles.toLeft}>
                 <p>
                     <b>1. Общие положения</b>
@@ -86,7 +86,7 @@ export default () => (
                     <b>6. Заявка на участие в фотовыставке</b>
                     <p className={styles.ident_20}>
                         Прием работ для фотовыставки осуществляется до{' '}
-                        <b>15 ноября 2018</b> года ИСКЛЮЧИТЕЛЬНО на сайте{' '}
+                        <b>15 ноября 2019</b> года ИСКЛЮЧИТЕЛЬНО на сайте{' '}
                         <a href="http://www.myturizmfoto.ru/" target="_blank">
                             http://www.myturizmfoto.ru/
                         </a>
