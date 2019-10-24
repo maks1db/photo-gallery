@@ -10,15 +10,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use('/',express.static(path.join(__dirname, '../../../public/favicon.ico')));
 
+app.use(
+    '/uploads',
+    express.static(path.join(__dirname, '../../../public/uploads'))
+);
+app.use(
+    '/assets',
+    express.static(path.join(__dirname, '../../../public/assets'))
+);
+
 if (process.env.NODE_ENV === 'dev') {
-    app.use(
-        '/uploads',
-        express.static(path.join(__dirname, '../../../public/uploads'))
-    );
-    app.use(
-        '/assets',
-        express.static(path.join(__dirname, '../../../public/assets'))
-    );
+    
     app.use(function(req, res, next) {
         res.header('Access-Control-Allow-Origin', '*');
         res.header(
