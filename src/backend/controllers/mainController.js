@@ -1,11 +1,11 @@
 module.exports.dateEnd = (req, res) => {
     res.json({
-        date: '2019-11-25T23:59:59.000Z'
+        date: new Date(2019, 10, 15, 23, 59, 59)
     });
 };
 
 module.exports.dateVoteEnd = (req, res) => {
     res.json({
-        date: '2019-11-25T23:59:59.000Z'
+        date: new Date(2019, 10, 22, 10, 0, 0)
     });
 };

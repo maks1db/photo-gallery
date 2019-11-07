@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === 'dev') {
     });
 }
 
-const port = 4000;
+const port = 4004;
 
 app.use('', routes);
 app.get('*', function(req, res) {
