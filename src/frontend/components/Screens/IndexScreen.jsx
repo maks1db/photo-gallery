@@ -1,25 +1,15 @@
 import Calendar from 'Calendar/Calendar.jsx';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import styles from './Main.scss';
 
-const Register = ({ dateEnd }) =>
-    !dateEnd.isFetching &&
-    (dateEnd.value < new Date() ? (
-        <h4>Прием заявок завершен</h4>
-    ) : (
-        <Link to="/register" className={styles.register}>
-            Подать заявку
-            <span className="fa fa-long-arrow-right" />
-        </Link>
-    ));
-
 const Info = ({ dateEnd }) =>
-    !dateEnd.isFetching &&
-    dateEnd.value > new Date() && (
+    (
         <div className={styles.counter}>
-            <h5>До завершения подачи заявок:</h5>
+            <h5>На сайте возникли технические проблемы. <br />
+                Присылайте заявки на почту <a href="mailto:Directlip@yandex.ru">Directlip@yandex.ru</a> <br />
+                По возникшим вопросам звоните 8950-800-7015 <br />
+            </h5>
             {!dateEnd.isFetching && <Calendar dateEnd={dateEnd.value} />}
         </div>
     );
@@ -34,7 +24,6 @@ export default ({ dateEnd }) => (
                     Липецкая областная универсальная научная библиотека
                 </h4>
                 <h1>Ежегодная туристическая фотовыставка</h1>
-                <Register dateEnd={dateEnd} />
             </div>
         </article>
         <Info dateEnd={dateEnd} />
