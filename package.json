@@ -56,7 +56,7 @@
     "string-builder": "~0.1.4"
   },
   "devDependencies": {
-    "eslint": "~4.7.0",
+    "eslint": "~4.18.2",
     "eslint-plugin-react": "~7.3.0",
     "autoprefixer": "~7.1.5",
     "@babel/polyfill": "7.6.0",
