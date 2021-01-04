@@ -28,7 +28,7 @@
     "mongoose": "~4.11.13",
     "body-parser": "~1.17.2",
     "camelcase": "4.1.0",
-    "axios": "~0.15.0",
+    "axios": "~0.21.1",
     "react": "~16.0.0",
     "react-addons-css-transition-group": "~15.6.0",
     "react-dom": "~16.0.0",
