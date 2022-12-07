@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "array-sort": "~0.1.2",
-    "express": "~4.15.3",
+    "express": "~4.17.3",
     "mongodb": "~2.2.31",
     "mongoose": "~4.11.13",
     "body-parser": "~1.17.2",
